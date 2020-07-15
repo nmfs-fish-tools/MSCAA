@@ -1,0 +1,31 @@
+<RCC>
+    <qresource prefix="/">
+        <file>forms/Main/Main_NavigatorTreeWidget.ui</file>
+        <file>forms/Setup/Setup_Tab01.ui</file>
+        <file>forms/Setup/Setup_Tab02.ui</file>
+        <file>forms/Setup/Setup_Tab03.ui</file>
+        <file>forms/Setup/Setup_Tab04.ui</file>
+        <file>icons/whatsthis.png</file>
+        <file>icons/NOAA.png</file>
+        <file>icons/NOAAsmall.png</file>
+        <file>icons/scrgrb.png</file>
+        <file>forms/SSCAA/SSCAA_Tab01.ui</file>
+        <file>forms/Main/Main_EntityListWidget.ui</file>
+        <file>forms/SSCAA/SSCAA_Tab03.ui</file>
+        <file>forms/SSCAA/SSCAA_Tab02.ui</file>
+        <file>forms/Setup/Setup_Tab05.ui</file>
+        <file>forms/MSCAA/MSCAA_Tab04.ui</file>
+        <file>forms/MSCAA/MSCAA_Tab03.ui</file>
+        <file>forms/MSCAA/MSCAA_Tab01.ui</file>
+        <file>forms/MSCAA/MSCAA_Tab02.ui</file>
+        <file>forms/MSCAA/MSCAA_Tab05.ui</file>
+        <file>forms/Setup/Setup_Tab06.ui</file>
+        <file>forms/Setup/Setup_Tab07.ui</file>
+        <file>forms/Simulation/Simulation_Tab01.ui</file>
+        <file>forms/Simulation/Simulation_Tab02.ui</file>
+        <file>forms/SSCAA/SSCAA_Tab06.ui</file>
+        <file>forms/SSCAA/SSCAA_Tab05.ui</file>
+        <file>forms/SSCAA/SSCAA_Tab04.ui</file>
+        <file>forms/Main/PreferencesDlg.ui</file>
+    </qresource>
+</RCC>
