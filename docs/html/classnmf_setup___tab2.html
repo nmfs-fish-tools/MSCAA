@@ -38,6 +38,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -153,6 +154,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_setup___tab2.html#a453301b436201b4b583824e4de15dcbe">callback_Setup_Tab2_ProjectNameAdd</a> ()</td></tr>
 <tr class="memdesc:a453301b436201b4b583824e4de15dcbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback invoked after user enters the project name. <br /></td></tr>
 <tr class="separator:a453301b436201b4b583824e4de15dcbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a196e09798c7670ec6d9738e018085432"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a196e09798c7670ec6d9738e018085432"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_setup___tab2.html#a196e09798c7670ec6d9738e018085432">callback_Setup_Tab2_RefreshDatabase</a> ()</td></tr>
+<tr class="memdesc:a196e09798c7670ec6d9738e018085432"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback invoked when the user wants to refresh the database pulldown list. <br /></td></tr>
+<tr class="separator:a196e09798c7670ec6d9738e018085432"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1e8e0c56d6a8a066e68ceff7bf9948b9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1e8e0c56d6a8a066e68ceff7bf9948b9"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_setup___tab2.html#a1e8e0c56d6a8a066e68ceff7bf9948b9">callback_Setup_Tab2_ReloadProject</a> ()</td></tr>
 <tr class="memdesc:a1e8e0c56d6a8a066e68ceff7bf9948b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback invoked when user clicks the reload project button. <br /></td></tr>
@@ -207,6 +212,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_setup___tab2.html#aa802417a18bb74225f47706344055e8b">loadWidgets</a> ()</td></tr>
 <tr class="memdesc:aa802417a18bb74225f47706344055e8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the current class widgets with initial data. <br /></td></tr>
 <tr class="separator:aa802417a18bb74225f47706344055e8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a524bd51bfc49d9a9923016b8ccd65374"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_setup___tab2.html#a524bd51bfc49d9a9923016b8ccd65374">setProjectDatabase</a> (QString dbName)</td></tr>
+<tr class="memdesc:a524bd51bfc49d9a9923016b8ccd65374"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the current item in the pulldown to the passed database name.  <a href="#a524bd51bfc49d9a9923016b8ccd65374">More...</a><br /></td></tr>
+<tr class="separator:a524bd51bfc49d9a9923016b8ccd65374"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The class containing the interactions for the 2nd Setup tabbed pane. </p>
@@ -367,6 +375,30 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">QString</td><td>of database nameto load </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a524bd51bfc49d9a9923016b8ccd65374"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void nmfSetup_Tab2::setProjectDatabase </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>dbName</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the current item in the pulldown to the passed database name. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dbName</td><td>: name of database to set the pulldown to </td></tr>
   </table>
   </dd>
 </dl>

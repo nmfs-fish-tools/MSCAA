@@ -45,6 +45,10 @@ namespace Ui {
 class nmfMainWindow;
 }
 
+/**
+ * @brief The main window class for the MSCAA application.  This contains the menu callbacks as
+ * well as GUI setup and loading functionality.
+ */
 class nmfMainWindow : public QMainWindow
 {
     Q_OBJECT

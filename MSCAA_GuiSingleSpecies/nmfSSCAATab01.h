@@ -35,7 +35,7 @@
 #include <QHeaderView>
 
 /**
- * @brief The class containing the interactions for the 1st SSCAA tabbed pane
+ * @brief The class containing the interactions for the 1st SSCAA tabbed pane: Fishery Catch-At-Age Data
  */
 class nmfSSCAA_Tab1: public QObject
 {

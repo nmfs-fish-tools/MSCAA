@@ -14,10 +14,10 @@
 <area shape="rect" id="node14" href="$classnmf_setup___tab7.html" title="The class containing the interactions for the 7th Setup tabbed pane. " alt="" coords="159,613,274,640"/>
 <area shape="rect" id="node15" href="$classnmf_simulation___tab1.html" title="nmfSimulation_Tab1" alt="" coords="146,664,287,691"/>
 <area shape="rect" id="node16" href="$classnmf_simulation___tab2.html" title="nmfSimulation_Tab2" alt="" coords="146,715,287,741"/>
-<area shape="rect" id="node17" href="$classnmf_s_s_c_a_a___tab1.html" title="The class containing the interactions for the 1st SSCAA tabbed pane. " alt="" coords="153,765,280,792"/>
-<area shape="rect" id="node18" href="$classnmf_s_s_c_a_a___tab2.html" title="The class containing the interactions for the 2nd SSCAA tabbed pane. " alt="" coords="153,816,280,843"/>
-<area shape="rect" id="node19" href="$classnmf_s_s_c_a_a___tab3.html" title="nmfSSCAA_Tab3" alt="" coords="153,867,280,893"/>
-<area shape="rect" id="node20" href="$classnmf_s_s_c_a_a___tab4.html" title="nmfSSCAA_Tab4" alt="" coords="153,917,280,944"/>
-<area shape="rect" id="node21" href="$classnmf_s_s_c_a_a___tab5.html" title="nmfSSCAA_Tab5" alt="" coords="153,968,280,995"/>
-<area shape="rect" id="node22" href="$classnmf_s_s_c_a_a___tab6.html" title="nmfSSCAA_Tab6" alt="" coords="153,1019,280,1045"/>
+<area shape="rect" id="node17" href="$classnmf_s_s_c_a_a___tab1.html" title="The class containing the interactions for the 1st SSCAA tabbed pane: Fishery Catch&#45;At&#45;Age Data..." alt="" coords="153,765,280,792"/>
+<area shape="rect" id="node18" href="$classnmf_s_s_c_a_a___tab2.html" title="The class containing the interactions for the 2nd SSCAA tabbed pane: Survey Catch Data..." alt="" coords="153,816,280,843"/>
+<area shape="rect" id="node19" href="$classnmf_s_s_c_a_a___tab3.html" title="The class containing the interactions for the 3rd SSCAA tabbed pane: Weight&#45;At&#45;Age Data..." alt="" coords="153,867,280,893"/>
+<area shape="rect" id="node20" href="$classnmf_s_s_c_a_a___tab4.html" title="The class containing the interactions for the 4th SSCAA tabbed pane: Maturity Data. " alt="" coords="153,917,280,944"/>
+<area shape="rect" id="node21" href="$classnmf_s_s_c_a_a___tab5.html" title="The class containing the interactions for the 5th SSCAA tabbed pane: Mortality Data. " alt="" coords="153,968,280,995"/>
+<area shape="rect" id="node22" href="$classnmf_s_s_c_a_a___tab6.html" title="The class containing the interactions for the 6th SSCAA tabbed pane: Run. " alt="" coords="153,1019,280,1045"/>
 </map>

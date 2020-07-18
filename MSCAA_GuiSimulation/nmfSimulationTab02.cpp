@@ -1173,6 +1173,8 @@ nmfSimulation_Tab2::showChartAbundance3d(const bool     showLogData,
     // Draw 3d surface with abundance data
     nmfChartSurface surface(Graph3D, XTitle, YTitleWithSuffix, ZTitle,
                             xLabelFormat, zLabelFormat,
+                            nmfConstants::DontReverseAxis,
+                            nmfConstants::ReverseAxis,
                             RowValues, ColumnValues, AbundanceScaled,
                             nmfConstants::ShowShadow);
 

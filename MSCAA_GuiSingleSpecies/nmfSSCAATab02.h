@@ -32,7 +32,7 @@
 #include <QComboBox>
 
 /**
- * @brief The class containing the interactions for the 2nd SSCAA tabbed pane
+ * @brief The class containing the interactions for the 2nd SSCAA tabbed pane: Survey Catch Data
  */
 class nmfSSCAA_Tab2: public QObject
 {

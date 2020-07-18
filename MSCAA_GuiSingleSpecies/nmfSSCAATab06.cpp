@@ -295,16 +295,16 @@ nmfSSCAA_Tab6::showChartAbundance3d(const bool     showLogData,
     boost::numeric::ublas::matrix<double> ColumnValues;
     boost::numeric::ublas::matrix<double> AbundanceScaled;
     std::string Species = getSpecies().toStdString();
-    int NumRows = m_AbundanceAll[Species].size1();
-    int NumCols = m_AbundanceAll[Species].size2();
+    int NumYears = m_AbundanceAll[Species].size1();
+    int NumAges  = m_AbundanceAll[Species].size2();
     QString xLabelFormat = "%d";
     QString zLabelFormat = "Age %d";
 
-    nmfUtils::initialize(AbundanceScaled,NumRows,NumCols);
-    nmfUtils::initialize(RowValues,      NumRows,NumCols);
-    nmfUtils::initialize(ColumnValues,   NumRows,NumCols);
-    for (int i = 0; i < NumRows; ++i) {
-        for (int j = 0; j < NumCols; ++j) {
+    nmfUtils::initialize(AbundanceScaled,NumYears,NumAges);
+    nmfUtils::initialize(RowValues,      NumYears,NumAges);
+    nmfUtils::initialize(ColumnValues,   NumYears,NumAges);
+    for (int i = 0; i < NumYears; ++i) {
+        for (int j = 0; j < NumAges; ++j) {
             RowValues(i,j)    = FirstYear + i;
             ColumnValues(i,j) = MinAge + j;
             if (showLogData) {
@@ -322,6 +322,8 @@ nmfSSCAA_Tab6::showChartAbundance3d(const bool     showLogData,
     // Draw 3d surface with abundance data
     nmfChartSurface surface(Graph3D, XTitle, YTitleWithSuffix, ZTitle,
                             xLabelFormat, zLabelFormat,
+                            nmfConstants::DontReverseAxis,
+                            nmfConstants::ReverseAxis,
                             RowValues, ColumnValues, AbundanceScaled,
                             nmfConstants::ShowShadow);
 }

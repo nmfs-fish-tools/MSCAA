@@ -483,6 +483,8 @@ nmfMSCAA_Tab5::showChartAbundance3d(
     // Draw 3d surface with abundance data
     nmfChartSurface surface(graph3D, xTitle, YTitleWithSuffix, zTitle,
                             xLabelFormat, zLabelFormat,
+                            nmfConstants::DontReverseAxis,
+                            nmfConstants::ReverseAxis,
                             RowValues, ColumnValues, AbundanceScaled,
                             nmfConstants::ShowShadow);
 

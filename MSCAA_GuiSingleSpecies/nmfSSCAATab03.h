@@ -1,8 +1,9 @@
 #ifndef NMFSSCAATAB3_H
 #define NMFSSCAATAB3_H
 
-//#include "nmfMSCAATableIO.h"
-
+/**
+ * @brief The class containing the interactions for the 3rd SSCAA tabbed pane: Weight-At-Age Data
+ */
 class nmfSSCAA_Tab3: public QObject
 {
     Q_OBJECT

@@ -4,12 +4,13 @@
 #include <Q3DSurface>
 #include <QTableView>
 
-//#include "nmfMSCAATableIO.h"
 #include "nmfChartSurface.h"
 #include "nmfChartLine.h"
 #include "VerboseDebugLevelDialog.h"
 
-
+/**
+ * @brief The class containing the interactions for the 6th SSCAA tabbed pane: Run
+ */
 class nmfSSCAA_Tab6: public QObject
 {
     Q_OBJECT

@@ -31,6 +31,7 @@ var searchData=
   ['callback_5fsetup_5ftab2_5fprojectdiradd',['callback_Setup_Tab2_ProjectDirAdd',['../classnmf_setup___tab2.html#a50bcaa7dafed911efe50ca0dea01b04f',1,'nmfSetup_Tab2']]],
   ['callback_5fsetup_5ftab2_5fprojectdirbrowse',['callback_Setup_Tab2_ProjectDirBrowse',['../classnmf_setup___tab2.html#af87ba95ea7408b03a4070dad47607c69',1,'nmfSetup_Tab2']]],
   ['callback_5fsetup_5ftab2_5fprojectnameadd',['callback_Setup_Tab2_ProjectNameAdd',['../classnmf_setup___tab2.html#a453301b436201b4b583824e4de15dcbe',1,'nmfSetup_Tab2']]],
+  ['callback_5fsetup_5ftab2_5frefreshdatabase',['callback_Setup_Tab2_RefreshDatabase',['../classnmf_setup___tab2.html#a196e09798c7670ec6d9738e018085432',1,'nmfSetup_Tab2']]],
   ['callback_5fsetup_5ftab2_5freloadproject',['callback_Setup_Tab2_ReloadProject',['../classnmf_setup___tab2.html#a1e8e0c56d6a8a066e68ceff7bf9948b9',1,'nmfSetup_Tab2']]],
   ['callback_5fsetup_5ftab2_5fsaveproject',['callback_Setup_Tab2_SaveProject',['../classnmf_setup___tab2.html#a7fff7f48dd95138b7068c66f1552575d',1,'nmfSetup_Tab2']]],
   ['callback_5fsetup_5ftab3_5faddspeciespb',['callback_Setup_Tab3_AddSpeciesPB',['../classnmf_setup___tab3.html#aa8e64cacd7b8379b19f7c74eac7ebb75',1,'nmfSetup_Tab3']]],

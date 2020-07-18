@@ -1,6 +1,11 @@
 #include "nmfADMB.h"
 #include <stdio.h>
 
+#ifdef _WIN32
+   #include <windows.h>
+   #include <tchar.h>
+#endif
+
 nmfADMB::nmfADMB(nmfDatabase*   databasePtr,
                  nmfLogger*     logger,
                  std::string&   projectDir,
@@ -1450,17 +1455,46 @@ void
 exec(std::string cmd)
 {
 #ifdef __linux__
-std::cout << "Before: " << cmd << std::endl;
     std::system(cmd.c_str());
-std::cout << "After: " << cmd << std::endl;
 #elif _WIN32
-    FILE *file;
-    char line[100];
-    cmd += " 2> nul";
-    file = _popen(cmd.c_str(),"rt");
-    while (fgets(line,100,file)) {
-        std::cout << line << std::endl;
+    STARTUPINFO startInfo;
+    PROCESS_INFORMATION procInfo;
+
+    ZeroMemory(&startInfo,sizeof(startInfo));
+    startInfo.cb = sizeof(startInfo);
+    ZeroMemory(&procInfo,sizeof(procInfo));
+
+    TCHAR* target = new TCHAR[cmd.size()+1];
+    target[cmd.size()] = 0;
+    std::copy(cmd.begin(),cmd.end(),target);
+
+    if (! CreateProcess(
+                nullptr,
+                target,
+                nullptr,
+                nullptr,
+                false,
+                0,
+                nullptr,
+                nullptr,
+                &startInfo,
+                &procInfo))
+    {
+        std::string msg = "Error on CreateProcess for: " + cmd;
+        m_logger->logMsg(nmfConstants::Error,msg);
     }
+    WaitForSingleObject(procInfo.hProcess,INFINITE);
+
+    CloseHandle(procInfo.hProcess);
+    CloseHandle(procInfo.hThread);
+
+//    FILE *file;
+//    char line[100];
+//    cmd += " 2> nul";
+//    file = _popen(cmd.c_str(),"rt");
+//    while (fgets(line,100,file)) {
+//        std::cout << line << std::endl;
+//    }
 #endif
 }
 

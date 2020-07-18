@@ -1,10 +1,11 @@
 #ifndef NMFSSCAATAB5_H
 #define NMFSSCAATAB5_H
 
-//#include "nmfMSCAATableIO.h"
-
 #include <QCheckBox>
 
+/**
+ * @brief The class containing the interactions for the 5th SSCAA tabbed pane: Mortality Data
+ */
 class nmfSSCAA_Tab5: public QObject
 {
     Q_OBJECT

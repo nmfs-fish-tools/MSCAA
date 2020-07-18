@@ -1,8 +1,9 @@
 #ifndef NMFSSCAATAB4_H
 #define NMFSSCAATAB4_H
 
-//#include "nmfMSCAATableIO.h"
-
+/**
+ * @brief The class containing the interactions for the 4th SSCAA tabbed pane: Maturity Data
+ */
 class nmfSSCAA_Tab4: public QObject
 {
     Q_OBJECT

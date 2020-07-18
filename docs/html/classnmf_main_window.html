@@ -38,6 +38,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -92,6 +93,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">nmfMainWindow Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The main window class for the MSCAA application. This contains the menu callbacks as well as GUI setup and loading functionality.  
+ <a href="classnmf_main_window.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="nmf_main_window_8h_source.html">nmfMainWindow.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for nmfMainWindow:</div>
 <div class="dyncontent">
@@ -228,7 +234,31 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5da3be9e59593e85e16518f30076b6ad"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5da3be9e59593e85e16518f30076b6ad"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>nmfMainWindow</b> (QWidget *parent=nullptr)</td></tr>
 <tr class="separator:a5da3be9e59593e85e16518f30076b6ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19bc4c57733ca92f5ce0166ef2ec4eda"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classnmf_main_window.html#a19bc4c57733ca92f5ce0166ef2ec4eda">isStartUpOK</a> ()</td></tr>
+<tr class="memdesc:a19bc4c57733ca92f5ce0166ef2ec4eda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notifies main routine if MainWindow has been started correctly with MySQL active.  <a href="#a19bc4c57733ca92f5ce0166ef2ec4eda">More...</a><br /></td></tr>
+<tr class="separator:a19bc4c57733ca92f5ce0166ef2ec4eda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The main window class for the MSCAA application. This contains the menu callbacks as well as GUI setup and loading functionality. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a19bc4c57733ca92f5ce0166ef2ec4eda"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nmfMainWindow::isStartUpOK </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Notifies main routine if MainWindow has been started correctly with MySQL active. </p>
+<dl class="section return"><dt>Returns</dt><dd>true/false signifying the state of the application start </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>MSCAA_Main/<a class="el" href="nmf_main_window_8h_source.html">nmfMainWindow.h</a></li>
 <li>MSCAA_Main/nmfMainWindow.cpp</li>

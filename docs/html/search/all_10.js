@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['verbosedebugleveldialog',['VerboseDebugLevelDialog',['../class_verbose_debug_level_dialog.html',1,'VerboseDebugLevelDialog'],['../class_verbose_debug_level_dialog.html#ab6056f621dbd8bdffcb04afd96be9e41',1,'VerboseDebugLevelDialog::VerboseDebugLevelDialog()']]],
-  ['verbosedebugleveldialog_2eh',['VerboseDebugLevelDialog.h',['../_verbose_debug_level_dialog_8h.html',1,'']]]
+  ['updateoutputcharts',['UpdateOutputCharts',['../classnmf_m_s_c_a_a___tab5.html#adf9eb93b21c0f5c900e9869d81411d72',1,'nmfMSCAA_Tab5']]]
 ];
