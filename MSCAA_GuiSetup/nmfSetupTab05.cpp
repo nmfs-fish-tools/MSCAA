@@ -94,8 +94,6 @@ nmfSetup_Tab5::loadWtTables()
 {
     QStandardItemModel* smodelTS = qobject_cast<QStandardItemModel*>(Setup_Tab5_TSwtTV->model());
     QStandardItemModel* smodelSP = qobject_cast<QStandardItemModel*>(Setup_Tab5_SPwtTV->model());
-    int m;
-    int month;
     int NumRows = smodelTS->rowCount();
     int NumCols = smodelTS->columnCount();
     int NumRecords;
@@ -113,7 +111,7 @@ nmfSetup_Tab5::loadWtTables()
         return;
     }
 
-    m = 0;
+    int m = 0;
     for (int row = 0; row < NumRows; ++row) {
         for (int col = 0; col < NumCols; ++col) {
             if (m < NumRecords) {

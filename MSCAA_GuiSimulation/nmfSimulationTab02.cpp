@@ -279,7 +279,7 @@ nmfSimulation_Tab2::getAbundanceDriver()
     std::string queryStr;
 
     fields     = {"SystemName","AbundanceDriver"};
-    queryStr   = "SELECT SystemName,AbundanceDriver FROM System";
+    queryStr   = "SELECT SystemName,AbundanceDriver FROM `System`";
     queryStr  += " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SystemName"].size();

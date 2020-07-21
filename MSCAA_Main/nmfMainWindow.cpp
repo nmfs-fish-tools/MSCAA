@@ -296,7 +296,7 @@ void
 nmfMainWindow::loadEntityList()
 {
 std::cout << "LoadEntityList"  << std::endl;
-    int NumSpecies;
+    unsigned NumSpecies;
     std::vector<std::string> fields;
     std::map<std::string, std::vector<std::string> > dataMap;
     std::string queryStr;
@@ -309,12 +309,12 @@ std::cout << "LoadEntityList"  << std::endl;
     fields = {"SpeName","MinAge","MaxAge","FirstYear","LastYear"};
     queryStr   = "SELECT SpeName,MinAge,MaxAge,FirstYear,LastYear FROM Species";
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
-    NumSpecies = dataMap["SpeName"].size();
+    NumSpecies = unsigned(dataMap["SpeName"].size());
     if (NumSpecies == 0) {
         m_logger->logMsg(nmfConstants::Error,"nmfMainWindow::LoadEntityList: No Species Found");
     } else {
         m_logger->logMsg(nmfConstants::Normal,"nmfMainWindow::LoadEntityList: Num Species found: "+std::to_string(NumSpecies));
-        for (int i=0; i<NumSpecies; ++i) {
+        for (unsigned i=0; i<NumSpecies; ++i) {
             m_entityModel.append( nmfEntity{ QString::fromStdString(dataMap["SpeName"][i]) });
         }
         EntityListLV->setModel(&m_entityModel);
@@ -699,7 +699,6 @@ nmfMainWindow::menu_preferences()
 QString
 nmfMainWindow::getADMBVersion()
 {
-    int i=0;
     int versionPos = -1;
     QString text;
     QString admbVersion;
@@ -969,7 +968,7 @@ std::cout << "readSettings: db name: " << m_ProjectDatabase << std::endl;
 QTableView*
 nmfMainWindow::findTableInFocus()
 {
-    QTableView *retv = NULL;
+    QTableView *retv = nullptr;
 
     if (Setup_Tab3_ptr->getTableSpecies()->hasFocus()) {
         return Setup_Tab3_ptr->getTableSpecies();
@@ -1060,8 +1059,8 @@ nmfMainWindow::callback_SetupTabChanged(int tab)
 {
     m_UI->EntityDockWidget->setEnabled(true);
 
-    QModelIndex topLevelndex = NavigatorTree->model()->index(0,0); // 0 is Setupgroup in NavigatorTree
-    QModelIndex childIndex   = topLevelndex.child(tab,0);
+    QModelIndex topLevelIndex = NavigatorTree->model()->index(0,0); // 0 is Setupgroup in NavigatorTree
+    QModelIndex childIndex    = topLevelIndex.model()->index(tab,0,topLevelIndex);
 
     NavigatorTree->blockSignals(true);
     NavigatorTree->setCurrentIndex(childIndex);
@@ -1074,7 +1073,7 @@ nmfMainWindow::callback_SSCAATabChanged(int tab)
     m_UI->EntityDockWidget->setEnabled(true);
 
     QModelIndex topLevelndex = NavigatorTree->model()->index(1,0); // 1 is SSCAA group in NavigatorTree
-    QModelIndex childIndex   = topLevelndex.child(tab,0);
+    QModelIndex childIndex   = topLevelndex.model()->index(tab,0,topLevelndex);
 
     NavigatorTree->blockSignals(true);
     NavigatorTree->setCurrentIndex(childIndex);
@@ -1129,7 +1128,7 @@ nmfMainWindow::setup3dChart()
 void
 nmfMainWindow::setChartView(QString type)
 {
-    if ((m_ChartView2d == NULL) || (m_ChartView3d == NULL)) {
+    if ((m_ChartView2d == nullptr) || (m_ChartView3d == nullptr)) {
         return;
     }
 
@@ -1208,10 +1207,6 @@ nmfMainWindow::callback_ShowChart(const QString& modeDELETE,
     int MinAge,MaxAge,FirstYear,LastYear,NumLengthBins;
     float MinLength,MaxLength;
     boost::numeric::ublas::matrix<double> *Abundance;
-    boost::numeric::ublas::matrix<double> AbundanceScaled;
-    boost::numeric::ublas::matrix<double> Data;
-    std::vector<double>* SpawningStockBiomass;
-    std::vector<double>* Recruitment;
     double sf = 1.0;
     std::string Species = getSpecies().toStdString();
 
@@ -1239,6 +1234,7 @@ nmfMainWindow::callback_ShowChart(const QString& modeDELETE,
                                 MinAge,MaxAge,FirstYear,LastYear,
                                 MinLength,MaxLength,NumLengthBins);
 
+    Abundance = nullptr;
     if (mode == "Simulation Data Input") {
 //        Abundance            = Simulation_Tab2_ptr->getAbundance();
 //        SpawningStockBiomass = Simulation_Tab2_ptr->getSpawningStockBiomass();
@@ -1343,16 +1339,16 @@ nmfMainWindow::populateOutputDataTable(
     QStringList         yearNames;
     QStandardItemModel* smodel;
 
-    int NumAges  = Abundance->size2();
-    int NumYears = Abundance->size1();
+    int NumAges  = int(Abundance->size2());
+    int NumYears = int(Abundance->size1());
     smodel = new QStandardItemModel(NumYears,NumAges);
-    for (unsigned year=0; year<NumYears; ++year) {
+    for (int year=0; year<NumYears; ++year) {
         yearNames << QString::number(FirstYear+year);
-        for (unsigned age=0; age<NumAges; ++age) {
+        for (int age=0; age<NumAges; ++age) {
             if (year == 0) {
                 ageNames << "Age " + QString::number(MinAge+age);
             }
-            item = new QStandardItem(QString::number((*Abundance)(year,age)));
+            item = new QStandardItem(QString::number((*Abundance)(unsigned(year),unsigned(age))));
             item->setTextAlignment(Qt::AlignCenter);
             smodel->setItem(year, age, item);
         }
@@ -1370,8 +1366,8 @@ nmfMainWindow::callback_AbundanceAgeGroupsSelected(
         QModelIndexList ageIndexList)
 {
     int value;
-    int NumYears;
-    int NumSelectedAges;
+    unsigned NumYears;
+    unsigned NumSelectedAges;
     double sf = 1.0;
     QString scale = Output_Controls_ptr->getOutputScale();
     boost::numeric::ublas::matrix<double> *Abundance;
@@ -1405,6 +1401,7 @@ nmfMainWindow::callback_AbundanceAgeGroupsSelected(
         AgeVec.push_back(value-MinAge);
     }
 
+    Abundance = nullptr;
     if (mode == "Simulation Data Input") {
 //        Abundance = Simulation_Tab2_ptr->getAbundance();
     } else if (mode == "SSCAA Data Input") {
@@ -1415,12 +1412,12 @@ nmfMainWindow::callback_AbundanceAgeGroupsSelected(
     if (Abundance == nullptr) {
         return;
     }
-    NumYears        = Abundance->size1();
-    NumSelectedAges = AgeVec.size();
-    nmfUtils::initialize(AbundanceScaled,NumYears,NumSelectedAges);
-    for (int i=0;i<NumYears;++i) {
-        for (int j=0;j<NumSelectedAges;++j) {
-            AbundanceScaled(i,j) = sf*(*Abundance)(i,AgeVec[j]);
+    NumYears        = unsigned(Abundance->size1());
+    NumSelectedAges = unsigned(AgeVec.size());
+    nmfUtils::initialize(AbundanceScaled,int(NumYears),int(NumSelectedAges));
+    for (unsigned i=0;i<NumYears;++i) {
+        for (unsigned j=0;j<NumSelectedAges;++j) {
+            AbundanceScaled(i,j) = sf*(*Abundance)(i,unsigned(AgeVec[j]));
         }
     }
 
@@ -1447,10 +1444,10 @@ nmfMainWindow::callback_MortalityAgeGroupsSelected(QModelIndexList ageIndexList,
     int value;
     int NumYears;
     int NumAges;
-    int NumSelectedAges;
-    int NaturalMortalitySize1;
-    int FishingMortalitySize1;
-    int PredationMortalitySize1;
+    unsigned NumSelectedAges;
+    unsigned NaturalMortalitySize1;
+    unsigned FishingMortalitySize1;
+    unsigned PredationMortalitySize1;
     int MinAge,MaxAge,FirstYear,LastYear,NumLengthBins;
     float MinLength,MaxLength;
     boost::numeric::ublas::matrix<double> NaturalMortality;
@@ -1511,12 +1508,12 @@ nmfMainWindow::callback_MortalityAgeGroupsSelected(QModelIndexList ageIndexList,
 
     clearChart = true;
     if (MortalityTypes.contains("Natural (solid line)")) {
-        NaturalMortalitySize1 = NaturalMortality.size1(); // Years
-        NumSelectedAges = ageVec.size();
-        nmfUtils::initialize(NaturalMortalityWithAges,NaturalMortalitySize1,NumSelectedAges);
-        for (int i=0;i<NaturalMortalitySize1;++i) {
-            for (int j=0;j<NumSelectedAges;++j) {
-                NaturalMortalityWithAges(i,j) = NaturalMortality(i,ageVec[j]);
+        NaturalMortalitySize1 = unsigned(NaturalMortality.size1()); // Years
+        NumSelectedAges       = unsigned(ageVec.size());
+        nmfUtils::initialize(NaturalMortalityWithAges,int(NaturalMortalitySize1),int(NumSelectedAges));
+        for (unsigned i=0;i<NaturalMortalitySize1;++i) {
+            for (unsigned j=0;j<NumSelectedAges;++j) {
+                NaturalMortalityWithAges(i,j) = NaturalMortality(i,unsigned(ageVec[j]));
             }
         }
         if (mode == "Simulation Data Input") {
@@ -1536,12 +1533,12 @@ nmfMainWindow::callback_MortalityAgeGroupsSelected(QModelIndexList ageIndexList,
     }
 
     if (MortalityTypes.contains("Fishing (dashed line)")) {
-        FishingMortalitySize1 = FishingMortality.size1(); // Years
-        NumSelectedAges = ageVec.size();
-        nmfUtils::initialize(FishingMortalityWithAges,FishingMortalitySize1,NumSelectedAges);
-        for (int i=0;i<FishingMortalitySize1;++i) {
-            for (int j=0;j<NumSelectedAges;++j) {
-                FishingMortalityWithAges(i,j) = FishingMortality(i,ageVec[j]);
+        FishingMortalitySize1 = unsigned(FishingMortality.size1()); // Years
+        NumSelectedAges       = unsigned(ageVec.size());
+        nmfUtils::initialize(FishingMortalityWithAges,int(FishingMortalitySize1),int(NumSelectedAges));
+        for (unsigned i=0;i<FishingMortalitySize1;++i) {
+            for (unsigned j=0;j<NumSelectedAges;++j) {
+                FishingMortalityWithAges(i,j) = FishingMortality(i,unsigned(ageVec[j]));
             }
         }
         if (mode == "Simulation Data Input") {
@@ -1561,12 +1558,12 @@ nmfMainWindow::callback_MortalityAgeGroupsSelected(QModelIndexList ageIndexList,
     }
 
     if (MortalityTypes.contains("Predation (dotted line)")) {
-        PredationMortalitySize1 = PredationMortality.size1(); // Years
-        NumSelectedAges = ageVec.size();
-        nmfUtils::initialize(PredationMortalityWithAges,PredationMortalitySize1,NumSelectedAges);
-        for (int i=0;i<PredationMortalitySize1;++i) {
-            for (int j=0;j<NumSelectedAges;++j) {
-                PredationMortalityWithAges(i,j) = PredationMortality(i,ageVec[j]);
+        PredationMortalitySize1 = unsigned(PredationMortality.size1()); // Years
+        NumSelectedAges         = unsigned(ageVec.size());
+        nmfUtils::initialize(PredationMortalityWithAges,int(PredationMortalitySize1),int(NumSelectedAges));
+        for (unsigned i=0;i<PredationMortalitySize1;++i) {
+            for (unsigned j=0;j<NumSelectedAges;++j) {
+                PredationMortalityWithAges(i,j) = PredationMortality(i,unsigned(ageVec[j]));
             }
         }
         if (mode == "Simulation Data Input") {
@@ -1614,8 +1611,8 @@ nmfMainWindow::callback_UpdateAgeList()
 void
 nmfMainWindow::callback_MSCAATabChanged(int tab)
 {
-    QModelIndex topLevelndex = NavigatorTree->model()->index(2,0); // 2 is MSCAA group in NavigatorTree
-    QModelIndex childIndex   = topLevelndex.child(tab,0);
+    QModelIndex topLevelIndex = NavigatorTree->model()->index(2,0); // 2 is MSCAA group in NavigatorTree
+    QModelIndex childIndex    = topLevelIndex.model()->index(tab,0,topLevelIndex);
 
     NavigatorTree->blockSignals(true);
     NavigatorTree->setCurrentIndex(childIndex);
@@ -1629,8 +1626,8 @@ nmfMainWindow::callback_SimulationTabChanged(int tab)
 {
     m_UI->EntityDockWidget->setEnabled(true);
 
-    QModelIndex topLevelndex = NavigatorTree->model()->index(3,0); // 3 is Simulation group in NavigatorTree
-    QModelIndex childIndex   = topLevelndex.child(tab,0);
+    QModelIndex topLevelIndex = NavigatorTree->model()->index(3,0); // 3 is Simulation group in NavigatorTree
+    QModelIndex childIndex    = topLevelIndex.model()->index(tab,0,topLevelIndex);
 
     NavigatorTree->blockSignals(true);
     NavigatorTree->setCurrentIndex(childIndex);
@@ -1747,7 +1744,7 @@ nmfMainWindow::menu_showTableNames()
     std::map<std::string, std::vector<std::string> > dataMap;
     std::string queryStr;
     std::string msg = "";
-    int NumTables=0;
+    unsigned NumTables=0;
 
     fields    = {"table_name"};
     queryStr  = "SELECT table_name FROM information_schema.tables WHERE ";
@@ -1761,7 +1758,7 @@ nmfMainWindow::menu_showTableNames()
                                  tr(msg.c_str()),
                                  QMessageBox::Ok);
     } else {
-        for (int i=0; i<NumTables; ++i) {
+        for (unsigned i=0; i<NumTables; ++i) {
             msg += std::to_string(i+1) + ". " + dataMap["table_name"][i] + "\n";
         }
         msg = "\nTables in database: " + m_ProjectDatabase + "\n\n" + msg;
@@ -1819,7 +1816,7 @@ void
 nmfMainWindow::menu_layoutOutput()
 {
     m_UI->OutputDockWidget->setFloating(true);
-    m_UI->OutputDockWidget->setGeometry(this->x()+this->width()*(2.0/3.0),
+    m_UI->OutputDockWidget->setGeometry(this->x()+int(this->width()*(2.0/3.0)),
                                       this->y(),
                                       1000,350);
     m_UI->OutputDockWidget->setWindowFlags(this->windowFlags() | Qt::WindowStaysOnTopHint);

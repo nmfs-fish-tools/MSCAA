@@ -114,6 +114,7 @@ nmfADMB::setDebug(const int& debug)
 bool
 nmfADMB::createInputFiles()
 {
+
     // 1. Write .dat file
     if (! writeADMBDataFile(m_dataFile,m_speciesData)) {
         m_logger->logMsg(nmfConstants::Error,"nmfADMB::createInputFiles: Problem with writeADMBDataFile for dataFile: "+m_dataFile.toStdString());
@@ -150,6 +151,8 @@ nmfADMB::createInputFiles()
 bool
 nmfADMB::build()
 {
+    m_logger->logMsg(nmfConstants::Normal,"nmfADMB::build()");
+
     // Build ADMB
     if (! buildADMB(m_tplFile,m_buildOutput)) {
         m_logger->logMsg(nmfConstants::Error,"nmfADMB::buildExecutable: ADMB build did not complete ");
@@ -161,6 +164,8 @@ nmfADMB::build()
 bool
 nmfADMB::run()
 {
+    m_logger->logMsg(nmfConstants::Normal,"nmfADMB::run()");
+
     // Run ADMB
     if (! runADMB(m_tplFile,m_runOutput)) {
         m_logger->logMsg(nmfConstants::Error,"nmfADMB::run: Problem with runADMB");
@@ -390,7 +395,6 @@ bool
 nmfADMB::getSystemData(
         StructSystemData& SystemData)
 {
-    int m = 0;
     int NumRecords;
     std::vector<std::string> fields;
     std::map<std::string, std::vector<std::string> > dataMap;
@@ -950,11 +954,9 @@ nmfADMB::getNaturalMortalityFirstYearPerSegment(
 bool
 nmfADMB::getInteraction(
         const int& NumSpecies,
-        const StructSpeciesData& SpeciesData,
         QString& PredValues,
         QString& PreyValues)
 {
-    int m = 0;
     int NumRecords;
     std::vector<std::string> fields;
     std::map<std::string, std::vector<std::string> > dataMap;
@@ -1145,7 +1147,7 @@ nmfADMB::writeADMBDataFile(const QString& dataFile,
 
     // Ignore Predator-Prey Interaction data if running single species
     if (1) { // (m_trophic == 1) {
-        if (! getInteraction(NumSpecies,SpeciesData,PredValues,PreyValues)) {
+        if (! getInteraction(NumSpecies,PredValues,PreyValues)) {
             m_logger->logMsg(nmfConstants::Error,"nmfADMB::writeADMBDataFile: Error getInteraction");
             return false;
         }
@@ -1159,7 +1161,7 @@ nmfADMB::writeADMBDataFile(const QString& dataFile,
     }
 
     // Override system data if user has set m_Trophic by kicking off a Single Species run
-    Trophic = (m_trophic == 0) ? m_trophic : (SystemData.NumSpInter > 0);
+    Trophic = (m_trophic == 0) ? m_trophic : (SystemData.NumSpInter.toInt() > 0);
 
     if (file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
@@ -1452,11 +1454,18 @@ nmfADMB::parseReportFile(std::map<std::string,boost::numeric::ublas::matrix<doub
 }
 
 void
-exec(std::string cmd)
+nmfADMB::execCmd(std::string path, std::string cmd)
 {
+
 #ifdef __linux__
-    std::system(cmd.c_str());
+    m_logger->logMsg(nmfConstants::Normal,"Run cmd: "+cmd);
+    int retv = std::system(cmd.c_str());
+//    int retv = QProcess::execute(cmd.c_str());
+    m_logger->logMsg(nmfConstants::Normal, "Run completed, retv = "+std::to_string(retv));
+
 #elif _WIN32
+
+    /*
     STARTUPINFO startInfo;
     PROCESS_INFORMATION procInfo;
 
@@ -1487,14 +1496,26 @@ exec(std::string cmd)
 
     CloseHandle(procInfo.hProcess);
     CloseHandle(procInfo.hThread);
+*/
 
-//    FILE *file;
-//    char line[100];
-//    cmd += " 2> nul";
-//    file = _popen(cmd.c_str(),"rt");
-//    while (fgets(line,100,file)) {
-//        std::cout << line << std::endl;
-//    }
+    // Run multiple dos commands
+    cmd = "pushd " + path + " & " + cmd + " & popd";
+    QString cmdStr = QString::fromStdString(cmd);
+    cmd = cmdStr.replace("/","\\\\").toStdString();
+    m_logger->logMsg(nmfConstants::Normal, "Run cmd: "+cmd);
+    m_logger->logMsg(nmfConstants::Normal, "Run Output");
+
+    FILE *file;
+    char line[100];
+    std::string msg;
+//  cmd += " 2> nul";
+    file = _popen(cmd.c_str(),"rt");
+    while (fgets(line,100,file)) {
+        msg = " | " + std::string(line);
+        m_logger->logMsg(nmfConstants::Normal,
+                         QString::fromStdString(msg).trimmed().toStdString());
+    }
+
 #endif
 }
 
@@ -1503,13 +1524,11 @@ bool
 nmfADMB::buildADMB(const QString& tplFile,
                    const QString& buildOutputFile)
 {
+    m_logger->logMsg(nmfConstants::Normal,"nmfADMB::buildADMB");
+
     std::string cmd;
     QString msg;
     QTime admbTimer;
-    char origWorkingDir[nmfConstants::MaxPathLength];
-
-    // Save the current working directory
-    getcwd(origWorkingDir, sizeof(origWorkingDir));
 
     // Start timer to time ADMB Build
     admbTimer.start();
@@ -1521,20 +1540,19 @@ nmfADMB::buildADMB(const QString& tplFile,
     QString targetName = target.fileName();
     QString destPath   = dest.absolutePath();
     QString destName   = dest.fileName();
+
     if (targetPath != destPath) {
         m_logger->logMsg(nmfConstants::Error,"Error: tpl dir not the same as build output dir");
         return false;
     }
-    chdir(targetPath.toLatin1());
 
     // 1. Build .cpp file
-    cmd = "admb " + targetName.toStdString() + " > " + destName.toStdString();
-    exec(cmd);
+    QString fullTargetName = QDir(targetPath).filePath(targetName);
+    QString fullDestName   = QDir(targetPath).filePath(destName);
+    cmd = "admb " + fullTargetName.toStdString() + " > " + fullDestName.toStdString();
+    execCmd(targetPath.toStdString(),cmd);
     msg = "<strong><br>Build command:</strong><br><br>" + QString::fromStdString(cmd);
     appendSummaryTextBox(msg);
-
-    // Reset the current working directory to what it was
-    chdir(origWorkingDir);
 
     // 2. Check that .cpp file was built correctly
     QString text;
@@ -1570,30 +1588,20 @@ nmfADMB::runADMB(const QString& tplFile,
     QString filePath = fileInfo.absolutePath();
     QString msg;
     QTime admbTimer;
-    char origWorkingDir[nmfConstants::MaxPathLength];
-
-     // Save the original working directory
-    getcwd(origWorkingDir, sizeof(origWorkingDir));
 
     // Start timer to time ADMB Run
     admbTimer.start();
-    chdir(filePath.toLatin1());
 
+    QString fullRunOutputFile = QDir(filePath).filePath(runOutputFile);
     cmd = QDir(filePath).filePath(fileBase).toStdString();
-//    cmd = fileBase.toStdString();
-//    if (m_debug == 0) {
-//        cmd += " > " + runOutputFile.toStdString() + " 2>&1"; // This last part redirects stderr as well
-//    }
     if (m_debug != 0) {
-        cmd += "  > " + runOutputFile.toStdString() +
-               " 2> " + runOutputFile.toStdString(); // This last part redirects stderr as well
+        cmd += "  > " + fullRunOutputFile.toStdString() +
+               " 2> " + fullRunOutputFile.toStdString(); // This last part redirects stderr as well
     }
-    exec(cmd);
+
+    execCmd(filePath.toStdString(),cmd);
     msg = "<strong>Run command:</strong><br><br>" + QString::fromStdString(cmd);
     appendSummaryTextBox(msg);
-
-    // Set the current working directory to what it was originally
-    chdir(origWorkingDir);
 
     // Read output file into string and print
     std::string output;
@@ -1650,8 +1658,8 @@ nmfADMB::readADMBReportFile(
     int NumSpecies; // = speciesData.Years.size();
     int year=0;
     int speciesCount = -1;
-    int NumAges;
-    int NumYears;
+    int NumAges  = -1;
+    int NumYears = -1;
     std::vector<std::string> SpeciesVec;
 
     m_database->getAllSpecies(m_logger, SpeciesVec);

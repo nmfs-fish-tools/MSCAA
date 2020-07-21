@@ -33,6 +33,14 @@
 
 #include <QComboBox>
 #include <QHeaderView>
+#include <QLabel>
+#include <QObject>
+#include <QPushButton>
+#include <QTableView>
+#include <QVBoxLayout>
+
+#include <nmfDatabase.h>
+#include <nmfLogger.h>
 
 /**
  * @brief The class containing the interactions for the 1st SSCAA tabbed pane: Fishery Catch-At-Age Data

@@ -155,6 +155,8 @@ nmfSSCAA_Tab6::callback_SavePB()
         msg = "\nSpecies table has been successfully updated.\n";
         QMessageBox::information(SSCAA_Tabs, "Table(s) Updated", msg, QMessageBox::Ok);
     }
+
+    return (okEst || okWt);
 }
 
 void
@@ -295,20 +297,22 @@ nmfSSCAA_Tab6::showChartAbundance3d(const bool     showLogData,
     boost::numeric::ublas::matrix<double> ColumnValues;
     boost::numeric::ublas::matrix<double> AbundanceScaled;
     std::string Species = getSpecies().toStdString();
-    int NumYears = m_AbundanceAll[Species].size1();
-    int NumAges  = m_AbundanceAll[Species].size2();
+    int NumYears = int(m_AbundanceAll[Species].size1());
+    int NumAges  = int(m_AbundanceAll[Species].size2());
     QString xLabelFormat = "%d";
     QString zLabelFormat = "Age %d";
+    double val = 0;
 
     nmfUtils::initialize(AbundanceScaled,NumYears,NumAges);
     nmfUtils::initialize(RowValues,      NumYears,NumAges);
     nmfUtils::initialize(ColumnValues,   NumYears,NumAges);
-    for (int i = 0; i < NumYears; ++i) {
-        for (int j = 0; j < NumAges; ++j) {
-            RowValues(i,j)    = FirstYear + i;
-            ColumnValues(i,j) = MinAge + j;
+    for (unsigned i = 0; i < unsigned(NumYears); ++i) {
+        for (unsigned j = 0; j < unsigned(NumAges); ++j) {
+            RowValues(i,j)    = FirstYear + int(i);
+            ColumnValues(i,j) = MinAge + int(j);
             if (showLogData) {
-                AbundanceScaled(i,j) = sf * std::log(m_AbundanceAll[Species](i,j));
+                val = sf * std::log(m_AbundanceAll[Species](i,j));
+                AbundanceScaled(i,j) = (val <= 0) ? 0 : val;
             } else {
                 AbundanceScaled(i,j) = sf * m_AbundanceAll[Species](i,j);
             }
@@ -861,6 +865,8 @@ std::cout << "nmfSSCAA_Tab6::loadWidgets()" << std::endl;
 
     loadFromSpeciesTable(nmfConstantsMSCAA::ColLabelsEstimations,SSCAA_Tab6_EstimationsTV);
     loadFromSpeciesTable(nmfConstantsMSCAA::ColLabelsWeightings, SSCAA_Tab6_WeightingsTV);
+
+    return true;
 }
 
 bool

@@ -339,7 +339,7 @@ nmfSetup_Tab6::loadSystemData(bool emitSignal)
 
     // Read System data
     fields     = {"SystemName","AbundanceDriver"};
-    queryStr   = "SELECT SystemName,AbundanceDriver FROM System";
+    queryStr   = "SELECT SystemName,AbundanceDriver FROM `System`";
     queryStr  += " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SystemName"].size();

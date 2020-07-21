@@ -262,10 +262,17 @@ nmfMSCAA_Tab5::callback_RunPB()
     int VerboseDebugLevel = getVerboseDebugLevel();
 
     bool runOK = nmfMSCAAUtils::runOptimizerADMB(
-                m_databasePtr,m_logger,
-                m_ProjectDir,m_ProjectName,m_ProjectSettingsConfig,
-                Trophic,VerboseDebugLevel,"MultiSpecies",MSCAA_Tabs,
-                MSCAA_Tab5_SummaryTE,m_Abundance);
+                m_databasePtr,
+                m_logger,
+                m_ProjectDir,
+                m_ProjectName,
+                m_ProjectSettingsConfig,
+                Trophic,
+                VerboseDebugLevel,
+                "MultiSpecies",
+                MSCAA_Tabs,
+                MSCAA_Tab5_SummaryTE,
+                m_Abundance);
 
     if (runOK) {
         // Select first Species in list
@@ -296,7 +303,7 @@ nmfMSCAA_Tab5::loadSystemData()
     std::string msg;
 
     fields     = {"SystemName","LogNorm","MultiResid"};
-    queryStr   = "SELECT SystemName,LogNorm,MultiResid FROM System WHERE SystemName = '";
+    queryStr   = "SELECT SystemName,LogNorm,MultiResid FROM `System` WHERE SystemName = '";
     queryStr  += m_ProjectSettingsConfig + "'";
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SystemName"].size();

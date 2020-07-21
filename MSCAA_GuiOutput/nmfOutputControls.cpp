@@ -87,7 +87,7 @@ MSCAA_GuiOutputControls::initWidgets()
     OutputScaleCMB->addItem("000");
     OutputScaleCMB->addItem("000 000");
     OutputScaleCMB->addItem("000 000 000");
-    OutputLogCB->setToolTip("Show natural log of data");
+    OutputLogCB->setToolTip("Show natural log of data (if < 0, clamp to 0)");
 
     // Deselect menu items that aren't completely implemented
     QVariant v(0);
@@ -226,7 +226,7 @@ MSCAA_GuiOutputControls::loadAgeLV(QStringList& ageList)
     SpeciesModel->setStringList(ageList);
     OutputAgeListLV->setModel(SpeciesModel);
 
-    disconnect(OutputAgeListLV->selectionModel(),0,0,0);
+    disconnect(OutputAgeListLV->selectionModel(),nullptr,nullptr,nullptr);
 //    connect(OutputAgeListLV->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
 //            this,                              SLOT(callback_RowChanged(QModelIndex,QModelIndex)));
 
@@ -257,13 +257,13 @@ MSCAA_GuiOutputControls::getSpecies(int&         NumSpecies,
     fields     = {"SpeName"};
     queryStr   = "SELECT SpeName from Species ORDER BY SpeName";
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
-    NumSpecies = dataMap["SpeName"].size();
+    NumSpecies = unsigned(dataMap["SpeName"].size());
     if (NumSpecies == 0) {
         m_logger->logMsg(nmfConstants::Warning,"[Warning] MSCAA_GuiOutputControls::getSpecies: No species found in table Species");
         return false;
     }
 
-    for (int species=0; species<NumSpecies; ++species) {
+    for (unsigned species=0; species<unsigned(NumSpecies); ++species) {
         SpeciesList << QString::fromStdString(dataMap["SpeName"][species]);
     }
 

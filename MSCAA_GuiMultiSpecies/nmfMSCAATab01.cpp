@@ -552,7 +552,7 @@ nmfMSCAA_Tab1::loadSystemData()
 
     // Get data from database
     fields     = {"SystemName","TotalBiomass","FH_FirstYear","FH_LastYear","Owt"};
-    queryStr   = "SELECT SystemName,TotalBiomass,FH_FirstYear,FH_LastYear,Owt FROM System ";
+    queryStr   = "SELECT SystemName,TotalBiomass,FH_FirstYear,FH_LastYear,Owt FROM `System` ";
     queryStr  += " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["TotalBiomass"].size();

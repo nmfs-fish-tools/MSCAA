@@ -9,6 +9,7 @@
 #pragma once
 
 #include "nmfDatabase.h"
+#include "nmfLogger.h"
 #include "nmfConstants.h"
 #include "nmfConstantsMSCAA.h"
 #include "nmfUtils.h"
@@ -127,7 +128,8 @@ private:
     QString           m_type;
 
     void clear(StructSpeciesData& SpeciesData);
-
+    void execCmd(std::string path,
+                 std::string cmd);
     bool getSurveyWeights(
             const int& NumSpecies,
             int&       NumSurveys,
@@ -193,7 +195,6 @@ private:
             QString& Data);
     bool getInteraction(
             const int& NumSpecies,
-            const StructSpeciesData& SpeciesData,
             QString& PredValues,
             QString& PreyValues);
     bool getSurveyFirstYearPerSegment(

@@ -41,6 +41,8 @@
 #include <boost/filesystem.hpp>
 //#include <nlopt.hpp>
 
+#include <QModelIndex>
+
 namespace Ui {
 class nmfMainWindow;
 }

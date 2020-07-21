@@ -82,7 +82,8 @@ bool checkYearValues(nmfLogger* logger,
                      QStandardItemModel* smodel)
 {
     int currFirstYear,currLastYear;
-    int prevFirstYear=0,prevLastYear=0;
+//  int prevFirstYear=0;
+    int prevLastYear=0;
     int numRows = smodel->rowCount();
     std::string msg;
 
@@ -122,7 +123,7 @@ bool checkYearValues(nmfLogger* logger,
                 return false;
             }
         }
-        prevFirstYear = currFirstYear;
+        //prevFirstYear = currFirstYear;
         prevLastYear  = currLastYear;
     }
 
@@ -141,7 +142,6 @@ void createNewNumberOfBinsTable(nmfDatabase* databasePtr,
                                 bool         isAutoFillChecked)
 {
     bool foundSpecies;
-    int m;
     int NumSpecies;
     int NumCols;
     int UpperLimit;
@@ -197,7 +197,6 @@ void createNewNumberOfBinsTable(nmfDatabase* databasePtr,
         calculateFirstLastSegments(FirstYear,LastYear,numBins,
                                    FirstYears,LastYears);
     }
-    m = 0;
     UpperLimit = (isDietTable) ? NumCols-1 : NumCols;
     for (int i=0; i<NumRows; ++i) {
         for (int j = 0; j < UpperLimit; ++j) {
@@ -234,7 +233,6 @@ void createNewYearsPerBinTable(nmfDatabase* databasePtr,
                                bool         isAutoFillChecked)
 {
     bool foundSpecies;
-    int m;
     int NumSpecies;
     int NumCols;
     int UpperLimit;
@@ -269,7 +267,7 @@ void createNewYearsPerBinTable(nmfDatabase* databasePtr,
 
     NumYears = (LastYear-FirstYear+1);
     NumBins  = NumYears/NumYearsPerBin;
-    NumBins  = ((float)NumBins == (float)NumYears/(float)NumYearsPerBin) ? NumBins : NumBins+1;
+    NumBins  = (NumBins == int(float(NumYears)/float(NumYearsPerBin))) ? NumBins : NumBins+1;
     NumRows  = NumBins;
 
     NumSpecies = allSpecies.size();
@@ -307,7 +305,6 @@ void createNewYearsPerBinTable(nmfDatabase* databasePtr,
         calculateFirstLastSegments(FirstYear,LastYear,NumBins,
                                    FirstYears,LastYears);
     }
-    m = 0;
     UpperLimit = (isDietTable) ? NumCols-1 : NumCols;
     for (int i=0; i<NumRows; ++i) {
         for (int j = 0; j < UpperLimit; ++j) {
@@ -477,7 +474,7 @@ bool getFHYearRange(nmfDatabase* databasePtr,
 
     // Get species data
     fields     = {"SystemName","FH_FirstYear","FH_LastYear"};
-    queryStr   = "SELECT SystemName,FH_FirstYear,FH_LastYear FROM System ";
+    queryStr   = "SELECT SystemName,FH_FirstYear,FH_LastYear FROM `System` ";
     queryStr  += "WHERE SystemName = '" + systemName + "'";
     dataMap    = databasePtr->nmfQueryDatabase(queryStr, fields);
     if (dataMap["SystemName"].size() == 0) {
@@ -779,7 +776,7 @@ void loadCatchAtLengthTable(nmfDatabase* databasePtr,
             if (row == 0) {
                 max = (col == NumLengthBins-1) ? min+binInc : min+binInc-1;
                 binName = //"Bin " + std::to_string(binNum+1)+"\n"+
-                           std::to_string((int)min)+"-"+std::to_string((int)max);
+                           std::to_string(int(min))+"-"+std::to_string(int(max));
                 HorizontalList << QString::fromStdString(binName);
                 min = max + 1;
              }
@@ -952,6 +949,7 @@ void loadMortalityTable(nmfDatabase* databasePtr,
     }
 
     m = 0;
+    item = nullptr;
     for (int i=0; i<NumRows; ++i) {
         for (int j = 0; j < 2; ++j) {
             if (j == 0) {
@@ -1265,7 +1263,7 @@ void rescaleModel(QTableView* tableView,
     double value;
     QModelIndex index;
 
-    if (unitsSF == 0) {
+    if (int(unitsSF) == 0) {
         unitsSF = 1.0;
         std::cout << "Error: rescaleModel: Found 0 value for unitsSF" << std::endl;
     }
@@ -1342,7 +1340,9 @@ bool runOptimizerADMB(
 
 
     QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-    buildOK = admb.build();
+    // -----------------------
+       buildOK = admb.build();
+    // -----------------------
     QApplication::restoreOverrideCursor();
 
     //
@@ -1360,7 +1360,9 @@ bool runOptimizerADMB(
                                       QMessageBox::Yes);
         if (reply == QMessageBox::Yes) {
             QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-            runOK = admb.run();
+            // -----------------------
+               runOK = admb.run();
+            // -----------------------
             QApplication::restoreOverrideCursor();
             if (runOK) {
                 admb.parseReportFile(abundanceData);
@@ -1762,7 +1764,7 @@ bool saveProportionTable(QTabWidget*  tabWidget,
         for (int col = 0; col < NumCols; ++col) {
             rowTotal += smodel->index(row,col).data().toDouble();
         }
-        if (rowTotal == 0) {
+        if (int(rowTotal) == 0) {
             logger->logMsg(nmfConstants::Warning,"Warning: Found row total of 0 in table: "+table);
             return false;
         } else {
@@ -2074,7 +2076,7 @@ bool systemTableExists(nmfDatabase*  databasePtr,
 
     // See if System data already exists
     fields     = {"SystemName"};
-    queryStr   = "SELECT SystemName FROM System ";
+    queryStr   = "SELECT SystemName FROM `System` ";
     queryStr  += "WHERE SystemName = '" + projectSettingsConfig + "'";
     dataMap    = databasePtr->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SystemName"].size();

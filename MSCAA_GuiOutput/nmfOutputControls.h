@@ -32,7 +32,11 @@
 #include <QGroupBox>
 #include <QListView>
 #include <QMessageBox>
+#include <QObject>
 #include <QStringListModel>
+
+#include <nmfLogger.h>
+#include <nmfDatabase.h>
 
 class MSCAA_GuiOutputControls: public QObject
 {
