@@ -1458,10 +1458,28 @@ nmfADMB::execCmd(std::string path, std::string cmd)
 {
 
 #ifdef __linux__
-    m_logger->logMsg(nmfConstants::Normal,"Run cmd: "+cmd);
-    int retv = std::system(cmd.c_str());
-//    int retv = QProcess::execute(cmd.c_str());
-    m_logger->logMsg(nmfConstants::Normal, "Run completed, retv = "+std::to_string(retv));
+
+    // Find the full path location of the admb command and use that in the system call.
+    // If not, when running from a file browser GUI app on linux (i.e. Nemo), the admb
+    // executable may not be found.
+    std::string result="";
+    FILE* file = popen("which admb", "r");
+    char buffer[100];
+    fscanf(file, "%100s", buffer);
+    pclose(file);
+    result = buffer;
+    result = QString::fromStdString(result).trimmed().toStdString();
+    if (QString::fromStdString(cmd).contains("admb ")) {
+        // Replace "admb" with the full path of the admb executable
+        QString cmdStr = QString::fromStdString(cmd);
+        QString subStr("admb ");
+        QString newStr = QString::fromStdString(result) + " ";
+        cmd = cmdStr.replace(subStr,newStr).toStdString();
+    }
+    m_logger->logMsg(nmfConstants::Normal,"cmd: "+cmd);
+//  int retv = std::system(cmd.c_str());
+    int retv = QProcess::execute(cmd.c_str());
+    m_logger->logMsg(nmfConstants::Normal, "cmd completed: retv = "+std::to_string(retv));
 
 #elif _WIN32
 
@@ -1549,7 +1567,7 @@ nmfADMB::buildADMB(const QString& tplFile,
     // 1. Build .cpp file
     QString fullTargetName = QDir(targetPath).filePath(targetName);
     QString fullDestName   = QDir(targetPath).filePath(destName);
-    cmd = "admb " + fullTargetName.toStdString() + " > " + fullDestName.toStdString();
+    cmd = "admb \"" + fullTargetName.toStdString() + "\" > \"" + fullDestName.toStdString() + "\"";
     execCmd(targetPath.toStdString(),cmd);
     msg = "<strong><br>Build command:</strong><br><br>" + QString::fromStdString(cmd);
     appendSummaryTextBox(msg);
@@ -1592,8 +1610,8 @@ nmfADMB::runADMB(const QString& tplFile,
     // Start timer to time ADMB Run
     admbTimer.start();
 
-    QString fullRunOutputFile = QDir(filePath).filePath(runOutputFile);
-    cmd = QDir(filePath).filePath(fileBase).toStdString();
+    QString fullRunOutputFile = "\"" + QDir(filePath).filePath(runOutputFile) + "\"";
+    cmd = "\"" + QDir(filePath).filePath(fileBase).toStdString() + "\"";
     if (m_debug != 0) {
         cmd += "  > " + fullRunOutputFile.toStdString() +
                " 2> " + fullRunOutputFile.toStdString(); // This last part redirects stderr as well

@@ -15,6 +15,8 @@
 #include "nmfUtils.h"
 #include "nmfUtilsQt.h"
 #include <unistd.h>
+#include <iostream>
+#include <stdio.h>
 
 #include <boost/filesystem.hpp>
 
