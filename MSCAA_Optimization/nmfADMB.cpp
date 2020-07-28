@@ -1477,9 +1477,11 @@ nmfADMB::execCmd(std::string path, std::string cmd)
         cmd = cmdStr.replace(subStr,newStr).toStdString();
     }
     m_logger->logMsg(nmfConstants::Normal,"cmd: "+cmd);
-//  int retv = std::system(cmd.c_str());
-    int retv = QProcess::execute(cmd.c_str());
+//    popen(cmd.c_str(),"r");
+    int retv = std::system(cmd.c_str());
+//    int retv = QProcess::execute(cmd.c_str());
     m_logger->logMsg(nmfConstants::Normal, "cmd completed: retv = "+std::to_string(retv));
+//    m_logger->logMsg(nmfConstants::Normal, "cmd completed");
 
 #elif _WIN32
 
