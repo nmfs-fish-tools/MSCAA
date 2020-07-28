@@ -24,7 +24,9 @@ nmfMainWindow::nmfMainWindow(QWidget *parent) :
     m_Username.clear();
     m_Password.clear();
     m_PreferencesWidget = nullptr;
-    m_PreferencesDlg    = new QDialog();
+    m_TableNamesWidget  = nullptr;
+    m_PreferencesDlg    = new QDialog(this);
+    m_TableNamesDlg     = new QDialog(this);
 
     EntityListLV = m_UI->EntityDockWidget->findChild<QListView *>("EntityListLV");
 
@@ -64,6 +66,7 @@ nmfMainWindow::nmfMainWindow(QWidget *parent) :
     readSettings(); // Read settings again in case user has cleared settings
 
     initializePreferencesDlg();
+    initializeTableNamesDlg();
 
     // Initialize widgets and connections
     setupLogWidget();
@@ -493,6 +496,8 @@ nmfMainWindow::initConnections()
             this,                       SLOT(menu_importDatabase()));
     connect(m_UI->actionExportDatabase, SIGNAL(triggered()),
             this,                       SLOT(menu_exportDatabase()));
+    connect(m_UI->actionExportAllDatabases, SIGNAL(triggered()),
+            this,                       SLOT(menu_exportAllDatabases()));
     connect(m_UI->actionShowLastADMBRun,SIGNAL(triggered()),
             this,                       SLOT(menu_showLastADMBRun()));
     connect(m_UI->actionLayoutOutput,   SIGNAL(triggered()),
@@ -1738,38 +1743,83 @@ nmfMainWindow::menu_exportDatabase()
 }
 
 void
+nmfMainWindow::menu_exportAllDatabases()
+{
+    QList<QString> authDBs = {};
+    m_databasePtr->getListOfAuthenticatedDatabaseNames(authDBs);
+
+    QList<QString>::iterator authDBsIterator;
+    std::string projectDatabase;
+    for (authDBsIterator = authDBs.begin(); authDBsIterator != authDBs.end(); authDBsIterator++)
+    {
+        projectDatabase = authDBsIterator->toStdString();
+
+        m_databasePtr->exportDatabase(this,
+                                      m_ProjectDir,
+                                      m_Username,
+                                      m_Password,
+                                      projectDatabase);
+    }
+}
+
+void
 nmfMainWindow::menu_showTableNames()
 {
+    QLabel*      DatabaseNameLB = m_TableNamesWidget->findChild<QLabel*>("DatabaseNameLB");
+    DatabaseNameLB->setText(QString::fromStdString(m_ProjectDatabase));
+    m_TableNamesDlg->show();
+}
+
+void
+nmfMainWindow::initializeTableNamesDlg()
+{
+    QUiLoader loader;
+    QFile file(":/forms/Main/TableNamesDlg.ui");
+    file.open(QFile::ReadOnly);
+    m_TableNamesWidget = loader.load(&file,this);
+    file.close();
+
+    QPushButton* TableNamesOkPB = m_TableNamesWidget->findChild<QPushButton*>("TableNamesOkPB");
+    QListWidget* TableNamesLW   = m_TableNamesWidget->findChild<QListWidget*>("TableNamesLW");
+    QLabel*      DatabaseNameLB = m_TableNamesWidget->findChild<QLabel*>("DatabaseNameLB");
+
     std::vector<std::string> fields;
     std::map<std::string, std::vector<std::string> > dataMap;
     std::string queryStr;
-    std::string msg = "";
-    unsigned NumTables=0;
+    int NumTables=0;
 
     fields    = {"table_name"};
     queryStr  = "SELECT table_name FROM information_schema.tables WHERE ";
     queryStr += "table_schema = '" + m_ProjectDatabase + "'";
     dataMap   = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumTables = dataMap["table_name"].size();
+
     if (NumTables <= 0) {
-        msg = "\nNo tables found in database: " + m_ProjectDatabase;
-        QMessageBox::information(this,
-                                 tr("Database Tables"),
-                                 tr(msg.c_str()),
-                                 QMessageBox::Ok);
+        TableNamesLW->addItem(QString::fromStdString("No tables found in database: " + m_ProjectDatabase));
     } else {
-        for (unsigned i=0; i<NumTables; ++i) {
-            msg += std::to_string(i+1) + ". " + dataMap["table_name"][i] + "\n";
+        DatabaseNameLB->setText(QString::fromStdString(m_ProjectDatabase));
+        for (int i=0; i<NumTables; ++i) {
+            TableNamesLW->addItem(QString::fromStdString(std::to_string(i+1) + ". " + dataMap["table_name"][i]));
         }
-        msg = "\nTables in database: " + m_ProjectDatabase + "\n\n" + msg;
-        QMessageBox::information(this,
-                                 tr("Database Tables"),
-                                 tr(msg.c_str()),
-                                 QMessageBox::Ok);
     }
 
+    QVBoxLayout* layout = new QVBoxLayout();
+    layout->addWidget(m_TableNamesWidget);
+    m_TableNamesDlg->adjustSize();
+    m_TableNamesDlg->setMinimumWidth(400);
+    m_TableNamesDlg->setMinimumHeight(300);
+    m_TableNamesDlg->setLayout(layout);
+    m_TableNamesDlg->setWindowTitle("Table Names");
+
+    connect(TableNamesOkPB,             SIGNAL(clicked()),
+            this,             SLOT(callback_TableNamesOkPB()));
 }
 
+void
+nmfMainWindow::callback_TableNamesOkPB()
+{
+    m_TableNamesDlg->hide();
+}
 
 void
 nmfMainWindow::menu_showLastADMBRun()

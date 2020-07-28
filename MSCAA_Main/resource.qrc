@@ -27,5 +27,6 @@
         <file>forms/SSCAA/SSCAA_Tab05.ui</file>
         <file>forms/SSCAA/SSCAA_Tab04.ui</file>
         <file>forms/Main/PreferencesDlg.ui</file>
+        <file>forms/Main/TableNamesDlg.ui</file>
     </qresource>
 </RCC>
