@@ -83,7 +83,9 @@ private:
     std::string    m_Username;
     std::string    m_Password;
     QDialog*       m_PreferencesDlg;
+    QDialog*	   m_TableNamesDlg;
     QWidget*       m_PreferencesWidget;
+    QWidget*       m_TableNamesWidget;
     bool           m_isStartUpOK;
 
     QWidget*       EntityListWidget;
@@ -143,6 +145,7 @@ private:
     void showDockWidgets(bool show);
     void updateWindowTitle();
     void initializePreferencesDlg();
+    void initializeTableNamesDlg();
     bool saveScreenshot(QString &outputFile, QPixmap &pm);
     void populateOutputDataTable(
             int& MinAge,
@@ -159,6 +162,7 @@ public slots:
     void menu_createTables();
     void menu_deselectAll();
     void menu_exportDatabase();
+    void menu_exportAllDatabases();
     void menu_importDatabase();
     void menu_layoutDefault();
     void menu_layoutOutput();
@@ -171,6 +175,7 @@ public slots:
     void menu_showLastADMBRun();
     void menu_showTableNames();
     void menu_whatsThis();
+    void callback_TableNamesOkPB();
     void callback_AbundanceAgeGroupsSelected(
             QString mode,
             QModelIndexList indexList);
