@@ -530,6 +530,8 @@ nmfMainWindow::initConnections()
 //            Simulation_Tab2_ptr, SLOT(callback_RunPB()));
     connect(SSCAA_Tab6_ptr,      SIGNAL(UpdateOutputCharts(QString)),
             this,                SLOT(callback_ShowChart(QString)));
+    connect(SSCAA_Tab6_ptr,      SIGNAL(ClearOutput()),
+            this,                SLOT(callback_ClearOutput()));
     connect(MSCAA_Tab5_ptr,      SIGNAL(SelectDefaultSpecies()),
             this,                SLOT(callback_SelectDefaultSpecies()));
     connect(MSCAA_Tab5_ptr,      SIGNAL(UpdateOutputCharts(QString)),
@@ -1334,6 +1336,21 @@ nmfMainWindow::callback_ShowChart(const QString& modeDELETE,
 }
 
 void
+nmfMainWindow::callback_ClearOutput()
+{
+//std::cout << "------> Removing all series <--------------" << std::endl;
+//    m_ChartView2d->chart()->removeAllSeries();
+//    QList<QSurface3DSeries*> allSeries = m_Graph3D->seriesList();
+//    for (QSurface3DSeries* series : allSeries) {
+//        m_Graph3D->removeSeries(series);
+//    }
+
+//    // Clear data table
+//    m_UI->MSCAAOutputDataTV->model()->removeRows(0,m_UI->MSCAAOutputDataTV->model()->rowCount());
+
+}
+
+void
 nmfMainWindow::populateOutputDataTable(
         int& MinAge,
         int& FirstYear,
@@ -1363,6 +1380,7 @@ nmfMainWindow::populateOutputDataTable(
 
     m_UI->MSCAAOutputDataTV->setModel(smodel);
     m_UI->MSCAAOutputDataTV->resizeColumnsToContents();
+
 }
 
 void

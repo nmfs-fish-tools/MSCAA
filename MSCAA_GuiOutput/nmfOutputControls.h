@@ -57,7 +57,7 @@ class MSCAA_GuiOutputControls: public QObject
     QLabel*      OutputScaleLBL;
     QLabel*      OutputMortalityTypeLBL;
     QComboBox*   OutputSpeciesCMB;
-    QComboBox*   OutputTypeCMB;
+    QComboBox*   OutputChartTypeCMB;
     QComboBox*   OutputScaleCMB;
     QCheckBox*   OutputLogCB; // Take natural log of data
     QCheckBox*   OutputNaturalMortalityCB;
@@ -122,7 +122,7 @@ signals:
                                     QModelIndexList mortalityTypeIndexList);
 
 public slots:
-    void callback_OutputTypeCMB(QString outputType);
+    void callback_OutputChartTypeCMB(QString outputType);
     void callback_OutputSpeciesCMB(QString outputSpecies);
     void callback_OutputScaleCMB(QString scale);
     void callback_AgeGroupSelectionChanged(QItemSelection sel, QItemSelection desel);

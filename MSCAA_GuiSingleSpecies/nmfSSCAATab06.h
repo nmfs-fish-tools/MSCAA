@@ -111,6 +111,7 @@ public:
     void ReadSettings();
 
 signals:
+    void ClearOutput();
     void UpdateOutputCharts(QString mode);
     void RunADMB(int trophic);
 

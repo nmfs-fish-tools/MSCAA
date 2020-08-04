@@ -41,7 +41,7 @@ MSCAA_GuiOutputControls::initWidgets()
     OutputAgeListLBL = new QLabel("Age Groups:");
     OutputScaleLBL   = new QLabel("Scale Factor:");
     OutputMortalityTypeLBL = new QLabel("Mortality Type:");
-    OutputTypeCMB    = new QComboBox();
+    OutputChartTypeCMB     = new QComboBox();
     OutputSpeciesCMB = new QComboBox();
     OutputScaleCMB   = new QComboBox();
     OutputLogCB      = new QCheckBox();
@@ -52,9 +52,9 @@ MSCAA_GuiOutputControls::initWidgets()
     OutputMortalityListLV = new QListView();
 
     controlLayt->addWidget(OutputTypeLBL);
-    typeLayt->addWidget(OutputTypeCMB);
+    typeLayt->addWidget(OutputChartTypeCMB);
     typeLayt->addWidget(OutputLogCB);
-    OutputTypeCMB->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed);
+    OutputChartTypeCMB->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed);
     controlLayt->addLayout(typeLayt);
     controlLayt->addWidget(OutputSpeciesLBL);
     controlLayt->addWidget(OutputSpeciesCMB);
@@ -74,15 +74,15 @@ MSCAA_GuiOutputControls::initWidgets()
     OutputAgeListLBL->setEnabled(false);
     OutputAgeListLV->setEnabled(false);
     OutputAgeListLV->setSelectionMode(QAbstractItemView::ExtendedSelection);
-    OutputTypeCMB->addItem("Abundance (3D)");
-    OutputTypeCMB->addItem("Abundance vs Time");
-    OutputTypeCMB->addItem("Mortality vs Time");
-    OutputTypeCMB->addItem("Recruitment vs SSB");
-    OutputTypeCMB->addItem("SSB vs Time");
-    OutputTypeCMB->setItemData(0, "3D Surface Plot of Abundance vs Time and Age Groups",  Qt::ToolTipRole);
-    OutputTypeCMB->setItemData(1, "2D Line Plot of Abundance vs Time (for one or more Age Groups)",  Qt::ToolTipRole);
-    OutputTypeCMB->setItemData(2, "2D Line Plot of Spawning Stock Biomass vs Time",  Qt::ToolTipRole);
-    OutputTypeCMB->setItemData(3, "2D Line Plot of Recruitment vs Spawning Stock Biomass",  Qt::ToolTipRole);
+    OutputChartTypeCMB->addItem("Abundance (3D)");
+    OutputChartTypeCMB->addItem("Abundance vs Time");
+    OutputChartTypeCMB->addItem("Mortality vs Time");
+    OutputChartTypeCMB->addItem("Recruitment vs SSB");
+    OutputChartTypeCMB->addItem("SSB vs Time");
+    OutputChartTypeCMB->setItemData(0, "3D Surface Plot of Abundance vs Time and Age Groups",  Qt::ToolTipRole);
+    OutputChartTypeCMB->setItemData(1, "2D Line Plot of Abundance vs Time (for one or more Age Groups)",  Qt::ToolTipRole);
+    OutputChartTypeCMB->setItemData(2, "2D Line Plot of Spawning Stock Biomass vs Time",  Qt::ToolTipRole);
+    OutputChartTypeCMB->setItemData(3, "2D Line Plot of Recruitment vs Spawning Stock Biomass",  Qt::ToolTipRole);
     OutputScaleCMB->addItem("Default");
     OutputScaleCMB->addItem("000");
     OutputScaleCMB->addItem("000 000");
@@ -92,8 +92,8 @@ MSCAA_GuiOutputControls::initWidgets()
     // Deselect menu items that aren't completely implemented
     QVariant v(0);
     for (int i=3; i<=4; ++i) {
-        OutputTypeCMB->model()->setData(
-                    OutputTypeCMB->model()->index(i,0),
+        OutputChartTypeCMB->model()->setData(
+                    OutputChartTypeCMB->model()->index(i,0),
                     v,Qt::UserRole-1);
     }
 
@@ -130,8 +130,8 @@ MSCAA_GuiOutputControls::initWidgets()
 void
 MSCAA_GuiOutputControls::initConnections()
 {
-    connect(OutputTypeCMB,          SIGNAL(currentTextChanged(QString)),
-            this,                   SLOT(callback_OutputTypeCMB(QString)));
+    connect(OutputChartTypeCMB,     SIGNAL(currentTextChanged(QString)),
+            this,                   SLOT(callback_OutputChartTypeCMB(QString)));
     connect(OutputSpeciesCMB,       SIGNAL(currentTextChanged(QString)),
             this,                   SLOT(callback_OutputSpeciesCMB(QString)));
     connect(OutputScaleCMB,         SIGNAL(currentTextChanged(QString)),
@@ -326,7 +326,7 @@ MSCAA_GuiOutputControls::callback_AgeGroupSelectionChanged(
 }
 
 void
-MSCAA_GuiOutputControls::callback_OutputTypeCMB(QString outputType)
+MSCAA_GuiOutputControls::callback_OutputChartTypeCMB(QString outputType)
 {
 
     emit UpdateAgeList();
@@ -349,7 +349,7 @@ void
 MSCAA_GuiOutputControls::callback_OutputLogCB(bool isChecked)
 {
     OutputScaleCMB->setCurrentIndex(0);
-    callback_OutputTypeCMB("Abundance (3D)");
+    callback_OutputChartTypeCMB("Abundance (3D)");
 }
 
 void
@@ -434,7 +434,7 @@ MSCAA_GuiOutputControls::setOutputSpeciesIndex(int index)
 QString
 MSCAA_GuiOutputControls::getOutputType()
 {
-    return OutputTypeCMB->currentText();
+    return OutputChartTypeCMB->currentText();
 }
 
 void
@@ -442,8 +442,8 @@ MSCAA_GuiOutputControls::setOutputType(QString type)
 {
     // This forces an update if the user needs to
     // refresh the same setting.
-    OutputTypeCMB->setCurrentIndex(0);
-    OutputTypeCMB->setCurrentText(type);
+    OutputChartTypeCMB->setCurrentIndex(0);
+    OutputChartTypeCMB->setCurrentText(type);
 
     return;
 }

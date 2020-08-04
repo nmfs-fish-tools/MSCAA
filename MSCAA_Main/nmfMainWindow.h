@@ -179,6 +179,7 @@ public slots:
     void callback_AbundanceAgeGroupsSelected(
             QString mode,
             QModelIndexList indexList);
+    void callback_ClearOutput();
     void callback_EntityList(QModelIndex index);
     void callback_LoadUserSuppliedNuOther();
     void callback_MortalityAgeGroupsSelected(QModelIndexList ageIndexList,
