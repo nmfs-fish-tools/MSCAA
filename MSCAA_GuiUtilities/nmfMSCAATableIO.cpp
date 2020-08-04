@@ -2084,4 +2084,46 @@ bool systemTableExists(nmfDatabase*  databasePtr,
     return (NumRecords == 1);
 }
 
+bool removePreviousRunsData(
+        QWidget*       parent,
+        nmfDatabase*   databasePtr,
+        nmfLogger*     logger,
+        std::string&   projectDir,
+        std::string&   projectName,
+        std::string&   projectSettingsConfig,
+        const QString& type,
+        QTextEdit*     summaryTextBox)
+{
+    QStringList filters;
+    QString msg;
+    QMessageBox::StandardButton reply;
+
+    // Remove previous run's data files
+    QString admbDir = getADMBDir(
+       databasePtr,logger,projectDir,projectName,
+       projectSettingsConfig,type,summaryTextBox);
+
+    msg = "\nOK to remove previous run's output data files? ";
+    msg += "This will remove all files in directory: \n\n";
+    msg += admbDir + "\n";
+    reply = QMessageBox::question(parent, "Remove Previous Run's Files",
+                                  msg,
+                                  QMessageBox::No|QMessageBox::Yes,
+                                  QMessageBox::Yes);
+    if (reply == QMessageBox::No) {
+        return false;
+    }
+
+    QDir dir(admbDir);
+    filters << "MSCAA*" << "*.cxx" << "admodel.*" << "fmin.log";
+    dir.setNameFilters(filters);
+    for(const QString & filename: dir.entryList()){
+        dir.remove(filename);
+        msg = "Removing: " + filename;
+        logger->logMsg(nmfConstants::Normal,msg.toStdString());
+    }
+    return true;
+}
+
+
 }

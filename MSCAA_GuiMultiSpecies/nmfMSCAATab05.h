@@ -84,6 +84,10 @@ class nmfMSCAA_Tab5: public QObject
 
 signals:
     /**
+     * @brief Clears the output chart and data areas
+     */
+    void ClearOutput();
+    /**
      * @brief Signal signifying that the first species should be selected
      */
     void SelectDefaultSpecies();

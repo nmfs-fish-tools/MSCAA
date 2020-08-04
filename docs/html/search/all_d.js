@@ -3,6 +3,7 @@ var searchData=
   ['readme',['README',['../md_docs_README.html',1,'']]],
   ['readlastreportfile',['readLastReportFile',['../classnmf_m_s_c_a_a___tab5.html#a8bb570ba9742285e63dc6fa9c6837daf',1,'nmfMSCAA_Tab5']]],
   ['reloadwidgets',['ReloadWidgets',['../classnmf_setup___tab2.html#a9cfc389dda849548df04ab138b278776',1,'nmfSetup_Tab2']]],
+  ['removepreviousrunsdata',['removePreviousRunsData',['../namespacenmf_m_s_c_a_a_utils.html#ae01038a63146f6e98e1977c8179640b9',1,'nmfMSCAAUtils']]],
   ['reportfile',['reportFile',['../struct_struct_a_d_m_b_filenames.html#a9e602c0ce42a361e48f4173244eb8488',1,'StructADMBFilenames']]],
   ['rescalemodel',['rescaleModel',['../namespacenmf_m_s_c_a_a_utils.html#af1c2990ab7d5bd553ecf51ac14268a5e',1,'nmfMSCAAUtils']]],
   ['rhoph',['Rhoph',['../struct_struct_species_data.html#af8f7c245542d87e607da74fc79c482d2',1,'StructSpeciesData']]],

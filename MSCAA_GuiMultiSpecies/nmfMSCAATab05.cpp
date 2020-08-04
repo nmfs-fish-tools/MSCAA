@@ -261,6 +261,18 @@ nmfMSCAA_Tab5::callback_RunPB()
     int Trophic = 1;
     int VerboseDebugLevel = getVerboseDebugLevel();
 
+    if (! nmfMSCAAUtils::removePreviousRunsData(MSCAA_Tabs,
+                m_databasePtr,m_logger,m_ProjectDir,m_ProjectName,
+                m_ProjectSettingsConfig,"MultiSpecies",MSCAA_Tab5_SummaryTE)) {
+        return;
+    }
+
+    // Clear chart and data
+    emit ClearOutput();
+
+    // ///////////////////
+    //    Run ADMB      //
+    // ///////////////////
     bool runOK = nmfMSCAAUtils::runOptimizerADMB(
                 m_databasePtr,
                 m_logger,

@@ -93,6 +93,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">MSCAA_GuiOutputControls Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The class containing the controls for the Output dock widget.  
+ <a href="class_m_s_c_a_a___gui_output_controls.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="nmf_output_controls_8h_source.html">nmfOutputControls.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for MSCAA_GuiOutputControls:</div>
 <div class="dyncontent">
@@ -106,112 +111,764 @@ Collaboration diagram for MSCAA_GuiOutputControls:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-slots"></a>
 Public Slots</h2></td></tr>
-<tr class="memitem:aeb4c18f891dfc182896ee51438e86d26"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aeb4c18f891dfc182896ee51438e86d26"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>callback_OutputTypeCMB</b> (QString outputType)</td></tr>
-<tr class="separator:aeb4c18f891dfc182896ee51438e86d26"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a017e9d7072304d9a862076e3ce80c9b1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a017e9d7072304d9a862076e3ce80c9b1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>callback_OutputSpeciesCMB</b> (QString outputSpecies)</td></tr>
-<tr class="separator:a017e9d7072304d9a862076e3ce80c9b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adcf275d92399450871e16f73f592c7d7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adcf275d92399450871e16f73f592c7d7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>callback_OutputScaleCMB</b> (QString scale)</td></tr>
-<tr class="separator:adcf275d92399450871e16f73f592c7d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad58a704f419477eb012202b036e46229"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad58a704f419477eb012202b036e46229"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>callback_AgeGroupSelectionChanged</b> (QItemSelection sel, QItemSelection desel)</td></tr>
+<tr class="memitem:ad58a704f419477eb012202b036e46229"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_s_c_a_a___gui_output_controls.html#ad58a704f419477eb012202b036e46229">callback_AgeGroupSelectionChanged</a> (QItemSelection sel, QItemSelection desel)</td></tr>
+<tr class="memdesc:ad58a704f419477eb012202b036e46229"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback invoked when the user makes a selection in the age listview.  <a href="#ad58a704f419477eb012202b036e46229">More...</a><br /></td></tr>
 <tr class="separator:ad58a704f419477eb012202b036e46229"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61c5e5da6115ac7b440f8048b96be638"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a61c5e5da6115ac7b440f8048b96be638"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>callback_MortalityTypeSelectionChanged</b> (QItemSelection sel, QItemSelection desel)</td></tr>
+<tr class="memitem:a61c5e5da6115ac7b440f8048b96be638"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_s_c_a_a___gui_output_controls.html#a61c5e5da6115ac7b440f8048b96be638">callback_MortalityTypeSelectionChanged</a> (QItemSelection sel, QItemSelection desel)</td></tr>
+<tr class="memdesc:a61c5e5da6115ac7b440f8048b96be638"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback invoked when the user makes a selection in the mortality type listview.  <a href="#a61c5e5da6115ac7b440f8048b96be638">More...</a><br /></td></tr>
 <tr class="separator:a61c5e5da6115ac7b440f8048b96be638"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29bb23b184dbd73841e9f0f773832b6c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a29bb23b184dbd73841e9f0f773832b6c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>callback_OutputLogCB</b> (bool isChecked)</td></tr>
+<tr class="memitem:aae9a8ae760860595b317191deafc60af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_s_c_a_a___gui_output_controls.html#aae9a8ae760860595b317191deafc60af">callback_OutputChartTypeCMB</a> (QString outputType)</td></tr>
+<tr class="memdesc:aae9a8ae760860595b317191deafc60af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback invoked when the user changes the chart type.  <a href="#aae9a8ae760860595b317191deafc60af">More...</a><br /></td></tr>
+<tr class="separator:aae9a8ae760860595b317191deafc60af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29bb23b184dbd73841e9f0f773832b6c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_s_c_a_a___gui_output_controls.html#a29bb23b184dbd73841e9f0f773832b6c">callback_OutputLogCB</a> (bool isChecked)</td></tr>
+<tr class="memdesc:a29bb23b184dbd73841e9f0f773832b6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback invoked when the user checks the natural log checkbox.  <a href="#a29bb23b184dbd73841e9f0f773832b6c">More...</a><br /></td></tr>
 <tr class="separator:a29bb23b184dbd73841e9f0f773832b6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcf275d92399450871e16f73f592c7d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_s_c_a_a___gui_output_controls.html#adcf275d92399450871e16f73f592c7d7">callback_OutputScaleCMB</a> (QString scale)</td></tr>
+<tr class="memdesc:adcf275d92399450871e16f73f592c7d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback invoked when the user changes the output scale.  <a href="#adcf275d92399450871e16f73f592c7d7">More...</a><br /></td></tr>
+<tr class="separator:adcf275d92399450871e16f73f592c7d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="signals"></a>
 Signals</h2></td></tr>
-<tr class="memitem:aafa26f7017c4fb44bcc6d464b99ce630"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aafa26f7017c4fb44bcc6d464b99ce630"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetChartView2d</b> (bool isVisible)</td></tr>
-<tr class="separator:aafa26f7017c4fb44bcc6d464b99ce630"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a785c29c73d0b2fa2d9be1305e2e525f4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a785c29c73d0b2fa2d9be1305e2e525f4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>ShowChart</b> (QString OutputType, QString OutputScale)</td></tr>
-<tr class="separator:a785c29c73d0b2fa2d9be1305e2e525f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e953edcc1da0b6e35c368ed73906dee"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2e953edcc1da0b6e35c368ed73906dee"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SelectCenterSurfacePoint</b> ()</td></tr>
-<tr class="separator:a2e953edcc1da0b6e35c368ed73906dee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a353e4c957f4be72442a5e1c3cf2083b0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a353e4c957f4be72442a5e1c3cf2083b0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdateSummaryStatistics</b> ()</td></tr>
-<tr class="separator:a353e4c957f4be72442a5e1c3cf2083b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7955dcaf1b77dc4fa35b252bff492ae2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7955dcaf1b77dc4fa35b252bff492ae2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdateAgeList</b> ()</td></tr>
-<tr class="separator:a7955dcaf1b77dc4fa35b252bff492ae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a86f12be05e1051a37462a8463c453597"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a86f12be05e1051a37462a8463c453597"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>AbundanceAgeGroupsSelected</b> (QString mode, QModelIndexList indexList)</td></tr>
+<tr class="memitem:a86f12be05e1051a37462a8463c453597"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_s_c_a_a___gui_output_controls.html#a86f12be05e1051a37462a8463c453597">AbundanceAgeGroupsSelected</a> (QString mode, QModelIndexList indexList)</td></tr>
+<tr class="memdesc:a86f12be05e1051a37462a8463c453597"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signal emitted when the user selects from the age listview.  <a href="#a86f12be05e1051a37462a8463c453597">More...</a><br /></td></tr>
 <tr class="separator:a86f12be05e1051a37462a8463c453597"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa14582570316f037f7926798d831f043"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa14582570316f037f7926798d831f043"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>MortalityAgeGroupsSelected</b> (QModelIndexList ageIndexList, QModelIndexList mortalityTypeIndexList)</td></tr>
+<tr class="memitem:aa14582570316f037f7926798d831f043"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_s_c_a_a___gui_output_controls.html#aa14582570316f037f7926798d831f043">MortalityAgeGroupsSelected</a> (QModelIndexList ageIndexList, QModelIndexList mortalityTypeIndexList)</td></tr>
+<tr class="memdesc:aa14582570316f037f7926798d831f043"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signal emitted when the user selects from the mortality agelist.  <a href="#aa14582570316f037f7926798d831f043">More...</a><br /></td></tr>
 <tr class="separator:aa14582570316f037f7926798d831f043"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a785c29c73d0b2fa2d9be1305e2e525f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_s_c_a_a___gui_output_controls.html#a785c29c73d0b2fa2d9be1305e2e525f4">ShowChart</a> (QString OutputType, QString OutputScale)</td></tr>
+<tr class="memdesc:a785c29c73d0b2fa2d9be1305e2e525f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signal emitted when the user wants to show the chart.  <a href="#a785c29c73d0b2fa2d9be1305e2e525f4">More...</a><br /></td></tr>
+<tr class="separator:a785c29c73d0b2fa2d9be1305e2e525f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7955dcaf1b77dc4fa35b252bff492ae2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7955dcaf1b77dc4fa35b252bff492ae2"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_s_c_a_a___gui_output_controls.html#a7955dcaf1b77dc4fa35b252bff492ae2">UpdateAgeList</a> ()</td></tr>
+<tr class="memdesc:a7955dcaf1b77dc4fa35b252bff492ae2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Signal emitted when the user wants to update the age listview widget. <br /></td></tr>
+<tr class="separator:a7955dcaf1b77dc4fa35b252bff492ae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a6d47df8aa7332c79779791fb8c1b0d40"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6d47df8aa7332c79779791fb8c1b0d40"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>MSCAA_GuiOutputControls</b> (QGroupBox *ControlsGroupBox, nmfLogger *Logger, nmfDatabase *DatabasePtr, std::string &amp;ProjectDir)</td></tr>
-<tr class="separator:a6d47df8aa7332c79779791fb8c1b0d40"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a521296c2d90551c4ffda9b0f6a3b4011"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a521296c2d90551c4ffda9b0f6a3b4011"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getSpeciesNumFromName</b> (QString SpeciesName)</td></tr>
-<tr class="separator:a521296c2d90551c4ffda9b0f6a3b4011"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f1707be4ee4cd64206028ccc06a4b64"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0f1707be4ee4cd64206028ccc06a4b64"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>loadSpeciesControlWidget</b> ()</td></tr>
-<tr class="separator:a0f1707be4ee4cd64206028ccc06a4b64"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb89934ace3a2dae17ebf906400adf4c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adb89934ace3a2dae17ebf906400adf4c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>loadWidgets</b> ()</td></tr>
-<tr class="separator:adb89934ace3a2dae17ebf906400adf4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa45684d4fabb16a10d18ab5e42ffd324"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa45684d4fabb16a10d18ab5e42ffd324"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>loadAgeLV</b> (QStringList &amp;ageList)</td></tr>
-<tr class="separator:aa45684d4fabb16a10d18ab5e42ffd324"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a38ab760422953e59d374c61a4421a2f7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a38ab760422953e59d374c61a4421a2f7"></a>
-QStringList&#160;</td><td class="memItemRight" valign="bottom"><b>getSelectedAges</b> ()</td></tr>
-<tr class="separator:a38ab760422953e59d374c61a4421a2f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ba072b7ea4081b03afd4604584d8f95"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2ba072b7ea4081b03afd4604584d8f95"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>refresh</b> ()</td></tr>
-<tr class="separator:a2ba072b7ea4081b03afd4604584d8f95"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c587c4cbf8678085a6248ccf8eaf795"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3c587c4cbf8678085a6248ccf8eaf795"></a>
-QString&#160;</td><td class="memItemRight" valign="bottom"><b>getOutputScale</b> ()</td></tr>
+<tr class="memitem:a5631e805e2dad5aa8af5324d97269406"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_s_c_a_a___gui_output_controls.html#a5631e805e2dad5aa8af5324d97269406">MSCAA_GuiOutputControls</a> (QGroupBox *controlsGroupBox, nmfLogger *logger, nmfDatabase *databasePtr, std::string &amp;projectDir)</td></tr>
+<tr class="memdesc:a5631e805e2dad5aa8af5324d97269406"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class constructor.  <a href="#a5631e805e2dad5aa8af5324d97269406">More...</a><br /></td></tr>
+<tr class="separator:a5631e805e2dad5aa8af5324d97269406"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8845c987be89335984cb34903013c0c5"><td class="memItemLeft" align="right" valign="top">QModelIndexList&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_s_c_a_a___gui_output_controls.html#a8845c987be89335984cb34903013c0c5">getAgeListSelectedIndexes</a> ()</td></tr>
+<tr class="memdesc:a8845c987be89335984cb34903013c0c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the selected age items.  <a href="#a8845c987be89335984cb34903013c0c5">More...</a><br /></td></tr>
+<tr class="separator:a8845c987be89335984cb34903013c0c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a319c7a4ac27d73dbaa9b9fce3c9b5d05"><td class="memItemLeft" align="right" valign="top">QWidget *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_s_c_a_a___gui_output_controls.html#a319c7a4ac27d73dbaa9b9fce3c9b5d05">getAgeListViewport</a> ()</td></tr>
+<tr class="memdesc:a319c7a4ac27d73dbaa9b9fce3c9b5d05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the viewport associated with the age listview widget.  <a href="#a319c7a4ac27d73dbaa9b9fce3c9b5d05">More...</a><br /></td></tr>
+<tr class="separator:a319c7a4ac27d73dbaa9b9fce3c9b5d05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c587c4cbf8678085a6248ccf8eaf795"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_s_c_a_a___gui_output_controls.html#a3c587c4cbf8678085a6248ccf8eaf795">getOutputScale</a> ()</td></tr>
+<tr class="memdesc:a3c587c4cbf8678085a6248ccf8eaf795"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current scale setting for the Output chart.  <a href="#a3c587c4cbf8678085a6248ccf8eaf795">More...</a><br /></td></tr>
 <tr class="separator:a3c587c4cbf8678085a6248ccf8eaf795"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0f80d8d6dafb9d252af8f11b7731467"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad0f80d8d6dafb9d252af8f11b7731467"></a>
-QString&#160;</td><td class="memItemRight" valign="bottom"><b>getOutputType</b> ()</td></tr>
-<tr class="separator:ad0f80d8d6dafb9d252af8f11b7731467"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad12b2c6383bf192c99c4deec2bc0fb37"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad12b2c6383bf192c99c4deec2bc0fb37"></a>
-QString&#160;</td><td class="memItemRight" valign="bottom"><b>getOutputSpecies</b> ()</td></tr>
+<tr class="memitem:ad12b2c6383bf192c99c4deec2bc0fb37"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_s_c_a_a___gui_output_controls.html#ad12b2c6383bf192c99c4deec2bc0fb37">getOutputSpecies</a> ()</td></tr>
+<tr class="memdesc:ad12b2c6383bf192c99c4deec2bc0fb37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current species name for the Output chart.  <a href="#ad12b2c6383bf192c99c4deec2bc0fb37">More...</a><br /></td></tr>
 <tr class="separator:ad12b2c6383bf192c99c4deec2bc0fb37"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a149876c35ffec6e71f6d7eca510c6d31"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a149876c35ffec6e71f6d7eca510c6d31"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getOutputSpeciesIndex</b> ()</td></tr>
+<tr class="memitem:a149876c35ffec6e71f6d7eca510c6d31"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_s_c_a_a___gui_output_controls.html#a149876c35ffec6e71f6d7eca510c6d31">getOutputSpeciesIndex</a> ()</td></tr>
+<tr class="memdesc:a149876c35ffec6e71f6d7eca510c6d31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current species index for the Output chart.  <a href="#a149876c35ffec6e71f6d7eca510c6d31">More...</a><br /></td></tr>
 <tr class="separator:a149876c35ffec6e71f6d7eca510c6d31"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a79340a2e68d1c84388b68ee227814e50"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a79340a2e68d1c84388b68ee227814e50"></a>
-QWidget *&#160;</td><td class="memItemRight" valign="bottom"><b>getListViewViewport</b> ()</td></tr>
-<tr class="separator:a79340a2e68d1c84388b68ee227814e50"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac637cf48ef7a3003a8536305f700ec02"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac637cf48ef7a3003a8536305f700ec02"></a>
-QModelIndexList&#160;</td><td class="memItemRight" valign="bottom"><b>getListViewSelectedIndexes</b> ()</td></tr>
-<tr class="separator:ac637cf48ef7a3003a8536305f700ec02"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ca43674c14dc395ad890149a84ad4c0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5ca43674c14dc395ad890149a84ad4c0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setOutputType</b> (QString type)</td></tr>
-<tr class="separator:a5ca43674c14dc395ad890149a84ad4c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5f9ec368001b939bc75b38b8ab994be2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5f9ec368001b939bc75b38b8ab994be2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setOutputSpeciesIndex</b> (int index)</td></tr>
-<tr class="separator:a5f9ec368001b939bc75b38b8ab994be2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8281af4e67956eba2696e999b019ad6b"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_s_c_a_a___gui_output_controls.html#a8281af4e67956eba2696e999b019ad6b">getOutputChartType</a> ()</td></tr>
+<tr class="memdesc:a8281af4e67956eba2696e999b019ad6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the current chart type for the Output chart.  <a href="#a8281af4e67956eba2696e999b019ad6b">More...</a><br /></td></tr>
+<tr class="separator:a8281af4e67956eba2696e999b019ad6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38ab760422953e59d374c61a4421a2f7"><td class="memItemLeft" align="right" valign="top">QStringList&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_s_c_a_a___gui_output_controls.html#a38ab760422953e59d374c61a4421a2f7">getSelectedAges</a> ()</td></tr>
+<tr class="memdesc:a38ab760422953e59d374c61a4421a2f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a list of all of the selected age values from the age listview.  <a href="#a38ab760422953e59d374c61a4421a2f7">More...</a><br /></td></tr>
+<tr class="separator:a38ab760422953e59d374c61a4421a2f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64e9704716bf7606e0bef73f2807a94e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_s_c_a_a___gui_output_controls.html#a64e9704716bf7606e0bef73f2807a94e">getSpeciesNumFromName</a> (QString species)</td></tr>
+<tr class="memdesc:a64e9704716bf7606e0bef73f2807a94e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a species name to its index in the species combo box.  <a href="#a64e9704716bf7606e0bef73f2807a94e">More...</a><br /></td></tr>
+<tr class="separator:a64e9704716bf7606e0bef73f2807a94e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa45684d4fabb16a10d18ab5e42ffd324"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_s_c_a_a___gui_output_controls.html#aa45684d4fabb16a10d18ab5e42ffd324">loadAgeLV</a> (QStringList &amp;ageList)</td></tr>
+<tr class="memdesc:aa45684d4fabb16a10d18ab5e42ffd324"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the age listview with the passed age list.  <a href="#aa45684d4fabb16a10d18ab5e42ffd324">More...</a><br /></td></tr>
+<tr class="separator:aa45684d4fabb16a10d18ab5e42ffd324"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac03a58e80bda6dc5b569f459f9d9f11d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac03a58e80bda6dc5b569f459f9d9f11d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>selectFirstAgeGroup</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_s_c_a_a___gui_output_controls.html#ac03a58e80bda6dc5b569f459f9d9f11d">selectFirstAgeGroup</a> ()</td></tr>
+<tr class="memdesc:ac03a58e80bda6dc5b569f459f9d9f11d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects the first item in the age listview. <br /></td></tr>
 <tr class="separator:ac03a58e80bda6dc5b569f459f9d9f11d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc5ee983150539ecc5690cda91467d03"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abc5ee983150539ecc5690cda91467d03"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>selectFirstMortalityGroup</b> (bool isMortality)</td></tr>
+<tr class="memitem:abc5ee983150539ecc5690cda91467d03"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_s_c_a_a___gui_output_controls.html#abc5ee983150539ecc5690cda91467d03">selectFirstMortalityGroup</a> (bool isMortality)</td></tr>
+<tr class="memdesc:abc5ee983150539ecc5690cda91467d03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects the first item in the mortality listview.  <a href="#abc5ee983150539ecc5690cda91467d03">More...</a><br /></td></tr>
 <tr class="separator:abc5ee983150539ecc5690cda91467d03"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74284b981531b6a9723a2bc6dfaddc56"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a74284b981531b6a9723a2bc6dfaddc56"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>thereAreSelections</b> ()</td></tr>
-<tr class="separator:a74284b981531b6a9723a2bc6dfaddc56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ddbef9c4002fb650c2d496a3212a0e5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4ddbef9c4002fb650c2d496a3212a0e5"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>showNaturalLogOfData</b> ()</td></tr>
+<tr class="memitem:aeac756eab61bd11921d5dd4b1e82d7a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_s_c_a_a___gui_output_controls.html#aeac756eab61bd11921d5dd4b1e82d7a3">setOutputChartType</a> (QString type)</td></tr>
+<tr class="memdesc:aeac756eab61bd11921d5dd4b1e82d7a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the chart type combo box to the passed value.  <a href="#aeac756eab61bd11921d5dd4b1e82d7a3">More...</a><br /></td></tr>
+<tr class="separator:aeac756eab61bd11921d5dd4b1e82d7a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f9ec368001b939bc75b38b8ab994be2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_s_c_a_a___gui_output_controls.html#a5f9ec368001b939bc75b38b8ab994be2">setOutputSpeciesIndex</a> (int index)</td></tr>
+<tr class="memdesc:a5f9ec368001b939bc75b38b8ab994be2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the species combobox value to the passed index.  <a href="#a5f9ec368001b939bc75b38b8ab994be2">More...</a><br /></td></tr>
+<tr class="separator:a5f9ec368001b939bc75b38b8ab994be2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ddbef9c4002fb650c2d496a3212a0e5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_s_c_a_a___gui_output_controls.html#a4ddbef9c4002fb650c2d496a3212a0e5">showNaturalLogOfData</a> ()</td></tr>
+<tr class="memdesc:a4ddbef9c4002fb650c2d496a3212a0e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to tell if the user has checked the natural log box.  <a href="#a4ddbef9c4002fb650c2d496a3212a0e5">More...</a><br /></td></tr>
 <tr class="separator:a4ddbef9c4002fb650c2d496a3212a0e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd1af79a49debfab7268012eb45ba3c9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acd1af79a49debfab7268012eb45ba3c9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>enableScaleWidgets</b> (bool enable)</td></tr>
-<tr class="separator:acd1af79a49debfab7268012eb45ba3c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74284b981531b6a9723a2bc6dfaddc56"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_s_c_a_a___gui_output_controls.html#a74284b981531b6a9723a2bc6dfaddc56">thereAreSelections</a> ()</td></tr>
+<tr class="memdesc:a74284b981531b6a9723a2bc6dfaddc56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convenience function to quickly tell if there are any selections in the age listview widget.  <a href="#a74284b981531b6a9723a2bc6dfaddc56">More...</a><br /></td></tr>
+<tr class="separator:a74284b981531b6a9723a2bc6dfaddc56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8091f8276261904f2d144849948459a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_m_s_c_a_a___gui_output_controls.html#a8091f8276261904f2d144849948459a0">toggleScaleWidgets</a> (bool enable)</td></tr>
+<tr class="memdesc:a8091f8276261904f2d144849948459a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Toggles the scale widget enabled-ness.  <a href="#a8091f8276261904f2d144849948459a0">More...</a><br /></td></tr>
+<tr class="separator:a8091f8276261904f2d144849948459a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The class containing the controls for the Output dock widget. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a5631e805e2dad5aa8af5324d97269406"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">MSCAA_GuiOutputControls::MSCAA_GuiOutputControls </td>
+          <td>(</td>
+          <td class="paramtype">QGroupBox *&#160;</td>
+          <td class="paramname"><em>controlsGroupBox</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nmfLogger *&#160;</td>
+          <td class="paramname"><em>logger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nmfDatabase *&#160;</td>
+          <td class="paramname"><em>databasePtr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>projectDir</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Class constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">controlsGroupBox</td><td>: group box containing all of the output controls </td></tr>
+    <tr><td class="paramname">logger</td><td>: logger pointer with which to send messages to the logger </td></tr>
+    <tr><td class="paramname">databasePtr</td><td>: database pointer with which to send message to the database </td></tr>
+    <tr><td class="paramname">projectDir</td><td>: project directory </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a86f12be05e1051a37462a8463c453597"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSCAA_GuiOutputControls::AbundanceAgeGroupsSelected </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>mode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QModelIndexList&#160;</td>
+          <td class="paramname"><em>indexList</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">signal</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Signal emitted when the user selects from the age listview. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mode</td><td>: unused (for future versions) </td></tr>
+    <tr><td class="paramname">indexList</td><td>: list of age indexes selected </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ad58a704f419477eb012202b036e46229"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSCAA_GuiOutputControls::callback_AgeGroupSelectionChanged </td>
+          <td>(</td>
+          <td class="paramtype">QItemSelection&#160;</td>
+          <td class="paramname"><em>sel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QItemSelection&#160;</td>
+          <td class="paramname"><em>desel</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Callback invoked when the user makes a selection in the age listview. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sel</td><td>: what was just selected </td></tr>
+    <tr><td class="paramname">desel</td><td>: what was just deselected </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a61c5e5da6115ac7b440f8048b96be638"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSCAA_GuiOutputControls::callback_MortalityTypeSelectionChanged </td>
+          <td>(</td>
+          <td class="paramtype">QItemSelection&#160;</td>
+          <td class="paramname"><em>sel</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QItemSelection&#160;</td>
+          <td class="paramname"><em>desel</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Callback invoked when the user makes a selection in the mortality type listview. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sel</td><td>: what was just selected </td></tr>
+    <tr><td class="paramname">desel</td><td>: what was just deselected </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aae9a8ae760860595b317191deafc60af"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSCAA_GuiOutputControls::callback_OutputChartTypeCMB </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>outputType</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Callback invoked when the user changes the chart type. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outputType</td><td>: type of chart to be displayed </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a29bb23b184dbd73841e9f0f773832b6c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSCAA_GuiOutputControls::callback_OutputLogCB </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isChecked</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Callback invoked when the user checks the natural log checkbox. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">isChecked</td><td>: describes if the box is checked or unchecked (true or false) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="adcf275d92399450871e16f73f592c7d7"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSCAA_GuiOutputControls::callback_OutputScaleCMB </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>scale</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Callback invoked when the user changes the output scale. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">scale</td><td>: QString representing desired scale for the current chart </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a8845c987be89335984cb34903013c0c5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QModelIndexList MSCAA_GuiOutputControls::getAgeListSelectedIndexes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the selected age items. </p>
+<dl class="section return"><dt>Returns</dt><dd>The list of selected age item indexes </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a319c7a4ac27d73dbaa9b9fce3c9b5d05"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QWidget * MSCAA_GuiOutputControls::getAgeListViewport </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the viewport associated with the age listview widget. </p>
+<dl class="section return"><dt>Returns</dt><dd>The widget corresponding the the age listview </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a8281af4e67956eba2696e999b019ad6b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString MSCAA_GuiOutputControls::getOutputChartType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the current chart type for the Output chart. </p>
+<dl class="section return"><dt>Returns</dt><dd>QString representing the current output chart's type </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3c587c4cbf8678085a6248ccf8eaf795"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString MSCAA_GuiOutputControls::getOutputScale </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the current scale setting for the Output chart. </p>
+<dl class="section return"><dt>Returns</dt><dd>QString representing the current output chart's scale value </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ad12b2c6383bf192c99c4deec2bc0fb37"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString MSCAA_GuiOutputControls::getOutputSpecies </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the current species name for the Output chart. </p>
+<dl class="section return"><dt>Returns</dt><dd>QString representing the current output chart's Species name </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a149876c35ffec6e71f6d7eca510c6d31"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int MSCAA_GuiOutputControls::getOutputSpeciesIndex </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the current species index for the Output chart. </p>
+<dl class="section return"><dt>Returns</dt><dd>integer representing the current output chart's Species index </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a38ab760422953e59d374c61a4421a2f7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QStringList MSCAA_GuiOutputControls::getSelectedAges </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets a list of all of the selected age values from the age listview. </p>
+<dl class="section return"><dt>Returns</dt><dd>list of the selected ages </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a64e9704716bf7606e0bef73f2807a94e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int MSCAA_GuiOutputControls::getSpeciesNumFromName </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>species</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Converts a species name to its index in the species combo box. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">species</td><td>: name of species whose index is to be found </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>index of passed species name </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aa45684d4fabb16a10d18ab5e42ffd324"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSCAA_GuiOutputControls::loadAgeLV </td>
+          <td>(</td>
+          <td class="paramtype">QStringList &amp;&#160;</td>
+          <td class="paramname"><em>ageList</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Loads the age listview with the passed age list. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ageList</td><td>: list of ages to load the age listview with </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aa14582570316f037f7926798d831f043"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSCAA_GuiOutputControls::MortalityAgeGroupsSelected </td>
+          <td>(</td>
+          <td class="paramtype">QModelIndexList&#160;</td>
+          <td class="paramname"><em>ageIndexList</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QModelIndexList&#160;</td>
+          <td class="paramname"><em>mortalityTypeIndexList</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">signal</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Signal emitted when the user selects from the mortality agelist. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ageIndexList</td><td>: list of age indexes selected </td></tr>
+    <tr><td class="paramname">mortalityTypeIndexList</td><td>: list of mortality types </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="abc5ee983150539ecc5690cda91467d03"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSCAA_GuiOutputControls::selectFirstMortalityGroup </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>isMortality</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Selects the first item in the mortality listview. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">isMortality</td><td>: unused (only implemented for "true") </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aeac756eab61bd11921d5dd4b1e82d7a3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSCAA_GuiOutputControls::setOutputChartType </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the chart type combo box to the passed value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>: name of chart type to set the chart type combo box at </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a5f9ec368001b939bc75b38b8ab994be2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSCAA_GuiOutputControls::setOutputSpeciesIndex </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the species combobox value to the passed index. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>: index of value of species to be set as current </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a785c29c73d0b2fa2d9be1305e2e525f4"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSCAA_GuiOutputControls::ShowChart </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>OutputType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>OutputScale</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">signal</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Signal emitted when the user wants to show the chart. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">OutputType</td><td>: the type of chart to show </td></tr>
+    <tr><td class="paramname">OutputScale</td><td>: the scale of the chart to be shown </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a4ddbef9c4002fb650c2d496a3212a0e5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MSCAA_GuiOutputControls::showNaturalLogOfData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convenience function to tell if the user has checked the natural log box. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if the box has bee checked, else false </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a74284b981531b6a9723a2bc6dfaddc56"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool MSCAA_GuiOutputControls::thereAreSelections </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convenience function to quickly tell if there are any selections in the age listview widget. </p>
+<dl class="section return"><dt>Returns</dt><dd>true if something has been selected, else false </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a8091f8276261904f2d144849948459a0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MSCAA_GuiOutputControls::toggleScaleWidgets </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>enable</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Toggles the scale widget enabled-ness. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">enable</td><td>: true or false for enabled or not enabled </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>MSCAA_GuiOutput/<a class="el" href="nmf_output_controls_8h_source.html">nmfOutputControls.h</a></li>
 <li>MSCAA_GuiOutput/nmfOutputControls.cpp</li>

@@ -21,7 +21,7 @@ MSCAA_GuiOutputControls::MSCAA_GuiOutputControls(
 
     initWidgets();
     initConnections();
-    loadWidgets();
+    //loadWidgets(); // nothing to load
 }
 
 MSCAA_GuiOutputControls::~MSCAA_GuiOutputControls()
@@ -45,9 +45,9 @@ MSCAA_GuiOutputControls::initWidgets()
     OutputSpeciesCMB = new QComboBox();
     OutputScaleCMB   = new QComboBox();
     OutputLogCB      = new QCheckBox();
-//    OutputNaturalMortalityCB   = new QCheckBox("Natural");
-//    OutputFishingMortalityCB   = new QCheckBox("Fishing");
-//    OutputPredationMortalityCB = new QCheckBox("Predation");
+//  OutputNaturalMortalityCB   = new QCheckBox("Natural");
+//  OutputFishingMortalityCB   = new QCheckBox("Fishing");
+//  OutputPredationMortalityCB = new QCheckBox("Predation");
     OutputAgeListLV  = new QListView();
     OutputMortalityListLV = new QListView();
 
@@ -60,9 +60,9 @@ MSCAA_GuiOutputControls::initWidgets()
     controlLayt->addWidget(OutputSpeciesCMB);
     controlLayt->addWidget(OutputMortalityTypeLBL);
     controlLayt->addWidget(OutputMortalityListLV);
-//    controlLayt->addWidget(OutputNaturalMortalityCB);
-//    controlLayt->addWidget(OutputFishingMortalityCB);
-//    controlLayt->addWidget(OutputPredationMortalityCB);
+//  controlLayt->addWidget(OutputNaturalMortalityCB);
+//  controlLayt->addWidget(OutputFishingMortalityCB);
+//  controlLayt->addWidget(OutputPredationMortalityCB);
     controlLayt->addWidget(OutputAgeListLBL);
     controlLayt->addWidget(OutputAgeListLV);
     controlLayt->addWidget(OutputScaleLBL);
@@ -114,9 +114,6 @@ MSCAA_GuiOutputControls::initWidgets()
     OutputMortalityListLV->setEnabled(false);
     OutputMortalityTypeLBL->setEnabled(false);
 
-
-    loadSpeciesControlWidget();
-
     readSettings();
 
     m_ControlsGroupBox->setMinimumHeight(100);
@@ -145,72 +142,6 @@ MSCAA_GuiOutputControls::initConnections()
 
 }
 
-void
-MSCAA_GuiOutputControls::loadWidgets()
-{
-    loadSpeciesControlWidget();
-
-}
-
-void
-MSCAA_GuiOutputControls::loadSpeciesControlWidget()
-{
-//    int NumSpecies;
-//    int NumGuilds;
-//    QStringList SpeciesList;
-//    QStringList GuildList;
-////    QStringListModel*  SpeciesOrGuildModel;
-//    std::string Algorithm;
-//    std::string Minimizer;
-//    std::string ObjectiveCriterion;
-//    std::string Scaling;
-//    std::string CompetitionForm;
-
-//    ReadSettings();
-
-//    AlgorithmIdentifiers(Algorithm,Minimizer,ObjectiveCriterion,Scaling,CompetitionForm,true);
-
-//    if (! getGuilds(NumGuilds,GuildList)) {
-//        m_logger->logMsg(nmfConstants::Warning,"[Warning] MSCAA_GuiOutputControls::loadSpeciesControlWidget: No records found in table Guilds, Name = "+m_ProjectSettingsConfig);
-//        return;
-//    }
-//    if (CompetitionForm == "AGG-PROD") {
-//       NumSpecies  = NumGuilds;
-//       SpeciesList = GuildList;
-//    } else {
-//        if (! getSpecies(NumSpecies,SpeciesList)) {
-//            m_logger->logMsg(nmfConstants::Error,"[Error 2] loadSpeciesControlWidget: No records found in table Species, Name = "+m_ProjectSettingsConfig);
-//            return;
-//        }
-//    }
-
-//    // Load Species controls combo box
-//    OutputSpeciesCMB->blockSignals(true);
-//    OutputAgeListLV->blockSignals(true);
-
-//    OutputSpeciesCMB->clear();
-//    m_SpeciesOrGuildModel->setStringList(QStringList({}));
-//    SpeciesHash.clear();
-//    for (int species=0; species<NumSpecies; ++species) {
-//        SpeciesHash[SpeciesList[species]] = species;
-//    }
-//    // Note: using same model for 2 widgets.  Now if we change the model,
-//    // we won't have to edit the widgets.
-//    m_SpeciesOrGuildModel->setStringList(SpeciesList);
-
-//    // RSK - Why doesn't this work?
-////    OutputSpeciesCMB->setModel(m_SpeciesOrGuildModel);
-
-//    OutputAgeListLV->setModel(m_SpeciesOrGuildModel);
-
-//    for (QString Species : SpeciesList) {
-//        OutputSpeciesCMB->addItem(Species);
-//    }
-
-//    OutputSpeciesCMB->blockSignals(false);
-//    OutputAgeListLV->blockSignals(false);
-
-}
 
 bool
 MSCAA_GuiOutputControls::showNaturalLogOfData()
@@ -227,13 +158,11 @@ MSCAA_GuiOutputControls::loadAgeLV(QStringList& ageList)
     OutputAgeListLV->setModel(SpeciesModel);
 
     disconnect(OutputAgeListLV->selectionModel(),nullptr,nullptr,nullptr);
-//    connect(OutputAgeListLV->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
-//            this,                              SLOT(callback_RowChanged(QModelIndex,QModelIndex)));
+//  connect(OutputAgeListLV->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
+//          this,                              SLOT(callback_RowChanged(QModelIndex,QModelIndex)));
 
     connect(OutputAgeListLV->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
             this,                              SLOT(callback_AgeGroupSelectionChanged(QItemSelection,QItemSelection)));
-
-
 
 }
 
@@ -308,7 +237,7 @@ MSCAA_GuiOutputControls::callback_AgeGroupSelectionChanged(
         QItemSelection desel)
 {
     int NumSelectedRows     = OutputAgeListLV->selectionModel()->selectedIndexes().size();
-    QString OutputChartType = getOutputType();
+    QString OutputChartType = getOutputChartType();
     QString mode = "tbd";
 
     if (NumSelectedRows > 0) {
@@ -341,7 +270,7 @@ MSCAA_GuiOutputControls::callback_OutputChartTypeCMB(QString outputType)
     OutputMortalityTypeLBL->setEnabled(isMortality);
     selectFirstMortalityGroup(isMortality);
     OutputLogCB->setVisible(isAbundance3d);
-    enableScaleWidgets(! isAbundance3d);
+    toggleScaleWidgets(! isAbundance3d);
 
 }
 
@@ -353,47 +282,17 @@ MSCAA_GuiOutputControls::callback_OutputLogCB(bool isChecked)
 }
 
 void
-MSCAA_GuiOutputControls::enableScaleWidgets(bool enable)
+MSCAA_GuiOutputControls::toggleScaleWidgets(bool enable)
 {
     OutputScaleLBL->setEnabled(enable);
     OutputScaleCMB->setEnabled(enable);
 }
 
 void
-MSCAA_GuiOutputControls::refresh()
-{
-//    int currentIndex = OutputTypeCMB->currentIndex();
-
-//    OutputTypeCMB->setCurrentIndex(0);
-//    OutputTypeCMB->setCurrentIndex(currentIndex);
-
-//    refreshScenarios();
-}
-
-void
-MSCAA_GuiOutputControls::callback_OutputSpeciesCMB(QString outputSpecies)
-{
-    /*
-    QString scenario  = getOutputScenario();
-    QString chartType = getOutputType();
-    QString method    = getOutputDiagnostics();
-
-    if (chartType == "Multi-Scenario Plots") {
-        emit ShowChartMultiScenario(m_SortedForecastLabelsMap[scenario]);
-    } else if ((chartType == "Diagnostics") && (method == "Retrospective Analysis")) {
-        emit ShowChartMohnsRho();
-    } else {
-        emit ShowChart("",outputSpecies);
-    }
-    emit UpdateSummaryStatistics();
-    */
-}
-
-void
 MSCAA_GuiOutputControls::callback_OutputScaleCMB(QString scale)
 {
     QString mode = "tbd";
-    QString OutputType = getOutputType();
+    QString OutputType = getOutputChartType();
 
     if (OutputType == "Abundance vs Time") {
         emit AbundanceAgeGroupsSelected(mode,
@@ -403,7 +302,7 @@ MSCAA_GuiOutputControls::callback_OutputScaleCMB(QString scale)
                     OutputAgeListLV->selectionModel()->selectedIndexes(),
                     OutputMortalityListLV->selectionModel()->selectedIndexes());
     } else {
-        emit ShowChart(getOutputType(),scale);
+        emit ShowChart(getOutputChartType(),scale);
     }
 }
 
@@ -432,13 +331,13 @@ MSCAA_GuiOutputControls::setOutputSpeciesIndex(int index)
 }
 
 QString
-MSCAA_GuiOutputControls::getOutputType()
+MSCAA_GuiOutputControls::getOutputChartType()
 {
     return OutputChartTypeCMB->currentText();
 }
 
 void
-MSCAA_GuiOutputControls::setOutputType(QString type)
+MSCAA_GuiOutputControls::setOutputChartType(QString type)
 {
     // This forces an update if the user needs to
     // refresh the same setting.
@@ -469,13 +368,13 @@ MSCAA_GuiOutputControls::getOutputScale()
 
 
 QWidget*
-MSCAA_GuiOutputControls::getListViewViewport()
+MSCAA_GuiOutputControls::getAgeListViewport()
 {
     return OutputAgeListLV->viewport();
 }
 
 QModelIndexList
-MSCAA_GuiOutputControls::getListViewSelectedIndexes()
+MSCAA_GuiOutputControls::getAgeListSelectedIndexes()
 {
     return OutputAgeListLV->selectionModel()->selectedIndexes();
 }
@@ -494,8 +393,4 @@ MSCAA_GuiOutputControls::readSettings()
     delete settings;
 }
 
-void
-MSCAA_GuiOutputControls::saveSettings()
-{
 
-}

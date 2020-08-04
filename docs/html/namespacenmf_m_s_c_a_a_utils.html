@@ -187,6 +187,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a9dc9cb6901120237fe4766efd6ad7d49"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_m_s_c_a_a_utils.html#a9dc9cb6901120237fe4766efd6ad7d49">systemTableExists</a> (nmfDatabase *databasePtr, nmfLogger *logger, std::string &amp;projectSettingsConfig)</td></tr>
 <tr class="memdesc:a9dc9cb6901120237fe4766efd6ad7d49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks to see if the passed System name config exists in the System database table.  <a href="#a9dc9cb6901120237fe4766efd6ad7d49">More...</a><br /></td></tr>
 <tr class="separator:a9dc9cb6901120237fe4766efd6ad7d49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae01038a63146f6e98e1977c8179640b9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenmf_m_s_c_a_a_utils.html#ae01038a63146f6e98e1977c8179640b9">removePreviousRunsData</a> (QWidget *parent, nmfDatabase *databasePtr, nmfLogger *logger, std::string &amp;projectDir, std::string &amp;projectName, std::string &amp;projectSettingsConfig, const QString &amp;type, QTextEdit *summaryTextBox)</td></tr>
+<tr class="memdesc:ae01038a63146f6e98e1977c8179640b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the directory in which the ADMB files are placed.  <a href="#ae01038a63146f6e98e1977c8179640b9">More...</a><br /></td></tr>
+<tr class="separator:ae01038a63146f6e98e1977c8179640b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>These are the MSCAA utility namespace functions. </p>
@@ -1666,6 +1669,84 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a class="anchor" id="ae01038a63146f6e98e1977c8179640b9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool nmfMSCAAUtils::removePreviousRunsData </td>
+          <td>(</td>
+          <td class="paramtype">QWidget *&#160;</td>
+          <td class="paramname"><em>parent</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nmfDatabase *&#160;</td>
+          <td class="paramname"><em>databasePtr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">nmfLogger *&#160;</td>
+          <td class="paramname"><em>logger</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>projectDir</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>projectName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>projectSettingsConfig</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QTextEdit *&#160;</td>
+          <td class="paramname"><em>summaryTextBox</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the directory in which the ADMB files are placed. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">parent</td><td>: parent widget on which to display a popup dialog </td></tr>
+    <tr><td class="paramname">databasePtr</td><td>: pointer to the database api class </td></tr>
+    <tr><td class="paramname">logger</td><td>: pointer to logger api class </td></tr>
+    <tr><td class="paramname">projectDir</td><td>: the directory in which the project exists </td></tr>
+    <tr><td class="paramname">projectName</td><td>: the name of the project </td></tr>
+    <tr><td class="paramname">projectSettingsConfig</td><td>: name of the project settings config file </td></tr>
+    <tr><td class="paramname">type</td><td>: model type ("SingleSpecies" or "MultiSpecies") </td></tr>
+    <tr><td class="paramname">summaryTextBox</td><td>: text box to display messages </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
 </div>
 </div>

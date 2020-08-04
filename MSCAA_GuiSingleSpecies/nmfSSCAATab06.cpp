@@ -218,8 +218,6 @@ nmfSSCAA_Tab6::callback_RunPB()
 {
     int Trophic = 0;
     int VerboseDebugLevel = getVerboseDebugLevel();
-    QMessageBox::StandardButton reply;
-    QStringList filters;
 
     QString msg = "Please select a Species prior to running in Single Species mode";
 
@@ -230,36 +228,17 @@ nmfSSCAA_Tab6::callback_RunPB()
         return;
     }
 
-    // Remove previous run's data files
-    QString admbDir = nmfMSCAAUtils::getADMBDir(
-       m_databasePtr,m_logger,m_ProjectDir,m_ProjectName,
-       m_ProjectSettingsConfig,"SingleSpecies",SSCAA_Tab6_SummaryTE);
-    msg = "\nOK to remove previous run's output data files? ";
-    msg += "This will remove all files in directory: \n\n";
-    msg += admbDir + "\n";
-    reply = QMessageBox::question(SSCAA_Tabs, tr("Remove Previous Run's Files"),
-                                  msg,
-                                  QMessageBox::No|QMessageBox::Yes,
-                                  QMessageBox::Yes);
-    if (reply == QMessageBox::No) {
+    if (! nmfMSCAAUtils::removePreviousRunsData(SSCAA_Tabs,
+                m_databasePtr,m_logger,m_ProjectDir,m_ProjectName,
+                m_ProjectSettingsConfig,"SingleSpecies",SSCAA_Tab6_SummaryTE)) {
         return;
-    }
-    QDir dir(admbDir);
-    filters << "MSCAA*" << "*.cxx";
-    dir.setNameFilters(filters);
-    for(const QString & filename: dir.entryList()){
-        dir.remove(filename);
-        msg = "Removing: " + filename;
-        m_logger->logMsg(nmfConstants::Normal,msg.toStdString());
     }
 
     // Clear chart and data
     emit ClearOutput();
 
     // ///////////////////
-    //                  //
     //    Run ADMB      //
-    //                  //
     // ///////////////////
     bool runOK = nmfMSCAAUtils::runOptimizerADMB(
                 m_databasePtr,
@@ -879,6 +858,13 @@ nmfSSCAA_Tab6::ReadSettings()
     m_ProjectSettingsConfig = settings->value("Name","").toString().toStdString();
     settings->endGroup();
     delete settings;
+}
+
+void
+nmfSSCAA_Tab6::clearData()
+{
+    m_AbundanceAll.clear();
+    m_Abundance.clear();
 }
 
 void

@@ -536,6 +536,8 @@ nmfMainWindow::initConnections()
             this,                SLOT(callback_SelectDefaultSpecies()));
     connect(MSCAA_Tab5_ptr,      SIGNAL(UpdateOutputCharts(QString)),
             this,                SLOT(callback_ShowChart(QString)));
+    connect(MSCAA_Tab5_ptr,      SIGNAL(ClearOutput()),
+            this,                SLOT(callback_ClearOutput()));
     connect(SSCAA_Tab6_ptr,      SIGNAL(RunADMB(int)),
             MSCAA_Tab5_ptr,      SLOT(callback_RunPB(int)));
 
@@ -746,7 +748,7 @@ void
 nmfMainWindow::menu_about()
 {
     QString name    = "Multi-Species Statistical Catch-At-Age";
-    QString version = "MSCAA v0.9.1 (beta)";
+    QString version = "MSCAA v0.9.2 (beta)";
     QString specialAcknowledgement = "";
     QString cppVersion   = "C++??";
     QString mysqlVersion = "?";
@@ -1163,7 +1165,7 @@ void
 nmfMainWindow::callback_ShowChart(const QString& mode)
 {
     callback_ShowChart(mode,
-                       Output_Controls_ptr->getOutputType(),
+                       Output_Controls_ptr->getOutputChartType(),
                        Output_Controls_ptr->getOutputScale());
 }
 
@@ -1175,7 +1177,7 @@ nmfMainWindow::callback_ShowChart(const QString& type,
     QString mode = getNavigationGroup();
     if (! mode.isEmpty()) {
         callback_ShowChart(mode,
-                           Output_Controls_ptr->getOutputType(),
+                           Output_Controls_ptr->getOutputChartType(),
                            Output_Controls_ptr->getOutputScale());
     } else {
         QMessageBox::warning(this,tr("Warning"),tr("\nPlease run a Model Estimation or Simulation."));
@@ -1273,7 +1275,7 @@ nmfMainWindow::callback_ShowChart(const QString& modeDELETE,
         QString YTitle = "Abundance";
         QString ZTitle = "Age Groups";
         showNaturalLogOfData = Output_Controls_ptr->showNaturalLogOfData();
-        Output_Controls_ptr->enableScaleWidgets(! showNaturalLogOfData);
+        Output_Controls_ptr->toggleScaleWidgets(! showNaturalLogOfData);
         if (mode == "Simulation Data Input") {
 //            Simulation_Tab2_ptr->showChartAbundance3d(
 //                        showNaturalLogOfData,MinAge,FirstYear,
@@ -1288,6 +1290,7 @@ nmfMainWindow::callback_ShowChart(const QString& modeDELETE,
                         showNaturalLogOfData,MinAge,FirstYear,
                         m_Graph3D,XTitle,YTitle,ZTitle,scale,sf);
         }
+        m_Graph3D->show();
     } else if (type == "Abundance vs Time") {
         setChartView("2D");
         if (! Output_Controls_ptr->thereAreSelections()) {
@@ -1333,21 +1336,30 @@ nmfMainWindow::callback_ShowChart(const QString& modeDELETE,
 //                        m_ChartWidget,Species,Data,scale);
 //        }
     }
+
 }
 
 void
 nmfMainWindow::callback_ClearOutput()
 {
-//std::cout << "------> Removing all series <--------------" << std::endl;
-//    m_ChartView2d->chart()->removeAllSeries();
-//    QList<QSurface3DSeries*> allSeries = m_Graph3D->seriesList();
-//    for (QSurface3DSeries* series : allSeries) {
-//        m_Graph3D->removeSeries(series);
-//    }
+    // Clear 3d and 2d charts
+    m_Graph3D->destroy();
+    SSCAA_Tab6_ptr->clearData();
+    QList<QSurface3DSeries*> allSeries = m_Graph3D->seriesList();
+    for (QSurface3DSeries* series : allSeries) {
+        m_Graph3D->removeSeries(series);
+    }
 
-//    // Clear data table
-//    m_UI->MSCAAOutputDataTV->model()->removeRows(0,m_UI->MSCAAOutputDataTV->model()->rowCount());
-
+    // Clear data from output table
+    if (m_UI->MSCAAOutputDataTV) {
+        QAbstractItemModel* smodel = m_UI->MSCAAOutputDataTV->model();
+        if (smodel) {
+            int numRows = smodel->rowCount();
+            if (numRows > 0) {
+                smodel->removeRows(0,numRows);
+            }
+        }
+    }
 }
 
 void

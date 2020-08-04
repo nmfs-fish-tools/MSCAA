@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['parsereportfile',['parseReportFile',['../classnmf_a_d_m_b.html#a5dc86a707e51e221e0eb21fdc50bd610',1,'nmfADMB']]]
+  ['mortalityagegroupsselected',['MortalityAgeGroupsSelected',['../class_m_s_c_a_a___gui_output_controls.html#aa14582570316f037f7926798d831f043',1,'MSCAA_GuiOutputControls']]],
+  ['mscaa_5fguioutputcontrols',['MSCAA_GuiOutputControls',['../class_m_s_c_a_a___gui_output_controls.html#a5631e805e2dad5aa8af5324d97269406',1,'MSCAA_GuiOutputControls']]]
 ];

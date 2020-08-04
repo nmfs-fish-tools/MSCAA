@@ -408,6 +408,27 @@ void loadTheTotalTable(nmfDatabase* databasePtr,
                        QString      species,
                        std::string  surveyOrFleet,
                        std::string& units);
+/**
+ * @brief Gets the directory in which the ADMB files are placed
+ * @param parent : parent widget on which to display a popup dialog
+ * @param databasePtr : pointer to the database api class
+ * @param logger : pointer to logger api class
+ * @param projectDir : the directory in which the project exists
+ * @param projectName : the name of the project
+ * @param projectSettingsConfig : name of the project settings config file
+ * @param type : model type ("SingleSpecies" or "MultiSpecies")
+ * @param summaryTextBox : text box to display messages
+ * @return
+ */
+bool removePreviousRunsData(
+        QWidget*       parent,
+        nmfDatabase*   databasePtr,
+        nmfLogger*     logger,
+        std::string&   projectDir,
+        std::string&   projectName,
+        std::string&   projectSettingsConfig,
+        const QString& type,
+        QTextEdit*     summaryTextBox);
 
 /**
  * @brief Rescales the data present in the passed tableView widget

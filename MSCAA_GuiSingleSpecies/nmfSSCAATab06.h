@@ -52,6 +52,7 @@ public:
     virtual ~nmfSSCAA_Tab6();
 
     void clearWidgets();
+    void clearData();
     bool loadWidgets();
     QTableView* getTable1();
     QTableView* getTable2();
@@ -111,6 +112,9 @@ public:
     void ReadSettings();
 
 signals:
+    /**
+     * @brief Clears the output chart and data areas
+     */
     void ClearOutput();
     void UpdateOutputCharts(QString mode);
     void RunADMB(int trophic);
