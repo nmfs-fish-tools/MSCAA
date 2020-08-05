@@ -129,8 +129,6 @@ MSCAA_GuiOutputControls::initConnections()
 {
     connect(OutputChartTypeCMB,     SIGNAL(currentTextChanged(QString)),
             this,                   SLOT(callback_OutputChartTypeCMB(QString)));
-    connect(OutputSpeciesCMB,       SIGNAL(currentTextChanged(QString)),
-            this,                   SLOT(callback_OutputSpeciesCMB(QString)));
     connect(OutputScaleCMB,         SIGNAL(currentTextChanged(QString)),
             this,                   SLOT(callback_OutputScaleCMB(QString)));
     connect(OutputLogCB,            SIGNAL(clicked(bool)),
@@ -138,8 +136,6 @@ MSCAA_GuiOutputControls::initConnections()
 
     connect(OutputMortalityListLV->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
             this,   SLOT(callback_MortalityTypeSelectionChanged(QItemSelection,QItemSelection)));
-
-
 }
 
 
