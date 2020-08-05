@@ -41,6 +41,7 @@ nmfSetup_Tab7::nmfSetup_Tab7(QTabWidget*  tabs,
     QFont noBoldFont;
     noBoldFont.setBold(false);
     Setup_Tab7_AgeLengthTV->setFont(noBoldFont);
+    Setup_Tab7_AgeLengthTV->setModel(nullptr);
 
     // Make connections
     connect(Setup_Tab7_LoadPB, SIGNAL(clicked()),
@@ -130,7 +131,9 @@ nmfSetup_Tab7::callback_LoadPB()
 void
 nmfSetup_Tab7::callback_SavePB()
 {
-
+    if (Setup_Tab7_AgeLengthTV->model() == nullptr) {
+        return;
+    }
     QStandardItemModel* smodel = qobject_cast<QStandardItemModel*>(Setup_Tab7_AgeLengthTV->model());
     int NumRows = smodel->rowCount();
     int NumCols = smodel->columnCount();
