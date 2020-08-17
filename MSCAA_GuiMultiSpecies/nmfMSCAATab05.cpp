@@ -541,6 +541,7 @@ nmfMSCAA_Tab5::showChartAbundanceVsTime(
                             ChartType,
                             LineStyle,
                             nmfConstantsMSCAA::ShowFirstPoint,
+                            nmfConstants::DontShowLegend,
                             startYear,
                             xAxisIsInteger,
                             YMinSliderVal,
