@@ -524,6 +524,7 @@ nmfMSCAA_Tab5::showChartAbundanceVsTime(
     std::string LineStyle = "SolidLine";
     bool xAxisIsInteger = true;
     QStringList RowLabelsForBars;
+    QStringList HoverLabels = {};
     QStringList ColumnLabelsForLegend = ageGroupNames;
     std::string MainTitle = "Abundance vs Time: "+species;
     std::string XLabel    = "Time (Years)";
@@ -545,9 +546,11 @@ nmfMSCAA_Tab5::showChartAbundanceVsTime(
                             startYear,
                             xAxisIsInteger,
                             YMinSliderVal,
+                            nmfConstantsMSCAA::DontLeaveGapsWhereNegative,
                             data,
                             RowLabelsForBars,
                             ColumnLabelsForLegend,
+                            HoverLabels,
                             MainTitle,
                             XLabel,
                             YLabel,

@@ -359,6 +359,7 @@ nmfSSCAA_Tab6::showChartAbundanceVsTime(
     bool xAxisIsInteger = true;
     QStringList RowLabelsForBars;
     QStringList ColumnLabelsForLegend = AgeGroupNames;
+    QStringList HoverLabels = AgeGroupNames;
     std::string MainTitle = "Abundance vs Time: "+Species;
     std::string XLabel    = "Time (Years)";
     std::string YLabel    = "Abundance";
@@ -383,9 +384,11 @@ nmfSSCAA_Tab6::showChartAbundanceVsTime(
                             StartYear,
                             xAxisIsInteger,
                             YMinSliderVal,
+                            nmfConstantsMSCAA::DontLeaveGapsWhereNegative,
                             Data,
                             RowLabelsForBars,
                             ColumnLabelsForLegend,
+                            HoverLabels,
                             MainTitle,
                             XLabel,
                             YLabel,
@@ -411,6 +414,7 @@ nmfSSCAA_Tab6::showChartMortalityVsTime(
     std::string ChartType = "Line";
     bool xAxisIsInteger = true;
     QStringList RowLabelsForBars;
+    QStringList HoverLabels = {};
     QStringList ColumnLabelsForLegend = AgeGroupNames;
     std::string MainTitle = "Mortality vs Time: "+Species;
     std::string XLabel    = "Time (Years)";
@@ -438,9 +442,11 @@ nmfSSCAA_Tab6::showChartMortalityVsTime(
                             StartYear,
                             xAxisIsInteger,
                             YMinSliderVal,
+                            nmfConstantsMSCAA::DontLeaveGapsWhereNegative,
                             Data,
                             RowLabelsForBars,
                             ColumnLabelsForLegend,
+                            HoverLabels,
                             MainTitle,
                             XLabel,
                             YLabel,

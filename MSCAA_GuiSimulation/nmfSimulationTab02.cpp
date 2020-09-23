@@ -947,6 +947,7 @@ nmfSimulation_Tab2::showChartMortalityVsTime(
 //  std::string LineStyle = "SolidLine";
     bool xAxisIsInteger = true;
     QStringList RowLabelsForBars;
+    QStringList HoverLabels = {};
     QStringList ColumnLabelsForLegend = AgeGroupNames;
     std::string MainTitle = "Mortality vs Time: "+Species;
     std::string XLabel    = "Time (Years)";
@@ -976,9 +977,11 @@ nmfSimulation_Tab2::showChartMortalityVsTime(
                             StartYear,
                             xAxisIsInteger,
                             YMinSliderVal,
+                            nmfConstantsMSCAA::DontLeaveGapsWhereNegative,
                             Data,
                             RowLabelsForBars,
                             ColumnLabelsForLegend,
+                            HoverLabels,
                             MainTitle,
                             XLabel,
                             YLabel,
@@ -1003,6 +1006,7 @@ nmfSimulation_Tab2::showChartAbundanceVsTime(
     std::string LineStyle = "SolidLine";
     bool xAxisIsInteger = true;
     QStringList RowLabelsForBars;
+    QStringList HoverLabels = {};
     QStringList ColumnLabelsForLegend = AgeGroupNames;
     std::string MainTitle = "Abundance vs Time: "+Species;
     std::string XLabel    = "Time (Years)";
@@ -1028,9 +1032,11 @@ nmfSimulation_Tab2::showChartAbundanceVsTime(
                             StartYear,
                             xAxisIsInteger,
                             YMinSliderVal,
+                            nmfConstantsMSCAA::DontLeaveGapsWhereNegative,
                             Data,
                             RowLabelsForBars,
                             ColumnLabelsForLegend,
+                            HoverLabels,
                             MainTitle,
                             XLabel,
                             YLabel,
@@ -1053,6 +1059,7 @@ nmfSimulation_Tab2::showChartSSBvsTime(QChart* ChartWidget,
     int StartYear=0;
     bool xAxisIsInteger = true;
     QStringList RowLabelsForBars;
+    QStringList HoverLabels = {};
     QStringList ColumnLabelsForLegend = {"one","two"};
     std::string MainTitle = "Spawning Stock Biomass vs Time: "+Species;
     std::string XLabel    = "Time (Years)";
@@ -1074,9 +1081,11 @@ nmfSimulation_Tab2::showChartSSBvsTime(QChart* ChartWidget,
                             StartYear,
                             xAxisIsInteger,
                             YMinSliderVal,
+                            nmfConstantsMSCAA::DontLeaveGapsWhereNegative,
                             Data,
                             RowLabelsForBars,
                             ColumnLabelsForLegend,
+                            HoverLabels,
                             MainTitle,
                             XLabel,
                             YLabel,
@@ -1100,6 +1109,7 @@ nmfSimulation_Tab2::showChartRecruitmentVsSSB(QChart* ChartWidget,
     int StartYear=0;
     bool xAxisIsInteger = false;
     QStringList RowLabelsForBars;
+    QStringList HoverLabels = {};
     QStringList ColumnLabelsForLegend = {"one","two"};
     std::string MainTitle = "Recruitment vs Spawning Stock Biomass: "+Species;
     std::string XLabel    = "Spawning Stock Biomass (Metric Tons)";
@@ -1120,9 +1130,11 @@ nmfSimulation_Tab2::showChartRecruitmentVsSSB(QChart* ChartWidget,
                             StartYear,
                             xAxisIsInteger,
                             YMinSliderVal,
+                            nmfConstantsMSCAA::DontLeaveGapsWhereNegative,
                             Data,
                             RowLabelsForBars,
                             ColumnLabelsForLegend,
+                            HoverLabels,
                             MainTitle,
                             XLabel,
                             YLabel,
