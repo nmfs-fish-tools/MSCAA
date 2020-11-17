@@ -22,6 +22,7 @@
 
 #include <QObject>
 #include <QTextEdit>
+#include <QElapsedTimer>
 
 
 /**
@@ -221,7 +222,7 @@ private:
                    const QString& buildOutputFile);
 
 
-    QString getTimerString(QTime& ADMBTimer,
+    QString getTimerString(QElapsedTimer& ADMBTimer,
                            const QString& header);
     /**
      * @brief Runs the ADMB executable. Creates multiple output files.

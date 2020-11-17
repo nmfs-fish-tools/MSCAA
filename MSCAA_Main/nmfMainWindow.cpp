@@ -53,6 +53,8 @@ nmfMainWindow::nmfMainWindow(QWidget *parent) :
     // Hide Progress Chart and Log widgets. Show them once user does their first MSCAA run.
     setDefaultDockWidgetsVisibility();
 
+    readSettings(); // Read settings again in case user has cleared settings
+
     // Prompt user for database login and password
     if (nmfDatabaseUtils::menu_connectToDatabase(
                 this,nmfConstantsMSCAA::SettingsDirWindows,m_databasePtr,
@@ -63,7 +65,6 @@ nmfMainWindow::nmfMainWindow(QWidget *parent) :
         m_isStartUpOK = false;
         return;
     }
-    readSettings(); // Read settings again in case user has cleared settings
 
     initializePreferencesDlg();
     initializeTableNamesDlg();
@@ -723,7 +724,7 @@ nmfMainWindow::getADMBVersion()
     file.close();
 
     // Split the output and get the text just after "Version:" which is the version number.
-    QStringList parts = text.split(QRegExp("\\s+"),QString::SkipEmptyParts);
+    QStringList parts = text.split(QRegExp("\\s+"),Qt::SkipEmptyParts);
     if ((parts.size() > 1) && (parts[0] == "Builds")) {
         for (int i=0; i<parts.size(); ++i) {
             if (parts[i] == "Version:") {
@@ -748,7 +749,7 @@ void
 nmfMainWindow::menu_about()
 {
     QString name    = "Multi-Species Statistical Catch-At-Age";
-    QString version = "MSCAA v0.9.5 (beta)";
+    QString version = "MSCAA v0.9.6 (beta)";
     QString specialAcknowledgement = "";
     QString cppVersion   = "C++??";
     QString mysqlVersion = "?";

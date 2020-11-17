@@ -1,0 +1,12 @@
+digraph "MSCAA_GuiUtilities" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_b0dd4c7b837d61b29440a9f979f7fd8e {
+    graph [ bgcolor="#eeeeff", pencolor="black", label="" URL="dir_b0dd4c7b837d61b29440a9f979f7fd8e.html"];
+    dir_b0dd4c7b837d61b29440a9f979f7fd8e [shape=plaintext label="MSCAA_GuiUtilities"];
+    dir_e2ea6dd9d12ab218d5308ecca6fa27ba [shape=box label="Docs" color="red" fillcolor="white" style="filled" URL="dir_e2ea6dd9d12ab218d5308ecca6fa27ba.html"];
+  }
+  dir_0687e2acd61e29298cc5aad18b5a0a93 [shape=box label="MSCAA_Optimization" fillcolor="white" style="filled" color="red" URL="dir_0687e2acd61e29298cc5aad18b5a0a93.html"];
+  dir_b0dd4c7b837d61b29440a9f979f7fd8e->dir_0687e2acd61e29298cc5aad18b5a0a93 [headlabel="1", labeldistance=1.5 headhref="dir_000001_000002.html"];
+}

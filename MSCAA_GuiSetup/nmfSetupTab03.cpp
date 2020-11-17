@@ -175,7 +175,7 @@ nmfSetup_Tab3::removeFromTable(
                 cmd = "DELETE FROM " + Table.toStdString() +" WHERE " + field +
                       " = '" + SpeciesName.toStdString() + "'";
                 errorMsg = m_databasePtr->nmfUpdateDatabase(cmd);
-                if (errorMsg != " ") {
+                if (nmfUtilsQt::isAnError(errorMsg)) {
                     m_logger->logMsg(nmfConstants::Error,"nmfSetupTab4 removeFromTable: Delete table error: " + errorMsg);
                     m_logger->logMsg(nmfConstants::Error,"cmd: " + cmd);
                     return;
@@ -296,7 +296,7 @@ nmfSetup_Tab3::callback_Setup_Tab3_SavePB()
         saveCmd = saveCmd.substr(0,saveCmd.size()-1) + "; ";
     }
     errorMsg = m_databasePtr->nmfUpdateDatabase(saveCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         m_logger->logMsg(nmfConstants::Error,"nmfSetupTab4 callback_Setup_Tab3_SavePB (Species): Write table error: " + errorMsg);
         m_logger->logMsg(nmfConstants::Error,"saveCmd: " + saveCmd);
         QMessageBox::warning(Setup_Tabs,"Warning",

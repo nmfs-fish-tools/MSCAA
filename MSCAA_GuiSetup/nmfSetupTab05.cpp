@@ -216,7 +216,7 @@ nmfSetup_Tab5::saveWeightTables()
     // Delete the current Species entry here
     deleteCmd = "DELETE FROM SurveyWeights WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     errorMsg = m_databasePtr->nmfUpdateDatabase(deleteCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         msg = "\nError in Save command. Couldn't delete all records from SurveyMonth table";
         m_logger->logMsg(nmfConstants::Error,"nmfSetup_Tab5::saveWeightTables: DELETE error: " + errorMsg);
         m_logger->logMsg(nmfConstants::Error,"cmd: " + deleteCmd);
@@ -247,7 +247,7 @@ nmfSetup_Tab5::saveWeightTables()
     // Save the new data
     saveCmd = saveCmd.substr(0,saveCmd.size()-1);
     errorMsg = m_databasePtr->nmfUpdateDatabase(saveCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         m_logger->logMsg(nmfConstants::Error,"nmfSetup_Tab5::saveWeightTables: Write table error: " + errorMsg);
         m_logger->logMsg(nmfConstants::Error,"cmd: " + saveCmd);
         QMessageBox::warning(Setup_Tab5_Widget, "Error",
@@ -281,7 +281,7 @@ nmfSetup_Tab5::saveMonthTable()
     // Delete the current Species entry here
     deleteCmd = "DELETE FROM SurveyMonth WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     errorMsg = m_databasePtr->nmfUpdateDatabase(deleteCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         msg = "\nError in Save command. Couldn't delete all records from SurveyMonth table";
         m_logger->logMsg(nmfConstants::Error,"nmfSetup_Tab5::callback_Setup_Tab5_SavePB: DELETE error: " + errorMsg);
         m_logger->logMsg(nmfConstants::Error,"cmd: " + deleteCmd);
@@ -310,7 +310,7 @@ nmfSetup_Tab5::saveMonthTable()
     // Save the new data
     saveCmd = saveCmd.substr(0,saveCmd.size()-1);
     errorMsg = m_databasePtr->nmfUpdateDatabase(saveCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         m_logger->logMsg(nmfConstants::Error,"nmfSetup_Tab5::callback_Setup_Tab5_SavePB: Write table error: " + errorMsg);
         m_logger->logMsg(nmfConstants::Error,"cmd: " + saveCmd);
         QMessageBox::warning(Setup_Tab5_Widget, "Error",

@@ -1,0 +1,12 @@
+digraph "MSCAA_GuiSingleSpecies" {
+  compound=true
+  node [ fontsize="10", fontname="Helvetica"];
+  edge [ labelfontsize="10", labelfontname="Helvetica"];
+  subgraph clusterdir_cd988bdf5437b0636fc5e89ee191e466 {
+    graph [ bgcolor="#eeeeff", pencolor="black", label="" URL="dir_cd988bdf5437b0636fc5e89ee191e466.html"];
+    dir_cd988bdf5437b0636fc5e89ee191e466 [shape=plaintext label="MSCAA_GuiSingleSpecies"];
+    dir_ac2708cb72e9639ba8851f9a03e1ddf3 [shape=box label="doc" color="red" fillcolor="white" style="filled" URL="dir_ac2708cb72e9639ba8851f9a03e1ddf3.html"];
+  }
+  dir_b0dd4c7b837d61b29440a9f979f7fd8e [shape=box label="MSCAA_GuiUtilities" fillcolor="white" style="filled" color="red" URL="dir_b0dd4c7b837d61b29440a9f979f7fd8e.html"];
+  dir_cd988bdf5437b0636fc5e89ee191e466->dir_b0dd4c7b837d61b29440a9f979f7fd8e [headlabel="7", labeldistance=1.5 headhref="dir_000008_000001.html"];
+}

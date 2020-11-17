@@ -363,26 +363,26 @@ nmfADMB::getSpeciesData(
     }
 
     // Find numbers per species
-    QStringList NumFleets = SpeciesData.NumFleets.split(QRegExp("\\s+"),QString::SkipEmptyParts); // split and ignore "space" characters
+    QStringList NumFleets = SpeciesData.NumFleets.split(QRegExp("\\s+"),Qt::SkipEmptyParts); // split and ignore "space" characters
     SpeciesData.Fleets.clear();
     for (QString fleet : NumFleets) {
         SpeciesData.Fleets.push_back(fleet.toInt());
     }
-    QStringList NumSurveys = SpeciesData.NumSurveys.split(QRegExp("\\s+"),QString::SkipEmptyParts); // split and ignore "space" characters
+    QStringList NumSurveys = SpeciesData.NumSurveys.split(QRegExp("\\s+"),Qt::SkipEmptyParts); // split and ignore "space" characters
     SpeciesData.Surveys.clear();
     for (QString survey : NumSurveys) {
         SpeciesData.Surveys.push_back(survey.toInt());
     }
 
-    QStringList FirstYears = SpeciesData.FirstYear.split(QRegExp("\\s+"),QString::SkipEmptyParts); // split and ignore "space" characters
-    QStringList LastYears  = SpeciesData.LastYear.split(QRegExp("\\s+"),QString::SkipEmptyParts); // split and ignore "space" characters
+    QStringList FirstYears = SpeciesData.FirstYear.split(QRegExp("\\s+"),Qt::SkipEmptyParts); // split and ignore "space" characters
+    QStringList LastYears  = SpeciesData.LastYear.split(QRegExp("\\s+"),Qt::SkipEmptyParts); // split and ignore "space" characters
     SpeciesData.Years.clear();
     for (int i = 0; i < FirstYears.size(); ++i) {
         SpeciesData.Years.push_back(LastYears[i].toInt()-FirstYears[i].toInt()+1);
     }
 
-    QStringList MinAge = SpeciesData.MinAge.split(QRegExp("\\s+"),QString::SkipEmptyParts); // split and ignore "space" characters
-    QStringList MaxAge = SpeciesData.MaxAge.split(QRegExp("\\s+"),QString::SkipEmptyParts); // split and ignore "space" characters
+    QStringList MinAge = SpeciesData.MinAge.split(QRegExp("\\s+"),Qt::SkipEmptyParts); // split and ignore "space" characters
+    QStringList MaxAge = SpeciesData.MaxAge.split(QRegExp("\\s+"),Qt::SkipEmptyParts); // split and ignore "space" characters
     SpeciesData.Ages.clear();
     for (int i = 0; i < MinAge.size(); ++i) {
         SpeciesData.Ages.push_back(MaxAge[i].toInt()-MinAge[i].toInt()+1);
@@ -437,8 +437,8 @@ nmfADMB::getPredationMortalityEstimates(
 {
     int totNumAges = 0;
 
-    QStringList minAgeList = SpeciesData.MinAge.split(QRegExp("\\s+"),QString::SkipEmptyParts); // split and ignore "space" characters
-    QStringList maxAgeList = SpeciesData.MaxAge.split(QRegExp("\\s+"),QString::SkipEmptyParts); // split and ignore "space" characters
+    QStringList minAgeList = SpeciesData.MinAge.split(QRegExp("\\s+"),Qt::SkipEmptyParts); // split and ignore "space" characters
+    QStringList maxAgeList = SpeciesData.MaxAge.split(QRegExp("\\s+"),Qt::SkipEmptyParts); // split and ignore "space" characters
     for (int i = 0; i < minAgeList.size(); ++i) {
         totNumAges += maxAgeList[i].toInt() - minAgeList[i].toInt() + 1;
     }
@@ -924,8 +924,8 @@ nmfADMB::getSurveyAges(
 
     for (int i = 0; i < NumSpecies; ++i) {
         for (int j = 0; j < SpeciesData.Surveys[i]; ++j) {
-            FICfage += "  " + SpeciesData.MinAge.split(QRegExp("\\s+"),QString::SkipEmptyParts)[i];
-            FIClage += "  " + SpeciesData.MaxAge.split(QRegExp("\\s+"),QString::SkipEmptyParts)[i];
+            FICfage += "  " + SpeciesData.MinAge.split(QRegExp("\\s+"),Qt::SkipEmptyParts)[i];
+            FIClage += "  " + SpeciesData.MaxAge.split(QRegExp("\\s+"),Qt::SkipEmptyParts)[i];
         }
         FICfage += "\n";
         FIClage += "\n";
@@ -993,7 +993,7 @@ nmfADMB::getSurveyFirstYearPerSegment(
 {
     int NumYears = SpeciesData.Years[0]; // Ex. 35 (assume num years is same for all species)
     int inc      = NumYears/NumSegments; // Ex. 17.5 => 17
-    QStringList Nsegs = SpeciesData.Nseg.split(QRegExp("\\s+"),QString::SkipEmptyParts);
+    QStringList Nsegs = SpeciesData.Nseg.split(QRegExp("\\s+"),Qt::SkipEmptyParts);
 
     // Beginning year of FIC segments for species where nseg > 1; if nseg == 1, FICyr = 0
     for (int seg = 0; seg < Nsegs.size(); ++seg) {
@@ -1469,19 +1469,21 @@ nmfADMB::execCmd(std::string path, std::string cmd)
     pclose(file);
     result = buffer;
     result = QString::fromStdString(result).trimmed().toStdString();
-    if (QString::fromStdString(cmd).contains("admb ")) {
+//std::cout << "result: >" << result << "< " << std::endl;
+//std::cout << "cmd: >" << cmd << "< " << std::endl;
+    if (QString::fromStdString(cmd).contains("admb ") && (!result.empty())) {
         // Replace "admb" with the full path of the admb executable
         QString cmdStr = QString::fromStdString(cmd);
         QString subStr("admb ");
         QString newStr = QString::fromStdString(result) + " ";
         cmd = cmdStr.replace(subStr,newStr).toStdString();
     }
-    m_logger->logMsg(nmfConstants::Normal,"cmd: "+cmd);
-//    popen(cmd.c_str(),"r");
+    m_logger->logMsg(nmfConstants::Normal,"cmd: "+cmd);    
+//  popen(cmd.c_str(),"r");
     int retv = std::system(cmd.c_str());
-//    int retv = QProcess::execute(cmd.c_str());
+//  int retv = QProcess::execute("admb",argList);
     m_logger->logMsg(nmfConstants::Normal, "cmd completed: retv = "+std::to_string(retv));
-//    m_logger->logMsg(nmfConstants::Normal, "cmd completed");
+//  m_logger->logMsg(nmfConstants::Normal, "cmd completed");
 
 #elif _WIN32
 
@@ -1548,7 +1550,7 @@ nmfADMB::buildADMB(const QString& tplFile,
 
     std::string cmd;
     QString msg;
-    QTime admbTimer;
+    QElapsedTimer admbTimer;
 
     // Start timer to time ADMB Build
     admbTimer.start();
@@ -1607,7 +1609,7 @@ nmfADMB::runADMB(const QString& tplFile,
     QString fileBase = fileInfo.baseName();
     QString filePath = fileInfo.absolutePath();
     QString msg;
-    QTime admbTimer;
+    QElapsedTimer admbTimer;
 
     // Start timer to time ADMB Run
     admbTimer.start();
@@ -1645,7 +1647,7 @@ nmfADMB::runADMB(const QString& tplFile,
 
 
 QString
-nmfADMB::getTimerString(QTime& admbTimer,
+nmfADMB::getTimerString(QElapsedTimer& admbTimer,
                         const QString& header)
 {
     double timerSec  = admbTimer.elapsed()/1000.0;

@@ -199,7 +199,7 @@ nmfSimulation_Tab2::callback_LoadPB()
     loadWidgets();
 }
 
-bool
+void
 nmfSimulation_Tab2::callback_SavePB()
 {
     bool ok = false;
@@ -1221,25 +1221,30 @@ nmfSimulation_Tab2::updateSummaryWindow(const int  &FirstYear,
 
     text += "  ";
     for (int age = MinAge; age <= MaxAge; ++age) {
-        text += value.sprintf("Age %2d        ",age);
+        text += QString("%1 %2        ").arg("Arg").arg(age,2,'d',0,'0');
+        //text += value.sprintf("Age %2d        ",age);
     }
     text += "\n";
 
     for (int year = 0; year < NumYears; ++year) {
         text += QString::number(year+FirstYear) + " ";
         for (int age = 0; age < NumAges; ++age) {
-            text += value.sprintf("%14.2f",Abundance(year,age));
+            text += QString("%1").arg(Abundance(year,age),14,'f',2,'0');
+            //text += value.sprintf("%14.2f",Abundance(year,age));
         }
         text += "\n";
     }
 
-    text += value.sprintf("\n        Recruitment   SpawningBiomass\n\n");
-    text += value.sprintf("%4d %8s %14s\n",FirstYear,"-","-");
-    for (int i = 0; i < Recruitment.size(); ++i) {
-        text += value.sprintf("%4d %14.2f %14.2f\n",
-                              FirstYear+i+1,
-                              Recruitment[i],
-                              SpawningBiomass[i]);
+    text += QString("%1").arg("\n        Recruitment   SpawningBiomass\n\n");
+    //text += value.sprintf("\n        Recruitment   SpawningBiomass\n\n");
+    text += QString("%1 %2 %3").arg(FirstYear,4,'d',0,'0').arg("       -").arg("             -");
+    //text += value.sprintf("%4d %8s %14s\n",FirstYear,"-","-");
+    for (unsigned long i = 0; i < Recruitment.size(); ++i) {
+        text += QString("%1 %2 %3").arg(FirstYear+i+1,4,'d',0,'0').arg(Recruitment[i],14,'f',2).arg(SpawningBiomass[i],14,'f',2);
+//        text += value.sprintf("%4d %14.2f %14.2f\n",
+//                              FirstYear+i+1,
+//                              Recruitment[i],
+//                              SpawningBiomass[i]);
     }
 
     text += "\n";

@@ -1516,7 +1516,7 @@ bool saveBinnedTable(QTabWidget*   tabWidget,
                 projectSettingsConfig + deleteStr;
 
     errorMsg = databasePtr->nmfUpdateDatabase(deleteCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         msg = "\nError in Save command. Couldn't delete all records from " + QString::fromStdString(table) + " table";
         logger->logMsg(nmfConstants::Error,"nmfMSCAAUtils::saveBinnedTable: DELETE error: " + errorMsg);
         logger->logMsg(nmfConstants::Error,"cmd: " + deleteCmd);
@@ -1527,7 +1527,7 @@ bool saveBinnedTable(QTabWidget*   tabWidget,
     // Save the new data
     saveCmd = saveCmd.substr(0,saveCmd.size()-1);
     errorMsg = databasePtr->nmfUpdateDatabase(saveCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         logger->logMsg(nmfConstants::Error,"nmfMSCAAUtils::saveBinnedTable: Write table error: " + errorMsg);
         logger->logMsg(nmfConstants::Error,"cmd: " + saveCmd);
         QMessageBox::warning(tabWidget, "Error",
@@ -1608,7 +1608,7 @@ bool saveCatchAtLengthTable(QTabWidget*  tabWidget,
             " WHERE SystemName = '" + projectSettingsConfig +
             "' AND SpeName = '" + species + "' " + surveyOrFleetStr;
     errorMsg = databasePtr->nmfUpdateDatabase(deleteCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         msg = "\nError in Save command. Couldn't delete all records from " + QString::fromStdString(table) + " table";
         logger->logMsg(nmfConstants::Error,"nmfMSCAAUtils::saveCatchAtLengthTable: DELETE error: " + errorMsg);
         logger->logMsg(nmfConstants::Error,"cmd: " + deleteCmd);
@@ -1619,7 +1619,7 @@ bool saveCatchAtLengthTable(QTabWidget*  tabWidget,
     // Save the new data
     saveCmd = saveCmd.substr(0,saveCmd.size()-1);
     errorMsg = databasePtr->nmfUpdateDatabase(saveCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         logger->logMsg(nmfConstants::Error,"nmfMSCAAUtils::saveCatchAtLengthTable: Write table error: " + errorMsg);
         logger->logMsg(nmfConstants::Error,"cmd: " + saveCmd);
         QMessageBox::warning(tabWidget, "Error",
@@ -1690,7 +1690,7 @@ bool saveParameterTable(QTabWidget*  tabWidget,
             "' AND SpeName = '" + species + " "
             "' AND Algorithm = '" + algorithm + "'";
     errorMsg = databasePtr->nmfUpdateDatabase(deleteCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         msg = "\nError in Save command. Couldn't delete all records from " + QString::fromStdString(table) + " table";
         logger->logMsg(nmfConstants::Error,"nmfMSCAAUtils::saveParameterTable: DELETE error: " + errorMsg);
         logger->logMsg(nmfConstants::Error,"cmd: " + deleteCmd);
@@ -1701,7 +1701,7 @@ bool saveParameterTable(QTabWidget*  tabWidget,
     // Save the new data
     saveCmd = saveCmd.substr(0,saveCmd.size()-1);
     errorMsg = databasePtr->nmfUpdateDatabase(saveCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         logger->logMsg(nmfConstants::Error,"nmfMSCAAUtils::saveParameterTable: Write table error: " + errorMsg);
         logger->logMsg(nmfConstants::Error,"cmd: " + saveCmd);
         QMessageBox::warning(tabWidget, "Error",
@@ -1789,7 +1789,7 @@ bool saveProportionTable(QTabWidget*  tabWidget,
                 " WHERE SystemName = '" + projectSettingsConfig +
                 "' AND SpeName = '" + species + "' " + surveyDeleteStr;
     errorMsg = databasePtr->nmfUpdateDatabase(deleteCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         msg = "\nError in Save command. Couldn't delete all records from " + QString::fromStdString(table) + " table";
         logger->logMsg(nmfConstants::Error,"nmfMSCAAUtils::saveProportionTable: DELETE error: " + errorMsg);
         logger->logMsg(nmfConstants::Error,"cmd: " + deleteCmd);
@@ -1800,7 +1800,7 @@ bool saveProportionTable(QTabWidget*  tabWidget,
     // Save the new data
     saveCmd = saveCmd.substr(0,saveCmd.size()-1);
     errorMsg = databasePtr->nmfUpdateDatabase(saveCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         logger->logMsg(nmfConstants::Error,"nmfMSCAAUtils::saveProportionTable: Write table error: " + errorMsg);
         logger->logMsg(nmfConstants::Error,"cmd: " + saveCmd);
         QMessageBox::warning(tabWidget, "Error",
@@ -1917,7 +1917,7 @@ bool saveTable(QTabWidget*  tabWidget,
             " WHERE SystemName = '" + projectSettingsConfig +
             "' AND SpeName = '" + species + "' " + surveyOrFleetStr;
     errorMsg = databasePtr->nmfUpdateDatabase(deleteCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         msg = "\nError in Save command. Couldn't delete all records from " + QString::fromStdString(table) + " table";
         logger->logMsg(nmfConstants::Error,"nmfMSCAAUtils::saveTable: DELETE error: " + errorMsg);
         logger->logMsg(nmfConstants::Error,"cmd: " + deleteCmd);
@@ -1928,7 +1928,7 @@ bool saveTable(QTabWidget*  tabWidget,
     // Save the new data
     saveCmd = saveCmd.substr(0,saveCmd.size()-1);
     errorMsg = databasePtr->nmfUpdateDatabase(saveCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         logger->logMsg(nmfConstants::Error,"nmfMSCAAUtils::saveTable: Write table error: " + errorMsg);
         logger->logMsg(nmfConstants::Error,"cmd: " + saveCmd);
         QMessageBox::warning(tabWidget, "Error",
@@ -2011,7 +2011,7 @@ bool saveTheTotalTable(QTabWidget* tabWidget,
             " WHERE SystemName = '" + projectSettingsConfig +
             "' AND SpeName = '" + species + "' " + surveyOrFleetStr;
     errorMsg = databasePtr->nmfUpdateDatabase(deleteCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         msg = "\nError in Save command. Couldn't delete all records from " + QString::fromStdString(table) + " table";
         logger->logMsg(nmfConstants::Error,"nmfMSCAAUtils::saveTable: DELETE error: " + errorMsg);
         logger->logMsg(nmfConstants::Error,"cmd: " + deleteCmd);
@@ -2022,7 +2022,7 @@ bool saveTheTotalTable(QTabWidget* tabWidget,
     // Save the new data
     saveCmd = saveCmd.substr(0,saveCmd.size()-1);
     errorMsg = databasePtr->nmfUpdateDatabase(saveCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         logger->logMsg(nmfConstants::Error,"nmfMSCAAUtils::saveTheTotalTable: Write table error: " + errorMsg);
         logger->logMsg(nmfConstants::Error,"cmd: " + saveCmd);
         QMessageBox::warning(tabWidget, "Error",

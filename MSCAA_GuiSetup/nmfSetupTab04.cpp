@@ -131,7 +131,7 @@ nmfSetup_Tab4::callback_SavePB()
     deleteCmd += " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     deleteCmd += " AND SpeName = '" + Species.toStdString() + "'";
     errorMsg = m_databasePtr->nmfUpdateDatabase(deleteCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         msg = "\nError in Save command. Couldn't delete records from Covariates table";
         m_logger->logMsg(nmfConstants::Error,"nmfSetup_Tab4::callback_SavePB: DELETE error: " + errorMsg);
         m_logger->logMsg(nmfConstants::Error,"cmd: " + deleteCmd);
@@ -163,7 +163,7 @@ nmfSetup_Tab4::callback_SavePB()
     // Save the new data
     saveCmd = saveCmd.substr(0,saveCmd.size()-1);
     errorMsg = m_databasePtr->nmfUpdateDatabase(saveCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         m_logger->logMsg(nmfConstants::Error,"nmfSetup_Tab4::callback_SavePB: Write table error: " + errorMsg);
         m_logger->logMsg(nmfConstants::Error,"cmd: " + saveCmd);
         QMessageBox::warning(Setup_Tab4_Widget, "Error",

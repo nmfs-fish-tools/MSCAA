@@ -179,7 +179,7 @@ nmfSimulation_Tab1::saveYearlyParameters()
     deleteCmd += " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     deleteCmd += " AND SpeName = '" + Species.toStdString() + "'";
     errorMsg = m_databasePtr->nmfUpdateDatabase(deleteCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         msg = "\nError in Save command. Couldn't delete all records from SimulationParametersYearly table";
         m_logger->logMsg(nmfConstants::Error,"nmfSimulation_Tab1::saveYearlyParameters: DELETE error: " + errorMsg);
         m_logger->logMsg(nmfConstants::Error,"cmd: " + deleteCmd);
@@ -190,7 +190,7 @@ nmfSimulation_Tab1::saveYearlyParameters()
     // Save the new data
     saveCmd = saveCmd.substr(0,saveCmd.size()-1);
     errorMsg = m_databasePtr->nmfUpdateDatabase(saveCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         m_logger->logMsg(nmfConstants::Error,"nmfSimulation_Tab1::saveYearlyParameters: Write table error: " + errorMsg);
         m_logger->logMsg(nmfConstants::Error,"cmd: " + saveCmd);
         QMessageBox::warning(Simulation_Tabs, "Error",
@@ -274,6 +274,8 @@ nmfSimulation_Tab1::loadYearlyParameters()
     smodel->setVerticalHeaderLabels(RowLabels);
     Simulation_Tab1_YearlyParametersTV->setModel(smodel);
     Simulation_Tab1_YearlyParametersTV->resizeColumnsToContents();
+
+    return true;
 }
 
 void

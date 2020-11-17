@@ -211,7 +211,7 @@ nmfMSCAA_Tab1::getNumInteractions()
 void
 nmfMSCAA_Tab1::updatePredPreyInteractionTable()
 {
-    int NumSpecies;
+//  int NumSpecies;
     int NumInteractions=0;
     QStandardItemModel *smodel;
     QAbstractItemModel *smodelMain;
@@ -223,7 +223,7 @@ nmfMSCAA_Tab1::updatePredPreyInteractionTable()
     std::vector<int> PreyVec;
 
     m_databasePtr->getAllSpecies(m_logger, Species);
-    NumSpecies = Species.size();
+//  NumSpecies = Species.size();
 
     smodelMain = qobject_cast<QAbstractItemModel*>(MSCAA_Tab1_InteractionsTV->model());
     for (int row = 0; row < smodelMain->rowCount(); ++row) {
@@ -279,7 +279,7 @@ nmfMSCAA_Tab1::saveInteractionsVecData()
     deleteCmd = "DELETE FROM PredatorPreyInteractionsVec WHERE SystemName = '" +
                 m_ProjectSettingsConfig + "'";
     errorMsg = m_databasePtr->nmfUpdateDatabase(deleteCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         msg = "\nError in Save command. Couldn't delete all records from PredatorPreyInteractionsVec table";
         m_logger->logMsg(nmfConstants::Error,"nmfMSCAA_Tab1::saveInteractionsVecData: DELETE error: " + errorMsg);
         m_logger->logMsg(nmfConstants::Error,"cmd: " + deleteCmd);
@@ -301,7 +301,7 @@ nmfMSCAA_Tab1::saveInteractionsVecData()
 
     // Save the new data
     errorMsg = m_databasePtr->nmfUpdateDatabase(saveCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         m_logger->logMsg(nmfConstants::Error,"nmfMSCAA_Tab1::saveInteractionsVecData: Write table error: " + errorMsg);
         m_logger->logMsg(nmfConstants::Error,"cmd: " + saveCmd);
         QMessageBox::warning(MSCAA_Tabs, "Error",
@@ -377,7 +377,7 @@ nmfMSCAA_Tab1::saveSystemData()
     }
     // Save the new data
     errorMsg = m_databasePtr->nmfUpdateDatabase(saveCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         m_logger->logMsg(nmfConstants::Error,"nmfMSCAA_Tab1::saveSystemData: Write table error: " + errorMsg);
         m_logger->logMsg(nmfConstants::Error,"cmd: " + saveCmd);
         QMessageBox::warning(MSCAA_Tabs, "Error",
@@ -432,7 +432,7 @@ nmfMSCAA_Tab1::saveInteractionsData()
     deleteCmd = "DELETE FROM PredatorPreyInteractions WHERE SystemName = '" +
                 m_ProjectSettingsConfig + "'";
     errorMsg = m_databasePtr->nmfUpdateDatabase(deleteCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         msg = "\nError in Save command. Couldn't delete all records from PredatorPreyInteractions table";
         m_logger->logMsg(nmfConstants::Error,"nmfMSCAA_Tab1::saveInteractionsData: DELETE error: " + errorMsg);
         m_logger->logMsg(nmfConstants::Error,"cmd: " + deleteCmd);
@@ -443,7 +443,7 @@ nmfMSCAA_Tab1::saveInteractionsData()
     // Save the new data
     saveCmd = saveCmd.substr(0,saveCmd.size()-1);
     errorMsg = m_databasePtr->nmfUpdateDatabase(saveCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         m_logger->logMsg(nmfConstants::Error,"nmfMSCAAUtils::saveInteractionsData: Write table error: " + errorMsg);
         m_logger->logMsg(nmfConstants::Error,"cmd: " + saveCmd);
         QMessageBox::warning(MSCAA_Tabs, "Error",
@@ -509,7 +509,7 @@ nmfMSCAA_Tab1::saveVulnerabilityData()
     deleteCmd = "DELETE FROM PredatorPreyVulnerability WHERE SystemName = '" +
                 m_ProjectSettingsConfig + "'";
     errorMsg = m_databasePtr->nmfUpdateDatabase(deleteCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         msg = "\nError in Save command. Couldn't delete all records from PredatorPreyVulnerability table";
         m_logger->logMsg(nmfConstants::Error,"nmfMSCAA_Tab1::saveVulnerabilityData: DELETE error: " + errorMsg);
         m_logger->logMsg(nmfConstants::Error,"cmd: " + deleteCmd);
@@ -520,7 +520,7 @@ nmfMSCAA_Tab1::saveVulnerabilityData()
     // Save the new data
     saveCmd = saveCmd.substr(0,saveCmd.size()-1);
     errorMsg = m_databasePtr->nmfUpdateDatabase(saveCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         m_logger->logMsg(nmfConstants::Error,"nmfMSCAAUtils::saveVulnerabilityData: Write table error: " + errorMsg);
         m_logger->logMsg(nmfConstants::Error,"cmd: " + saveCmd);
         QMessageBox::warning(MSCAA_Tabs, "Error",
@@ -535,10 +535,10 @@ nmfMSCAA_Tab1::saveVulnerabilityData()
 bool
 nmfMSCAA_Tab1::loadSystemData()
 {
-    int NumSpecies;
+//  int NumSpecies;
     int NumRecords;
     std::vector<std::string> Species;
-    QStandardItemModel *smodel;
+//  QStandardItemModel *smodel;
     std::vector<std::string> fields;
     std::map<std::string, std::vector<std::string> > dataMap;
     std::string queryStr;
@@ -547,8 +547,8 @@ nmfMSCAA_Tab1::loadSystemData()
     QString units;
 
     m_databasePtr->getAllSpecies(m_logger, Species);
-    NumSpecies = Species.size();
-    smodel = new QStandardItemModel(NumSpecies,NumSpecies);
+//  NumSpecies = Species.size();
+//  smodel = new QStandardItemModel(NumSpecies,NumSpecies);
 
     // Get data from database
     fields     = {"SystemName","TotalBiomass","FH_FirstYear","FH_LastYear","Owt"};
@@ -576,6 +576,7 @@ nmfMSCAA_Tab1::loadSystemData()
 
     emit LoadedSystemData();
 
+    return true;
 }
 
 bool

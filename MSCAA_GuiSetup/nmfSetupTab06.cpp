@@ -122,7 +122,7 @@ nmfSetup_Tab6::saveFleetData()
     // Delete the current Species entry here
     deleteCmd = "DELETE FROM Fleets WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     errorMsg = m_databasePtr->nmfUpdateDatabase(deleteCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         msg = "\nError in Save command. Couldn't delete all records from SurveyMonth table";
         m_logger->logMsg(nmfConstants::Error,"nmfSetup_Tab6::saveFleetData: DELETE error: " + errorMsg);
         m_logger->logMsg(nmfConstants::Error,"cmd: " + deleteCmd);
@@ -149,7 +149,7 @@ nmfSetup_Tab6::saveFleetData()
     // Save the new data
     saveCmd = saveCmd.substr(0,saveCmd.size()-1);
     errorMsg = m_databasePtr->nmfUpdateDatabase(saveCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         m_logger->logMsg(nmfConstants::Error,"nmfSetup_Tab6::saveFleetData: Write table error: " + errorMsg);
         m_logger->logMsg(nmfConstants::Error,"cmd: " + saveCmd);
         QMessageBox::warning(Setup_Tab6_Widget, "Error",
@@ -190,7 +190,7 @@ nmfSetup_Tab6::saveSystemData()
                    AbundanceDriver.toStdString() + "')";
     }
     errorMsg = m_databasePtr->nmfUpdateDatabase(saveCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         m_logger->logMsg(nmfConstants::Error,"nmfSetup_Tab6::saveSystemData: Write table error: " + errorMsg);
         m_logger->logMsg(nmfConstants::Error,"cmd: " + saveCmd);
         QMessageBox::warning(Setup_Tab6_Widget, "Error",

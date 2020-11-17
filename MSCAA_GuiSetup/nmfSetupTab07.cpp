@@ -152,7 +152,7 @@ nmfSetup_Tab7::callback_SavePB()
     deleteCmd = "DELETE FROM AgeLengthKey WHERE SystemName = '" + m_ProjectSettingsConfig + "'" +
                 " AND SpeName = '" + Species.toStdString() + "'";
     errorMsg = m_databasePtr->nmfUpdateDatabase(deleteCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         msg = "\nError in Save command. Couldn't delete all records from AgeLengthKey table";
         m_logger->logMsg(nmfConstants::Error,"nmfSetup_Tab7::callback_SavePB: DELETE error: " + errorMsg);
         m_logger->logMsg(nmfConstants::Error,"cmd: " + deleteCmd);
@@ -181,7 +181,7 @@ nmfSetup_Tab7::callback_SavePB()
     // Save the new data
     saveCmd = saveCmd.substr(0,saveCmd.size()-1);
     errorMsg = m_databasePtr->nmfUpdateDatabase(saveCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         m_logger->logMsg(nmfConstants::Error,"nmfSetup_Tab7::callback_SavePB: Write table error: " + errorMsg);
         m_logger->logMsg(nmfConstants::Error,"cmd: " + saveCmd);
         QMessageBox::warning(Setup_Tab7_Widget, "Error",

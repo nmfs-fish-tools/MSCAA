@@ -524,7 +524,7 @@ nmfSSCAA_Tab6::writeADMBDataFile(const QString& datFile,
     QString msg;
 
     // Read Catch table
-    for (int i = 0; i < TableNames.size(); ++i) {
+    for (unsigned long i = 0; i < TableNames.size(); ++i) {
         if (! nmfMSCAAUtils::getDatabaseData(m_databasePtr,m_logger,
                 m_ProjectSettingsConfig,Species.toStdString(),Fleet.toStdString(),
                 NumYears,NumAges,TableNames[i],Tables[i])) {
@@ -535,7 +535,7 @@ nmfSSCAA_Tab6::writeADMBDataFile(const QString& datFile,
     }
 
     // Read Mortality tables
-    for (int i = 0; i < MortalityTableNames.size(); ++i) {
+    for (unsigned long i = 0; i < MortalityTableNames.size(); ++i) {
         if (! nmfMSCAAUtils::getMortalityData(m_databasePtr,m_logger,
                  m_ProjectSettingsConfig,Species.toStdString(),NumYears,
                  MinAge,MaxAge,MortalityTableNames[i],MortalityTables[i])) {
@@ -576,8 +576,8 @@ void
 nmfSSCAA_Tab6::writeToFileStream(QTextStream& fileStream,
                                  boost::numeric::ublas::matrix<double>& matrix)
 {
-    for (int i = 0; i < matrix.size1(); ++i) {
-        for (int j = 0; j < matrix.size2(); ++j) {
+    for (unsigned i = 0; i < matrix.size1(); ++i) {
+        for (unsigned j = 0; j < matrix.size2(); ++j) {
             fileStream << " " << matrix(i,j);
         }
         fileStream << "\n";
@@ -841,7 +841,7 @@ nmfSSCAA_Tab6::saveToSpeciesTable(const std::vector<std::string>& ColLabels,
     // Save the new data
     saveCmd = saveCmd.substr(0,saveCmd.size()-1);
     errorMsg = m_databasePtr->nmfUpdateDatabase(saveCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         m_logger->logMsg(nmfConstants::Error,"nmfSSCAA_Tab6::saveWeightings: Write table error: " + errorMsg);
         m_logger->logMsg(nmfConstants::Error,"cmd: " + saveCmd);
         QMessageBox::warning(SSCAA_Tabs, "Error",

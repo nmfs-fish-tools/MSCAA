@@ -143,7 +143,7 @@ nmfMSCAA_Tab5::saveSpeciesData()
 
     m_databasePtr->getAllSpecies(m_logger, SpeciesList);
 
-    for (int col=0; col<SpeciesList.size(); ++col) {
+    for (unsigned long col=0; col<SpeciesList.size(); ++col) {
         indexFH  = smodelFH->index(0,col);
         indexRho = smodelRho->index(0,col);
         FHstr    = smodelFH->data(indexFH).toString().toStdString();
@@ -154,7 +154,7 @@ nmfMSCAA_Tab5::saveSpeciesData()
 
         // Save the new data
         errorMsg = m_databasePtr->nmfUpdateDatabase(saveCmd);
-        if (errorMsg != " ") {
+        if (nmfUtilsQt::isAnError(errorMsg)) {
             m_logger->logMsg(nmfConstants::Error,"nmfMSCAAUtils::saveSystemData: Write table error: " + errorMsg);
             m_logger->logMsg(nmfConstants::Error,"cmd: " + saveCmd);
             QMessageBox::warning(MSCAA_Tabs, "Error",
@@ -187,7 +187,7 @@ nmfMSCAA_Tab5::saveSystemData()
     }
     // Save the new data
     errorMsg = m_databasePtr->nmfUpdateDatabase(saveCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         m_logger->logMsg(nmfConstants::Error,"nmfMSCAAUtils::saveSystemData: Write table error: " + errorMsg);
         m_logger->logMsg(nmfConstants::Error,"cmd: " + saveCmd);
         QMessageBox::warning(MSCAA_Tabs, "Error",
@@ -307,7 +307,6 @@ nmfMSCAA_Tab5::getAbundance(std::string Species)
 bool
 nmfMSCAA_Tab5::loadSystemData()
 {
-    int m = 0;
     int NumRecords;
     std::vector<std::string> fields;
     std::map<std::string, std::vector<std::string> > dataMap;

@@ -1,0 +1,33 @@
+digraph "MSCAA_GuiUtilities/nmfMSCAATableIO.h"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="MSCAA_GuiUtilities\l/nmfMSCAATableIO.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Contains the MSCAA namespace utility functions."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="MSCAA_GuiMultiSpecies\l/nmfMSCAATab01.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$nmf_m_s_c_a_a_tab01_8h.html",tooltip="This file contains the class definition for the GUI elements and functionality for the 1st tabbed MSC..."];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="MSCAA_Main/nmfMainWindow.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$nmf_main_window_8h_source.html",tooltip=" "];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="MSCAA_GuiMultiSpecies\l/nmfMSCAATab02.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$nmf_m_s_c_a_a_tab02_8h.html",tooltip="This file contains the class definition for the GUI elements and functionality for the 2nd tabbed MSC..."];
+  Node4 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="MSCAA_GuiMultiSpecies\l/nmfMSCAATab03.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$nmf_m_s_c_a_a_tab03_8h.html",tooltip="This file contains the class definition for the GUI elements and functionality for the 3rd tabbed MSC..."];
+  Node5 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="MSCAA_GuiMultiSpecies\l/nmfMSCAATab04.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$nmf_m_s_c_a_a_tab04_8h.html",tooltip="This file contains the class definition for the GUI elements and functionality for the 4th tabbed MSC..."];
+  Node6 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="MSCAA_GuiSetup/nmfSetupTab04.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$nmf_setup_tab04_8h.html",tooltip="This file contains the class definition for the GUI elements and functionality for the 4th tabbed Set..."];
+  Node7 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="MSCAA_GuiSetup/nmfSetupTab06.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$nmf_setup_tab06_8h.html",tooltip="This file contains the class definition for the GUI elements and functionality for the 6th tabbed Set..."];
+  Node8 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="MSCAA_GuiSimulation\l/nmfSimulationTab01.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$nmf_simulation_tab01_8h_source.html",tooltip=" "];
+  Node9 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node10 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node10 [label="MSCAA_GuiSimulation\l/nmfSimulationTab02.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$nmf_simulation_tab02_8h_source.html",tooltip=" "];
+  Node10 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

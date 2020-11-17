@@ -182,7 +182,7 @@ signals:
 
 public Q_SLOTS:
     void callback_LoadPB();
-    bool callback_SavePB();
+    void callback_SavePB();
     void callback_PrevPB();
     void callback_RunPB();
 //    void callback_RunPB_OLD();

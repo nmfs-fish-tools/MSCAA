@@ -196,7 +196,7 @@ nmfMSCAA_Tab2::saveTable(QTableView*  tableView,
     // Delete the current entry here
     deleteCmd = "DELETE FROM " + tableName + " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     errorMsg = m_databasePtr->nmfUpdateDatabase(deleteCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         msg = "\nError in Save command. Couldn't delete all records from " + QString::fromStdString(tableName) + " table";
         m_logger->logMsg(nmfConstants::Error,"nmfMSCAA_Tab2::SaveTable: DELETE error: " + errorMsg);
         m_logger->logMsg(nmfConstants::Error,"cmd: " + deleteCmd);
@@ -221,7 +221,7 @@ nmfMSCAA_Tab2::saveTable(QTableView*  tableView,
     // Save the new data
     saveCmd = saveCmd.substr(0,saveCmd.size()-1);
     errorMsg = m_databasePtr->nmfUpdateDatabase(saveCmd);
-    if (errorMsg != " ") {
+    if (nmfUtilsQt::isAnError(errorMsg)) {
         m_logger->logMsg(nmfConstants::Error,"nmfMSCAA_Tab2::SaveTable: Write table error: " + errorMsg);
         m_logger->logMsg(nmfConstants::Error,"cmd: " + saveCmd);
         QMessageBox::warning(MSCAA_Tabs, "Error",
@@ -327,7 +327,7 @@ std::cout << "nmfMSCAA_Tab2::loadWidgets()" << std::endl;
                                            "PredatorPreyVarianceLTRatio",
                                            "PredatorPreyVarianceGTRatio"};
 
-    for (int i = 0; i < tableNames.size(); ++i) {
+    for (unsigned long i = 0; i < tableNames.size(); ++i) {
         loadTable(tableViews[i],tableNames[i]);
     }
 
