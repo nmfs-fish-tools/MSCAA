@@ -1013,7 +1013,6 @@ nmfADMB::writeADMBDataFile(const QString& dataFile,
                                  StructSpeciesData& SpeciesData)
 {
     bool retv = false;
-    char buf[100];
     int NumSpecies;
     int NumSurveys;
     int BinSize=0;
@@ -1167,10 +1166,10 @@ nmfADMB::writeADMBDataFile(const QString& dataFile,
     {
         QTextStream fileStream(&file);
 
-        std::time_t now = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-        std::strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", std::localtime(&now));
+        QDateTime now  = QDateTime::currentDateTime();
+        QString   time = now.toString("yyyy-MM-dd hh:mm:ss");
 
-        fileStream << "# Data file produced by NOAA's National Marine Fisheries Service MSCAA Tool: " << buf << "\n";
+        fileStream << "# Data file produced by NOAA's National Marine Fisheries Service MSCAA Tool: " << time << "\n";
         fileStream << "# Modify parameterization to allow for multiple phase declarations for each parameter\n\n";
         fileStream << "# Debug Level\n";
         fileStream << "#  " << m_debug << "\n\n"; // RSK - this doesn't work when uncommented
@@ -1396,7 +1395,7 @@ nmfADMB::writeADMBTPLFile(const QString& tplFile)
 bool
 nmfADMB::writeADMBCxxFiles(const QString& tplFile)
 {
-    std::vector<std::string> filesToCopy;
+    QStringList filesToCopy;
     QString msg;
 
     if (! m_origTplFile.empty()) {
@@ -1409,10 +1408,10 @@ nmfADMB::writeADMBCxxFiles(const QString& tplFile)
 
         std::string destDir = dest.absolutePath().toStdString();
         std::string destFile;
-        for (std::string filename : filesToCopy) {
-            QFileInfo file(QString::fromStdString(filename));
+        for (QString filename : filesToCopy) {
+            QFileInfo file(filename);
             destFile = destDir + "/" + file.fileName().toStdString();
-            nmfUtils::copyFile(filename,destFile);
+            nmfUtils::copyFile(filename.toStdString(),destFile);
         }
 
         msg = "<strong>Copying .cxx files to: </strong>" + QString::fromStdString(destDir);
