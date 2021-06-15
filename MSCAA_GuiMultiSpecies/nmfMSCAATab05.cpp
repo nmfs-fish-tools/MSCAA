@@ -504,7 +504,8 @@ nmfMSCAA_Tab5::showChartAbundance3d(
                             nmfConstants::DontReverseAxis,
                             nmfConstants::ReverseAxis,
                             RowValues, ColumnValues, AbundanceScaled,
-                            nmfConstants::ShowShadow);
+                            nmfConstants::ShowShadow,
+                            nmfConstants::DontManuallySetYMinMax,0,0);
 
 }
 

@@ -341,7 +341,8 @@ nmfSSCAA_Tab6::showChartAbundance3d(const bool     showLogData,
                             nmfConstants::DontReverseAxis,
                             nmfConstants::ReverseAxis,
                             RowValues, ColumnValues, AbundanceScaled,
-                            nmfConstants::ShowShadow);
+                            nmfConstants::ShowShadow,
+                            nmfConstants::DontManuallySetYMinMax,0,0);
 }
 
 void
