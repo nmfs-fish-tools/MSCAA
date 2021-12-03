@@ -82,7 +82,7 @@ class nmfSetup_Tab3: public QObject
     void readSettings();
     void removeFromTable(std::string field,
                          QTableWidgetItem* itemToRemove,
-                         QList<QString>& TablesToDeleteFrom);
+                         QList<std::string>& TablesToDeleteFrom);
     void saveFleetData();
     void saveSettings();
 

@@ -712,7 +712,7 @@ nmfSetup_Tab2::createTables(QString databaseName)
     connect(progressDlg, SIGNAL(canceled()), this, SLOT(callback_progressDlgCancel()));
 
     // 1 of 29: Species
-    fullTableName = db + ".Species";
+    fullTableName = db + "." + nmfConstantsMSCAA::TableSpecies;
     cmd  = "CREATE TABLE IF NOT EXISTS " + fullTableName;
     cmd += "(SpeName           varchar(100) NOT NULL,";
     cmd += " MinAge            int(11) NULL,";
@@ -761,8 +761,8 @@ nmfSetup_Tab2::createTables(QString databaseName)
 
     // 2 of 29: CatchFishery
     // 3 of 29: CatchFisheryProportion
-    for (std::string tableName : {"CatchFishery",
-                                  "CatchFisheryProportion"})
+    for (std::string tableName : {nmfConstantsMSCAA::TableCatchFishery,
+                                  nmfConstantsMSCAA::TableCatchFisheryProportion})
     {
         fullTableName = db + "." + tableName;
         cmd  = "CREATE TABLE IF NOT EXISTS " + fullTableName;
@@ -792,10 +792,10 @@ nmfSetup_Tab2::createTables(QString databaseName)
     // 5 of 29: Maturity
     // 6 of 29: Consumption
     // 7 of 29: InitialAbundance
-    for (std::string tableName : {"Weight",
-                                  "Maturity",
-                                  "Consumption",
-                                  "InitialAbundance"})
+    for (std::string tableName : {nmfConstantsMSCAA::TableWeight,
+                                  nmfConstantsMSCAA::TableMaturity,
+                                  nmfConstantsMSCAA::TableConsumption,
+                                  nmfConstantsMSCAA::TableInitialAbundance})
     {
         fullTableName = db + "." + tableName;
         cmd  = "CREATE TABLE IF NOT EXISTS " + fullTableName;
@@ -822,8 +822,8 @@ nmfSetup_Tab2::createTables(QString databaseName)
 
     // 8 of 29: CatchSurvey
     // 9 of 29: CatchSurveyProportion
-    for (std::string tableName : {"CatchSurvey",
-                                  "CatchSurveyProportion"})
+    for (std::string tableName : {nmfConstantsMSCAA::TableCatchSurvey,
+                                  nmfConstantsMSCAA::TableCatchSurveyProportion})
     {
         fullTableName = db + "." + tableName;
         cmd  = "CREATE TABLE IF NOT EXISTS " + fullTableName;
@@ -851,7 +851,7 @@ nmfSetup_Tab2::createTables(QString databaseName)
 
 
     // 10 of 29: CatchFisheryTotal
-    for (std::string tableName : {"CatchFisheryTotal"})
+    for (std::string tableName : {nmfConstantsMSCAA::TableCatchFisheryTotal})
     {
         fullTableName = db + "." + tableName;
         cmd  = "CREATE TABLE IF NOT EXISTS " + fullTableName;
@@ -877,7 +877,7 @@ nmfSetup_Tab2::createTables(QString databaseName)
     }
 
     // 11 of 29: CatchSurveyTotal
-    for (std::string tableName : {"CatchSurveyTotal"})
+    for (std::string tableName : {nmfConstantsMSCAA::TableCatchSurveyTotal})
     {
         fullTableName = db + "." + tableName;
         cmd  = "CREATE TABLE IF NOT EXISTS " + fullTableName;
@@ -904,8 +904,8 @@ nmfSetup_Tab2::createTables(QString databaseName)
 
     // 12 of 29: MortalityNatural
     // 13 of 29: MortalityFishing
-    for (std::string tableName : {"MortalityNatural",
-                                  "MortalityFishing"})
+    for (std::string tableName : {nmfConstantsMSCAA::TableMortalityNatural,
+                                  nmfConstantsMSCAA::TableMortalityFishing})
     {
         fullTableName = db + "." + tableName;
         cmd  = "CREATE TABLE IF NOT EXISTS " + fullTableName;
@@ -930,7 +930,7 @@ nmfSetup_Tab2::createTables(QString databaseName)
     }
 
     // 14 of 29: Diet
-    for (std::string tableName : {"Diet"})
+    for (std::string tableName : {nmfConstantsMSCAA::TableDiet})
     {
         fullTableName = db + "." + tableName;
         cmd  = "CREATE TABLE IF NOT EXISTS " + fullTableName;
@@ -957,7 +957,7 @@ nmfSetup_Tab2::createTables(QString databaseName)
     }
 
     // 15 of 29: SurveyMonth
-    for (std::string tableName : {"SurveyMonth"})
+    for (std::string tableName : {nmfConstantsMSCAA::TableSurveyMonth})
     {
         fullTableName = db + "." + tableName;
         cmd  = "CREATE TABLE IF NOT EXISTS " + fullTableName;
@@ -981,7 +981,7 @@ nmfSetup_Tab2::createTables(QString databaseName)
     }
 
     // 16 of 29: SurveyWeights
-    for (std::string tableName : {"SurveyWeights"})
+    for (std::string tableName : {nmfConstantsMSCAA::TableSurveyWeights})
     {
         fullTableName = db + "." + tableName;
         cmd  = "CREATE TABLE IF NOT EXISTS " + fullTableName;
@@ -1005,8 +1005,8 @@ nmfSetup_Tab2::createTables(QString databaseName)
             return;
     }
 
-    // 17 of 29: System
-    for (std::string tableName : {"System"})
+    // 17 of 29: Models
+    for (std::string tableName : {nmfConstantsMSCAA::TableModels})
     {
         fullTableName = db + "." + tableName;
         cmd  = "CREATE TABLE IF NOT EXISTS " + fullTableName;
@@ -1039,11 +1039,11 @@ nmfSetup_Tab2::createTables(QString databaseName)
     // 20 of 29: PredatorPreyVarianceGTRatio
     // 21 of 29: PredatorPreyInteractions
     // 22 of 29: PredatorPreyVulnerability - From Eq'n (5) Curti Dissertation
-    for (std::string tableName : {"PredatorPreyPreferredRatio",
-                                  "PredatorPreyVarianceLTRatio",
-                                  "PredatorPreyVarianceGTRatio",
-                                  "PredatorPreyInteractions",
-                                  "PredatorPreyVulnerability"})
+    for (std::string tableName : {nmfConstantsMSCAA::TablePredatorPreyPreferredRatio,
+                                  nmfConstantsMSCAA::TablePredatorPreyVarianceLTRatio,
+                                  nmfConstantsMSCAA::TablePredatorPreyVarianceGTRatio,
+                                  nmfConstantsMSCAA::TablePredatorPreyInteractions,
+                                  nmfConstantsMSCAA::TablePredatorPreyVulnerability})
     {
         fullTableName = db + "." + tableName;
         cmd  = "CREATE TABLE IF NOT EXISTS " + fullTableName;
@@ -1067,7 +1067,7 @@ nmfSetup_Tab2::createTables(QString databaseName)
     }
 
     // 23 of 29: PredatorPreyInteractionsVec
-    for (std::string tableName : {"PredatorPreyInteractionsVec"})
+    for (std::string tableName : {nmfConstantsMSCAA::TablePredatorPreyInteractionsVec})
     {
         fullTableName = db + "." + tableName;
         cmd  = "CREATE TABLE IF NOT EXISTS " + fullTableName;
@@ -1090,7 +1090,7 @@ nmfSetup_Tab2::createTables(QString databaseName)
     }
 
     // 24 of 29: Covariates
-    for (std::string tableName : {"Covariates"})
+    for (std::string tableName : {nmfConstantsMSCAA::TableCovariates})
     {
         fullTableName = db + "." + tableName;
         cmd  = "CREATE TABLE IF NOT EXISTS " + fullTableName;
@@ -1116,7 +1116,7 @@ nmfSetup_Tab2::createTables(QString databaseName)
     }
 
     // 25 of 29: Fleets
-    for (std::string tableName : {"Fleets"})
+    for (std::string tableName : {nmfConstantsMSCAA::TableFleets})
     {
         fullTableName = db + "." + tableName;
         cmd  = "CREATE TABLE IF NOT EXISTS " + fullTableName;
@@ -1140,7 +1140,7 @@ nmfSetup_Tab2::createTables(QString databaseName)
     }
 
     // 26 of 29: Age-Length Key
-    for (std::string tableName : {"AgeLengthKey"})
+    for (std::string tableName : {nmfConstantsMSCAA::TableAgeLengthKey})
     {
         fullTableName = db + "." + tableName;
         cmd  = "CREATE TABLE IF NOT EXISTS " + fullTableName;
@@ -1165,7 +1165,7 @@ nmfSetup_Tab2::createTables(QString databaseName)
     }
 
     // 27 of 29: CatchAtLengthFishery
-    for (std::string tableName : {"CatchAtLengthFishery"})
+    for (std::string tableName : {nmfConstantsMSCAA::TableCatchAtLengthFishery})
     {
         fullTableName = db + "." + tableName;
         cmd  = "CREATE TABLE IF NOT EXISTS " + fullTableName;
@@ -1193,7 +1193,7 @@ nmfSetup_Tab2::createTables(QString databaseName)
     }
 
     // 28 of 29: SimulationParametersSpecies
-    for (std::string tableName : {"SimulationParametersSpecies"})
+    for (std::string tableName : {nmfConstantsMSCAA::TableSimulationParametersSpecies})
     {
         fullTableName = db + "." + tableName;
         cmd  = "CREATE TABLE IF NOT EXISTS " + fullTableName;
@@ -1218,7 +1218,7 @@ nmfSetup_Tab2::createTables(QString databaseName)
     }
 
     // 29 of 29: SimulationParametersYearly
-    for (std::string tableName : {"SimulationParametersYearly"})
+    for (std::string tableName : {nmfConstantsMSCAA::TableSimulationParametersYearly})
     {
         fullTableName = db + "." + tableName;
         cmd  = "CREATE TABLE IF NOT EXISTS " + fullTableName;
@@ -1243,7 +1243,7 @@ nmfSetup_Tab2::createTables(QString databaseName)
     }
 
     // 30 of 30: Application (contains name of application - used to assure app is using correct database)
-    for (std::string tableName : {"Application"})
+    for (std::string tableName : {nmfConstantsMSCAA::TableApplication})
     {
         fullTableName = db + "." + tableName;
         cmd  = "CREATE TABLE IF NOT EXISTS " + fullTableName;

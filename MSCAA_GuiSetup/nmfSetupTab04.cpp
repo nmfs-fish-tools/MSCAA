@@ -127,7 +127,7 @@ nmfSetup_Tab4::callback_SavePB()
         return;
 
     // Delete the current Species entry here
-    deleteCmd  = "DELETE FROM Covariates ";
+    deleteCmd  = "DELETE FROM " + nmfConstantsMSCAA::TableCovariates;
     deleteCmd += " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     deleteCmd += " AND SpeName = '" + Species.toStdString() + "'";
     errorMsg = m_databasePtr->nmfUpdateDatabase(deleteCmd);
@@ -140,7 +140,7 @@ nmfSetup_Tab4::callback_SavePB()
     }
 
     // Build insert command from the model data
-    saveCmd  = "INSERT INTO Covariates ";
+    saveCmd  = "INSERT INTO " + nmfConstantsMSCAA::TableCovariates;
     saveCmd += " (MohnsRhoLabel,SystemName,SpeName,CovariateNumber,CovariateName,Year,Value) VALUES ";
     for (int col = 0; col < smodel->columnCount(); ++col) {
         covariateNumber = std::to_string(col);
@@ -274,7 +274,8 @@ nmfSetup_Tab4::loadWidgets()
 
     fields     = {"MohnsRhoLabel","SystemName","SpeName","CovariateNumber",
                   "CovariateName","Year","Value"};
-    queryStr   = "SELECT MohnsRhoLabel,SystemName,SpeName,CovariateNumber,CovariateName,Year,Value FROM Covariates ";
+    queryStr   = "SELECT MohnsRhoLabel,SystemName,SpeName,CovariateNumber,CovariateName,Year,Value FROM " +
+                  nmfConstantsMSCAA::TableCovariates;
     queryStr  += " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     queryStr  += " AND SpeName = '" + Species.toStdString() + "'";
     queryStr  += " ORDER BY CovariateNumber,Year";
@@ -288,7 +289,7 @@ nmfSetup_Tab4::loadWidgets()
     }
 
     fields    = {"COUNT(DISTINCT(CovariateNumber))"};
-    queryStr  = "SELECT COUNT(DISTINCT(CovariateNumber)) FROM Covariates ";
+    queryStr  = "SELECT COUNT(DISTINCT(CovariateNumber)) FROM " + nmfConstantsMSCAA::TableCovariates;
     queryStr += " WHERE SpeName='" + Species.toStdString() + "'";
     dataMap2  = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumCols   = std::stoi(dataMap2["COUNT(DISTINCT(CovariateNumber))"][0]);
@@ -296,7 +297,7 @@ nmfSetup_Tab4::loadWidgets()
     Setup_Tab4_CovariatesSB->setValue(NumCols);
 
     fields    = {"COUNT(DISTINCT(Year))"};
-    queryStr  = "SELECT COUNT(DISTINCT(Year)) FROM Covariates ";
+    queryStr  = "SELECT COUNT(DISTINCT(Year)) FROM " + nmfConstantsMSCAA::TableCovariates;
     queryStr += " WHERE SpeName='" + Species.toStdString() + "'";
     dataMap2  = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumRows   = std::stoi(dataMap2["COUNT(DISTINCT(Year))"][0]);

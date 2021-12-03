@@ -155,9 +155,9 @@ void createNewNumberOfBinsTable(nmfDatabase* databasePtr,
     QStandardItemModel* smodel;
     std::vector<std::string> allSpecies;
     QStringList HorizontalList;
-    bool isDietTable = (table == "Diet");
+    bool isDietTable = (table == nmfConstantsMSCAA::TableDiet);
 
-    foundSpecies = databasePtr->getAllSpecies(logger,allSpecies);
+    foundSpecies = databasePtr->getSpecies(logger,allSpecies);
     if (! foundSpecies)
         return;
 
@@ -247,10 +247,10 @@ void createNewYearsPerBinTable(nmfDatabase* databasePtr,
     QStandardItemModel* smodel;
     std::vector<std::string> allSpecies;
     QStringList HorizontalList;
-    bool isDietTable = (table == "Diet");
+    bool isDietTable = (table == nmfConstantsMSCAA::TableDiet);
     int NumYears;
 
-    foundSpecies = databasePtr->getAllSpecies(logger,allSpecies);
+    foundSpecies = databasePtr->getSpecies(logger,allSpecies);
     if (! foundSpecies)
         return;
 
@@ -422,7 +422,7 @@ bool getDatabaseData(
     fields     = {"SystemName","SpeName","Year","Age","Value","Units"};
     queryStr   = "SELECT SystemName,SpeName,Year,Age,Value,Units FROM " + tableName;
     queryStr  += " WHERE SpeName = '"  + species + "'";
-    if (tableName == "CatchFishery") {
+    if (tableName == nmfConstantsMSCAA::TableCatchFishery) {
         queryStr += " AND Fleet = '" + fleet + "'";
     }
     queryStr  += " AND SystemName = '" + projectSettingsConfig + "'";
@@ -445,7 +445,7 @@ bool getDatabaseData(
     }
 
     // Scale to kilograms if Weight table
-    if (tableName == "Weight") {
+    if (tableName == nmfConstantsMSCAA::TableWeight) {
         if (dataMap["Units"][0] == "Grams") {
             sf = 1000.0;
         }
@@ -474,7 +474,7 @@ bool getFHYearRange(nmfDatabase* databasePtr,
 
     // Get species data
     fields     = {"SystemName","FH_FirstYear","FH_LastYear"};
-    queryStr   = "SELECT SystemName,FH_FirstYear,FH_LastYear FROM `System` ";
+    queryStr   = "SELECT SystemName,FH_FirstYear,FH_LastYear FROM " + nmfConstantsMSCAA::TableModels;
     queryStr  += "WHERE SystemName = '" + systemName + "'";
     dataMap    = databasePtr->nmfQueryDatabase(queryStr, fields);
     if (dataMap["SystemName"].size() == 0) {
@@ -562,7 +562,7 @@ int getNumBins(nmfDatabase* databasePtr,
     std::vector<std::string> fields;
     std::map<std::string, std::vector<std::string> > dataMap;
     std::string queryStr;
-    bool isDietTable = (table == "Diet");
+    bool isDietTable = (table == nmfConstantsMSCAA::TableDiet);
 
     if (isDietTable) {
         fields     = {"SystemName","PredatorName","PredatorAge","Bin","BinType","ColName","Value"};
@@ -633,14 +633,14 @@ void loadBinnedTable(nmfDatabase* databasePtr,
     QStringList VerticalList;
     QStandardItem *item;
     std::vector<std::string> allSpecies;
-    bool isDietTable = (table == "Diet");
+    bool isDietTable = (table == nmfConstantsMSCAA::TableDiet);
 
     if (isDietTable && (predatorName.isEmpty() || predatorAge.isEmpty())) {
         return;
     }
 
     // Get species information
-    foundSpecies = databasePtr->getAllSpecies(logger,allSpecies);
+    foundSpecies = databasePtr->getSpecies(logger,allSpecies);
     if (! foundSpecies)
         return;
 
@@ -752,7 +752,7 @@ void loadCatchAtLengthTable(nmfDatabase* databasePtr,
     NumRows = LastYear-FirstYear+1;
     smodel = new QStandardItemModel( NumRows, NumLengthBins );
 
-    // Read data from table: CatchAtLengthFishery
+    // Read data from table: nmfConstantsMSCAA::TableCatchAtLengthFishery
     fields     = {"SystemName","SpeName","Fleet","Year","BinNumber","BinName","Value"};
     queryStr   = "SELECT SystemName,SpeName,Fleet,Year,BinNumber,BinName,Value FROM " + table;
     queryStr  += " WHERE SpeName = '"  + species.toStdString() + "'";
@@ -809,7 +809,7 @@ void loadComboBox(nmfDatabase* databasePtr,
 
     // Get appropriate items to load into combobox
     if (type == "Name") {
-        databasePtr->getAllSpecies(logger,allItems);
+        databasePtr->getSpecies(logger,allItems);
     } else if (type == "Age") {
         getAllAges(databasePtr,logger,species,allItems);
     } else if (type == "Year") {
@@ -836,7 +836,7 @@ void loadFleetComboBox(nmfDatabase* databasePtr,
     QString fleetName;
 
     fields     = {"SystemName","SpeName","FleetNumber","FleetName"};
-    queryStr   = "SELECT SystemName,SpeName,FleetNumber,FleetName FROM Fleets";
+    queryStr   = "SELECT SystemName,SpeName,FleetNumber,FleetName FROM " + nmfConstantsMSCAA::TableFleets;
     queryStr  += " WHERE SpeName = '"  + species.toStdString() + "'";
     queryStr  += " AND SystemName = '" + projectSettingsConfig + "'";
     queryStr  += " ORDER BY SpeName,FleetNumber";
@@ -1016,7 +1016,7 @@ void loadParameterTable(nmfDatabase* databasePtr,
 
     smodel = new QStandardItemModel( 1, NumColumns );
 
-    // Read data from table: SimulationParametersSpecies
+    // Read data from table: nmfConstantsMSCAA::TableSimulationParametersSpecies
     fields     = {"SystemName","Algorithm","SpeName","ParameterName","Value"};
     queryStr   = "SELECT SystemName,Algorithm,SpeName,ParameterName,Value FROM " + table;
     queryStr  += " WHERE SpeName = '"  + species.toStdString() + "'";
@@ -1076,7 +1076,7 @@ void loadTable(nmfDatabase* databasePtr,
     QStringList HorizontalList;
     QStringList VerticalList;
     QStandardItem *item;
-    bool hasSurvey = (table == "CatchSurvey");
+    bool hasSurvey = (table == nmfConstantsMSCAA::TableCatchSurvey);
 
     if (species.isEmpty()) {
         return;
@@ -1097,8 +1097,8 @@ void loadTable(nmfDatabase* databasePtr,
     }
 
     // Get table data
-    if ((table == "Weight")      || (table == "Maturity") ||
-        (table == "Consumption") || (table == "InitialAbundance")) {
+    if ((table == nmfConstantsMSCAA::TableWeight)      || (table == nmfConstantsMSCAA::TableMaturity) ||
+        (table == nmfConstantsMSCAA::TableConsumption) || (table == nmfConstantsMSCAA::TableInitialAbundance)) {
         fields    = {"SystemName","SpeName","Year","Age","Value","Units"};
         queryStr  = "SELECT SystemName,SpeName,Year,Age,Value,Units FROM " + table;
         queryStr += " WHERE SpeName = '"  + species.toStdString() + "'";
@@ -1194,7 +1194,7 @@ void loadTheTotalTable(nmfDatabase* databasePtr,
     QStringList HorizontalList;
     QStringList VerticalList;
     QStandardItem *item;
-    bool hasSurvey = (table == "CatchSurveyTotal");
+    bool hasSurvey = (table == nmfConstantsMSCAA::TableCatchSurveyTotal);
 
     if (species.isEmpty()) {
         return;
@@ -1425,9 +1425,9 @@ bool saveBinnedTable(QTabWidget*   tabWidget,
     std::string MohnsRhoLabel = ""; // placeholder
     QString msg;
     std::vector<std::string> allSpecies;
-    bool isDietTable = (table == "Diet");
+    bool isDietTable = (table == nmfConstantsMSCAA::TableDiet);
 
-    foundSpecies = databasePtr->getAllSpecies(logger,allSpecies);
+    foundSpecies = databasePtr->getSpecies(logger,allSpecies);
     if (!foundSpecies)
         return false;
 
@@ -1744,7 +1744,7 @@ bool saveProportionTable(QTabWidget*  tabWidget,
     QStandardItem* rowHeaderItem;
     QStandardItem* colHeaderItem;
     QString msg;
-    bool isSurvey = (table == "CatchSurveyProportion");
+    bool isSurvey = (table == nmfConstantsMSCAA::TableCatchSurveyProportion);
 
     NumRows = smodel->rowCount();
     NumCols = smodel->columnCount();
@@ -1844,11 +1844,11 @@ bool saveTable(QTabWidget*  tabWidget,
     std::string MohnsRhoLabel = ""; // placeholder
     QString msg;
     QStandardItemModel* smodel = qobject_cast<QStandardItemModel*>(tableView->model());
-    bool hasSurvey = (table == "CatchSurvey");
-    bool noSurveyOrFleet = (table == "Weight")      ||
-                           (table == "Maturity")    ||
-                           (table == "Consumption") ||
-                           (table == "InitialAbundance");
+    bool hasSurvey = (table == nmfConstantsMSCAA::TableCatchSurvey);
+    bool noSurveyOrFleet = (table == nmfConstantsMSCAA::TableWeight)      ||
+                           (table == nmfConstantsMSCAA::TableMaturity)    ||
+                           (table == nmfConstantsMSCAA::TableConsumption) ||
+                           (table == nmfConstantsMSCAA::TableInitialAbundance);
 
     foundSpecies = databasePtr->getSpeciesData(logger,species,minAge,maxAge,
                                   FirstYear,LastYear,
@@ -1976,7 +1976,7 @@ bool saveTheTotalTable(QTabWidget* tabWidget,
     std::string surveyOrFleetStr;
     QString msg;
     QStandardItemModel* smodel = qobject_cast<QStandardItemModel*>(tableView->model());
-    bool hasSurvey = (table == "CatchSurveyTotal");
+    bool hasSurvey = (table == nmfConstantsMSCAA::TableCatchSurveyTotal);
 
     foundSpecies = databasePtr->getSpeciesData(logger,species,minAge,maxAge,
                                   FirstYear,LastYear,
@@ -2076,7 +2076,7 @@ bool systemTableExists(nmfDatabase*  databasePtr,
 
     // See if System data already exists
     fields     = {"SystemName"};
-    queryStr   = "SELECT SystemName FROM `System` ";
+    queryStr   = "SELECT SystemName FROM " + nmfConstantsMSCAA::TableModels;
     queryStr  += "WHERE SystemName = '" + projectSettingsConfig + "'";
     dataMap    = databasePtr->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SystemName"].size();

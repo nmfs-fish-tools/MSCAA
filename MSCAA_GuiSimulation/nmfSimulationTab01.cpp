@@ -158,7 +158,7 @@ nmfSimulation_Tab1::saveYearlyParameters()
     QString year;
     QString Species = getSpecies();
 
-    saveCmd = "INSERT INTO SimulationParametersYearly";
+    saveCmd = "INSERT INTO " + nmfConstantsMSCAA::TableSimulationParametersYearly;
     saveCmd += " (MohnsRhoLabel,SystemName,SpeName,Year,ParameterName,Value) VALUES ";
     for (int col = 0; col < smodel->columnCount(); ++col) {
         for (int row=0; row<smodel->rowCount(); ++row) {
@@ -175,7 +175,7 @@ nmfSimulation_Tab1::saveYearlyParameters()
     }
 
     // Delete the current Species entry here
-    deleteCmd  = "DELETE FROM SimulationParametersYearly ";
+    deleteCmd  = "DELETE FROM " + nmfConstantsMSCAA::TableSimulationParametersYearly;
     deleteCmd += " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     deleteCmd += " AND SpeName = '" + Species.toStdString() + "'";
     errorMsg = m_databasePtr->nmfUpdateDatabase(deleteCmd);
@@ -250,7 +250,8 @@ nmfSimulation_Tab1::loadYearlyParameters()
 
     // Read data from table
     fields     = {"SystemName","SpeName","Year","ParameterName","Value"};
-    queryStr   = "SELECT SystemName,SpeName,Year,ParameterName,Value FROM SimulationParametersYearly ";
+    queryStr   = "SELECT SystemName,SpeName,Year,ParameterName,Value FROM " +
+                  nmfConstantsMSCAA::TableSimulationParametersYearly;
     queryStr  += " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     queryStr  += " AND SpeName = '" + Species.toStdString() + "'";
     queryStr  += " ORDER BY Year,ParameterName";

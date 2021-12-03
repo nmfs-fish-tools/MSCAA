@@ -141,7 +141,7 @@ nmfMSCAA_Tab5::saveSpeciesData()
     std::string FHstr;
     std::string Rhostr;
 
-    m_databasePtr->getAllSpecies(m_logger, SpeciesList);
+    m_databasePtr->getSpecies(m_logger, SpeciesList);
 
     for (unsigned long col=0; col<SpeciesList.size(); ++col) {
         indexFH  = smodelFH->index(0,col);
@@ -149,8 +149,10 @@ nmfMSCAA_Tab5::saveSpeciesData()
         FHstr    = smodelFH->data(indexFH).toString().toStdString();
         Rhostr   = smodelRho->data(indexRho).toString().toStdString();
 
-        saveCmd  = "UPDATE Species SET Rhoph = " + Rhostr +
-                ", FHwt = " + FHstr + " WHERE SpeName = '" + SpeciesList[col] + "'";
+        saveCmd  = "UPDATE " + nmfConstantsMSCAA::TableSpecies +
+                   " SET Rhoph = " + Rhostr +
+                   ", FHwt = " + FHstr +
+                   " WHERE SpeName = '" + SpeciesList[col] + "'";
 
         // Save the new data
         errorMsg = m_databasePtr->nmfUpdateDatabase(saveCmd);
@@ -177,7 +179,8 @@ nmfMSCAA_Tab5::saveSystemData()
                          m_databasePtr,m_logger,m_ProjectSettingsConfig);
 
     if (SystemDataExists) {
-        saveCmd  = "UPDATE System SET LogNorm = " +
+        saveCmd  = "UPDATE " + nmfConstantsMSCAA::TableModels +
+                   " SET LogNorm = " +
                     MSCAA_Tab5_LogNormLE->text().toStdString() +
                    ", MultiResid = "  + MSCAA_Tab5_MultiResidLE->text().toStdString() +
                    " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
@@ -314,8 +317,8 @@ nmfMSCAA_Tab5::loadSystemData()
     std::string msg;
 
     fields     = {"SystemName","LogNorm","MultiResid"};
-    queryStr   = "SELECT SystemName,LogNorm,MultiResid FROM `System` WHERE SystemName = '";
-    queryStr  += m_ProjectSettingsConfig + "'";
+    queryStr   = "SELECT SystemName,LogNorm,MultiResid FROM " + nmfConstantsMSCAA::TableModels +
+                 " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SystemName"].size();
     if (NumRecords == 0) {
@@ -346,12 +349,13 @@ nmfMSCAA_Tab5::loadProportions()
     QStringList ProportionLabel = {"Proportions"};
     QStandardItemModel *smodel;
 
-    m_databasePtr->getAllSpecies(m_logger, Species);
+    m_databasePtr->getSpecies(m_logger, Species);
     NumSpecies = Species.size();
     smodel = new QStandardItemModel(1,NumSpecies);
 
     fields     = {"SpeName","FHwt"};
-    queryStr   = "SELECT SpeName,FHwt FROM Species ORDER BY SpeName";
+    queryStr   = "SELECT SpeName,FHwt FROM " + nmfConstantsMSCAA::TableSpecies +
+                 " ORDER BY SpeName";
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SpeName"].size();
     if (NumRecords == 0) {
@@ -392,7 +396,8 @@ nmfMSCAA_Tab5::loadPhases()
     QModelIndex index;
 
     fields     = {"SpeName","Rhoph"};
-    queryStr   = "SELECT SpeName,Rhoph FROM Species ORDER BY SpeName";
+    queryStr   = "SELECT SpeName,Rhoph FROM " + nmfConstantsMSCAA::TableSpecies +
+                 " ORDER BY SpeName";
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SpeName"].size();
     if (NumRecords == 0) {
@@ -532,6 +537,7 @@ nmfMSCAA_Tab5::showChartAbundanceVsTime(
     std::vector<bool> GridLines = {true,true};
     int Theme = 0;
     double YMinSliderVal = 0;
+    double YMaxVal  = nmfConstants::NoValueDouble;
     QColor dashedLineColor = Qt::black;
     std::string ScaleStr = (scale == "Default") ? "" : scale.toStdString()+" ";
 
@@ -545,7 +551,7 @@ nmfMSCAA_Tab5::showChartAbundanceVsTime(
                             nmfConstants::DontShowLegend,
                             startYear,
                             xAxisIsInteger,
-                            YMinSliderVal,
+                            YMinSliderVal,YMaxVal,
                             nmfConstantsMSCAA::DontLeaveGapsWhereNegative,
                             data,
                             RowLabelsForBars,

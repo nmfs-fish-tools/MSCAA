@@ -212,7 +212,7 @@ nmfSimulation_Tab2::callback_SavePB()
         ok = nmfMSCAAUtils::saveParameterTable(Simulation_Tabs,m_databasePtr,m_logger,
                                                Simulation_Tab2_RecruitmentParametersTV,
                                                m_ProjectSettingsConfig,
-                                               "SimulationParametersSpecies",
+                                               nmfConstantsMSCAA::TableSimulationParametersSpecies,
                                                getSpecies().toStdString(),
                                                getRecruitmentType().toStdString());
         if (ok) {
@@ -227,7 +227,7 @@ nmfSimulation_Tab2::callback_SavePB()
          ok = nmfMSCAAUtils::saveTable(Simulation_Tabs,m_databasePtr,m_logger,
                                        Simulation_Tab2_InitialAbundanceTV,
                                        m_ProjectSettingsConfig,
-                                       "InitialAbundance",
+                                       nmfConstantsMSCAA::TableInitialAbundance,
                                        getSpecies().toStdString(),"0","",
                                        nmfConstants::IsNotProportion,
                                        nmfConstants::dontIncludeTotalColumn,
@@ -279,7 +279,7 @@ nmfSimulation_Tab2::getAbundanceDriver()
     std::string queryStr;
 
     fields     = {"SystemName","AbundanceDriver"};
-    queryStr   = "SELECT SystemName,AbundanceDriver FROM `System`";
+    queryStr   = "SELECT SystemName,AbundanceDriver FROM " + nmfConstantsMSCAA::TableModels;
     queryStr  += " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SystemName"].size();
@@ -291,6 +291,7 @@ nmfSimulation_Tab2::getAbundanceDriver()
 
     return dataMap["AbundanceDriver"][0];
 }
+
 
 bool
 nmfSimulation_Tab2::getSpeciesParameters(
@@ -341,6 +342,7 @@ nmfSimulation_Tab2::getSpeciesParameters(
 
     return true;
 }
+
 
 bool
 nmfSimulation_Tab2::getYearlyParameters(
@@ -845,31 +847,31 @@ nmfSimulation_Tab2::callback_RunPB_OLD()
 
     // Get database data
     for (std::string species : allSpecies) {
-        if (! nmfMSCAAUtils::getDatabaseData(m_databasePtr,m_logger,m_ProjectSettingsConfig,Species,NumYears,NumAges,"Weight", weight)) {
+        if (! nmfMSCAAUtils::getDatabaseData(m_databasePtr,m_logger,m_ProjectSettingsConfig,Species,NumYears,NumAges,nmfConstantsMSCAA:TableWeight, weight)) {
             m_logger->logMsg(nmfConstants::Warning,"No Weight Year-Age data found.");
             return;
         }
         WeightMap[species] = weight;
     }
-    if (! nmfMSCAAUtils::getDatabaseData(m_databasePtr,m_logger,m_ProjectSettingsConfig,Species,NumYears,NumAges,"Maturity", maturity)) {
+    if (! nmfMSCAAUtils::getDatabaseData(m_databasePtr,m_logger,m_ProjectSettingsConfig,Species,NumYears,NumAges,nmfConstantsMSCAA::TableMaturity, maturity)) {
         m_logger->logMsg(nmfConstants::Warning,"No Maturity Year-Age data found.");
         return;
     }
-    if (! nmfMSCAAUtils::getDatabaseData(m_databasePtr,m_logger,m_ProjectSettingsConfig,Species,1,NumAges,"InitialAbundance", initialAbundance)) {
+    if (! nmfMSCAAUtils::getDatabaseData(m_databasePtr,m_logger,m_ProjectSettingsConfig,Species,1,NumAges,nmfConstantsMSCAA::TableInitialAbundance, initialAbundance)) {
         m_logger->logMsg(nmfConstants::Warning,"No InitialAbundance Year-Age data found.");
         return;
     }
-    if (! getSpeciesParameters("SimulationParametersSpecies",alpha,beta,gamma)) {
+    if (! getSpeciesParameters(nmfConstantsMSCAA::TableSimulationParametersSpecies,alpha,beta,gamma)) {
         m_logger->logMsg(nmfConstants::Warning,"No alpha,beta,gamma parameter data found.");
         return;
     }
 
-    if (! getYearlyParameters(Species,NumYears,"SimulationParametersYearly",sigma,zeta)) {
+    if (! getYearlyParameters(Species,NumYears,nmfConstantsMSCAA::TableSimulationParametersYearly,sigma,zeta)) {
         m_logger->logMsg(nmfConstants::Warning,"No sigma,zeta parameter data found.");
         return;
     }
 
-    if (! nmfMSCAAUtils::getMortalityData(m_databasePtr,m_logger,m_ProjectSettingsConfig,Species,NumYears,MinAge,MaxAge,"MortalityNatural",m_NaturalMortality)) {
+    if (! nmfMSCAAUtils::getMortalityData(m_databasePtr,m_logger,m_ProjectSettingsConfig,Species,NumYears,MinAge,MaxAge,nmfConstantsMSCAA::TableMortalityNatural,m_NaturalMortality)) {
         m_logger->logMsg(nmfConstants::Warning,"No Natural Mortality Year-Age data found.");
         return;
     }
@@ -879,27 +881,27 @@ nmfSimulation_Tab2::callback_RunPB_OLD()
         return;
     }
 
-    if (! getPredatorPreyData("PredatorPreyPreferredRatio",preferredRatio)) {
+    if (! getPredatorPreyData(nmfConstantsMSCAA::TablePredatorPreyPreferredRatio,preferredRatio)) {
         m_logger->logMsg(nmfConstants::Warning,"No Predator Prey Preferred Ratio data found.");
         return;
     }
 
-    if (! getPredatorPreyData("PredatorPreyVarianceLTRatio",preferredLTRatio)) {
+    if (! getPredatorPreyData(nmfConstantsMSCAA::TablePredatorPreyVarianceLTRatio,preferredLTRatio)) {
         m_logger->logMsg(nmfConstants::Warning,"No Predator Prey Variance < η data found.");
         return;
     }
 
-    if (! getPredatorPreyData("PredatorPreyVarianceGTRatio",preferredGTRatio)) {
+    if (! getPredatorPreyData(nmfConstantsMSCAA::TablePredatorPreyVarianceGTRatio,preferredGTRatio)) {
         m_logger->logMsg(nmfConstants::Warning,"No Predator Prey Variance > η data found.");
         return;
     }
 
-    if (! getPredatorPreyData("PredatorPreyVulnerability",vulnerabilityRho)) {
+    if (! getPredatorPreyData(nmfConstantsMSCAA::TablePredatorPreyVulnerability,vulnerabilityRho)) {
         m_logger->logMsg(nmfConstants::Warning,"No Predator Prey Vulnerability found.");
         return;
     }
 
-    if (! getFleetCatchTotals(Species,NumYears,NumAges,"CatchFishery",fisheryCatch)) {
+    if (! getFleetCatchTotals(Species,NumYears,NumAges,nmfConstantsMSCAA::TableCatchFishery,fisheryCatch)) {
         m_logger->logMsg(nmfConstants::Warning,"No Catch Year-Age data found.");
         return;
     }
@@ -955,6 +957,7 @@ nmfSimulation_Tab2::showChartMortalityVsTime(
     std::vector<bool> GridLines = {true,true};
     int Theme = 0;
     double YMinSliderVal = 0;
+    double YMaxVal  = nmfConstants::NoValueDouble;
     QColor dashedLineColor = QColor(0,0,1); // Qt::black;
     QList<QColor> LineColors = {Qt::blue,
                                 Qt::red,
@@ -976,7 +979,7 @@ nmfSimulation_Tab2::showChartMortalityVsTime(
                             nmfConstants::DontShowLegend,
                             StartYear,
                             xAxisIsInteger,
-                            YMinSliderVal,
+                            YMinSliderVal,YMaxVal,
                             nmfConstantsMSCAA::DontLeaveGapsWhereNegative,
                             Data,
                             RowLabelsForBars,
@@ -1014,6 +1017,7 @@ nmfSimulation_Tab2::showChartAbundanceVsTime(
     std::vector<bool> GridLines = {true,true};
     int Theme = 0;
     double YMinSliderVal = 0;
+    double YMaxVal  = nmfConstants::NoValueDouble;
     QColor dashedLineColor = Qt::black;
     QList<QColor> LineColors = {Qt::blue,
                                 Qt::red,
@@ -1031,7 +1035,7 @@ nmfSimulation_Tab2::showChartAbundanceVsTime(
                             nmfConstants::DontShowLegend,
                             StartYear,
                             xAxisIsInteger,
-                            YMinSliderVal,
+                            YMinSliderVal,YMaxVal,
                             nmfConstantsMSCAA::DontLeaveGapsWhereNegative,
                             Data,
                             RowLabelsForBars,
@@ -1067,6 +1071,7 @@ nmfSimulation_Tab2::showChartSSBvsTime(QChart* ChartWidget,
     std::vector<bool> GridLines = {true,true};
     int Theme = 0;
     double YMinSliderVal = 0;
+    double YMaxVal  = nmfConstants::NoValueDouble;
     QColor dashedLineColor = Qt::black;
     QList<QColor> LineColors = {Qt::blue};
     std::string ScaleStr = (Scale == "Default") ? "" : Scale.toStdString()+" ";
@@ -1080,7 +1085,7 @@ nmfSimulation_Tab2::showChartSSBvsTime(QChart* ChartWidget,
                             nmfConstants::DontShowLegend,
                             StartYear,
                             xAxisIsInteger,
-                            YMinSliderVal,
+                            YMinSliderVal,YMaxVal,
                             nmfConstantsMSCAA::DontLeaveGapsWhereNegative,
                             Data,
                             RowLabelsForBars,
@@ -1118,6 +1123,7 @@ nmfSimulation_Tab2::showChartRecruitmentVsSSB(QChart* ChartWidget,
     std::vector<bool> GridLines = {true,true};
     int Theme = 0;
     double YMinSliderVal = 0;
+    double YMaxVal  = nmfConstants::NoValueDouble;
     QColor dashedLineColor = Qt::black;
     QList<QColor> LineColors = {Qt::blue};
 
@@ -1129,7 +1135,7 @@ nmfSimulation_Tab2::showChartRecruitmentVsSSB(QChart* ChartWidget,
                             nmfConstants::DontShowLegend,
                             StartYear,
                             xAxisIsInteger,
-                            YMinSliderVal,
+                            YMinSliderVal,YMaxVal,
                             nmfConstantsMSCAA::DontLeaveGapsWhereNegative,
                             Data,
                             RowLabelsForBars,
@@ -1291,14 +1297,14 @@ std::cout << "nmfSimulation_Tab2::loadWidgets()" << std::endl;
     nmfMSCAAUtils::loadParameterTable(m_databasePtr,m_logger,
                                       m_ProjectSettingsConfig,
                                       Simulation_Tab2_RecruitmentParametersTV,
-                                      "SimulationParametersSpecies",
+                                      nmfConstantsMSCAA::TableSimulationParametersSpecies,
                                       getSpecies(),
                                       getRecruitmentType());
 
     nmfMSCAAUtils::loadTable(m_databasePtr,m_logger,
                              m_ProjectSettingsConfig,
                              Simulation_Tab2_InitialAbundanceTV,
-                             "InitialAbundance",
+                             nmfConstantsMSCAA::TableInitialAbundance,
                              getSpecies(),"0",units,
                              nmfConstants::dontIncludeTotalColumn,
                              nmfConstants::FirstYearOnly);

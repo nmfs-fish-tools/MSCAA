@@ -367,6 +367,7 @@ nmfSSCAA_Tab6::showChartAbundanceVsTime(
     std::vector<bool> GridLines = {true,true};
     int Theme = 0;
     double YMinSliderVal = 0;
+    double YMaxVal = nmfConstants::NoValueDouble;
     QColor dashedLineColor = Qt::black;
     QList<QColor> LineColors = {Qt::blue,
                                 Qt::red,
@@ -384,7 +385,7 @@ nmfSSCAA_Tab6::showChartAbundanceVsTime(
                             nmfConstants::DontShowLegend,
                             StartYear,
                             xAxisIsInteger,
-                            YMinSliderVal,
+                            YMinSliderVal,YMaxVal,
                             nmfConstantsMSCAA::DontLeaveGapsWhereNegative,
                             Data,
                             RowLabelsForBars,
@@ -423,6 +424,8 @@ nmfSSCAA_Tab6::showChartMortalityVsTime(
     std::vector<bool> GridLines = {true,true};
     int Theme = 0;
     double YMinSliderVal = 0;
+    double YMaxVal  = nmfConstants::NoValueDouble;
+
     QColor dashedLineColor = QColor(0,0,1); // Qt::black;
     QList<QColor> LineColors = {Qt::blue,
                                 Qt::red,
@@ -442,7 +445,7 @@ nmfSSCAA_Tab6::showChartMortalityVsTime(
                             nmfConstants::DontShowLegend,
                             StartYear,
                             xAxisIsInteger,
-                            YMinSliderVal,
+                            YMinSliderVal,YMaxVal,
                             nmfConstantsMSCAA::DontLeaveGapsWhereNegative,
                             Data,
                             RowLabelsForBars,
@@ -519,9 +522,11 @@ nmfSSCAA_Tab6::writeADMBDataFile(const QString& datFile,
     boost::numeric::ublas::matrix<double> Catch;
     boost::numeric::ublas::matrix<double> Weight;
     std::vector<boost::numeric::ublas::matrix<double> > Tables = {Catch, Weight};
-    std::vector<std::string> TableNames = {"CatchFishery","Weight"};
+    std::vector<std::string> TableNames = {nmfConstantsMSCAA::TableCatchFishery,
+                                           nmfConstantsMSCAA::TableWeight};
     std::vector<boost::numeric::ublas::matrix<double> > MortalityTables = {NaturalMortality, FishingMortality};
-    std::vector<std::string> MortalityTableNames = {"MortalityNatural","MortalityFishing"};
+    std::vector<std::string> MortalityTableNames = {nmfConstantsMSCAA::TableMortalityNatural,
+                                                    nmfConstantsMSCAA::TableMortalityFishing};
     QString msg;
 
     // Read Catch table
@@ -609,7 +614,7 @@ nmfSSCAA_Tab6::writeADMBParameterFile(const QString& parameterFile,
         fileStream << "\n";
         fileStream << "# log_relpop:\n";
         for (int i = 0; i < NumYears+NumAges-1; ++i) {
-            fileStream << " " << nmfUtils::getRandomNumber(-1,-15.0,15.0);
+            fileStream << " " << nmfUtils::getRandomNumber(nmfConstants::RandomSeed,-15.0,15.0);
         }
         fileStream << "\n";
         fileStream << "# effort_devs:\n";
@@ -825,11 +830,11 @@ nmfSSCAA_Tab6::saveToSpeciesTable(const std::vector<std::string>& ColLabels,
     std::vector<std::string> Species;
     QModelIndex index;
 
-    m_databasePtr->getAllSpecies(m_logger, Species);
+    m_databasePtr->getSpecies(m_logger, Species);
     NumSpecies = Species.size();
 
     for (int row = 0; row < NumSpecies; ++row) {
-        saveCmd += "UPDATE Species SET ";
+        saveCmd += "UPDATE " + nmfConstantsMSCAA::TableSpecies + " SET ";
         for (int col = 0; col < smodel->columnCount(); ++col) {
             index = smodel->index(row,col);
             value = index.data().toString().toStdString();
@@ -917,7 +922,7 @@ nmfSSCAA_Tab6::loadFromSpeciesTable(const std::vector<std::string>& ColLabels,
 
     NumCols = ColLabels.size();
 
-    m_databasePtr->getAllSpecies(m_logger, Species);
+    m_databasePtr->getSpecies(m_logger, Species);
     NumSpecies = Species.size();
     smodel = new QStandardItemModel(NumSpecies,NumCols);
 
@@ -930,7 +935,7 @@ nmfSSCAA_Tab6::loadFromSpeciesTable(const std::vector<std::string>& ColLabels,
     for (std::string label : ColLabels) {
         queryStr += "," + label;
     }
-    queryStr  += " FROM Species ORDER BY SpeName";
+    queryStr  += " FROM " + nmfConstantsMSCAA::TableSpecies + " ORDER BY SpeName";
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SpeName"].size();
     if (NumRecords == 0) {

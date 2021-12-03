@@ -192,7 +192,8 @@ nmfADMB::getSurveyWeights(
     NumSurveys = 0;
 
     fields     = {"Surveys"};
-    queryStr   = "SELECT COUNT(DISTINCT(Survey)) as Surveys FROM SurveyWeights";
+    queryStr   = "SELECT COUNT(DISTINCT(Survey)) as Surveys FROM " +
+                  nmfConstantsMSCAA::TableSurveyWeights;
     dataMap    = m_database->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["Surveys"].size();
     if (NumRecords > 0) {
@@ -204,7 +205,8 @@ nmfADMB::getSurveyWeights(
     }
 
     fields     = {"SystemName","SpeName","Survey","TSwtValue","SPwtValue"};
-    queryStr   = "SELECT SystemName,SpeName,Survey,TSwtValue,SPwtValue FROM SurveyWeights";
+    queryStr   = "SELECT SystemName,SpeName,Survey,TSwtValue,SPwtValue FROM " +
+                  nmfConstantsMSCAA::TableSurveyWeights;
     queryStr  += " ORDER BY Survey,SpeName";
     dataMap    = m_database->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SpeName"].size();
@@ -239,8 +241,8 @@ nmfADMB::getSurveyMonths(
     std::string msg;
 
     fields     = {"SystemName","SpeName","Survey","Value"};
-    queryStr   = "SELECT SystemName,SpeName,Survey,Value FROM SurveyMonth";
-    queryStr  += " ORDER BY SpeName";
+    queryStr   = "SELECT SystemName,SpeName,Survey,Value FROM " +
+                  nmfConstantsMSCAA::TableSurveyMonth + " ORDER BY SpeName";
     dataMap    = m_database->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SpeName"].size();
     if (NumRecords != NumSpecies*NumSurveys) {
@@ -315,7 +317,8 @@ nmfADMB::getSpeciesData(
     queryStr   = "SELECT SpeName,MinAge,MaxAge,FirstAgePrtRcrt,AgeFullRcrt,AgeFullRcrtSurvey,";
     queryStr  += "SurveySel,FirstYear,LastYear,NumSurveys,NumFleets,Nseg,aAge1ph,aFtph,dAge1ph,";
     queryStr  += "dFtph,ficph,fishph,Yr1ph,Rhoph,TCwt,CPwt,Bwt,Ywt,Rwt,FHwt,Bthres,Rthres,";
-    queryStr  += "MinLength,MaxLength,NumLengthBins,CatchAtAge FROM Species ORDER BY SpeName";
+    queryStr  += "MinLength,MaxLength,NumLengthBins,CatchAtAge FROM " + nmfConstantsMSCAA::TableSpecies +
+                 " ORDER BY SpeName";
     dataMap    = m_database->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SpeName"].size();
     if (NumRecords != NumSpecies) {
@@ -402,7 +405,8 @@ nmfADMB::getSystemData(
     std::string msg;
 
     fields     = {"SystemName","TotalBiomass","FH_FirstYear","FH_LastYear","NumSpInter","Owt","LogNorm","MultiResid"};
-    queryStr   =  "SELECT SystemName,TotalBiomass,FH_FirstYear,FH_LastYear,NumSpInter,Owt,LogNorm,MultiResid FROM `System`";
+    queryStr   =  "SELECT SystemName,TotalBiomass,FH_FirstYear,FH_LastYear,NumSpInter,Owt,LogNorm,MultiResid FROM " +
+                   nmfConstantsMSCAA::TableModels;
     queryStr  +=  " WHERE SystemName = '" + m_projectSettingsConfig + "'";
     dataMap    = m_database->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SystemName"].size();
@@ -453,7 +457,7 @@ nmfADMB::getPredationMortalityEstimates(
 bool
 nmfADMB::getPreferredData(
         const int& NumSpecies,
-        QString TableName,
+        std::string TableName,
         QString& Data)
 {
     int m = 0;
@@ -464,12 +468,12 @@ nmfADMB::getPreferredData(
     std::string msg;
 
     fields     = {"SystemName","PredatorName","PreyName","Value"};
-    queryStr   = "SELECT SystemName,PredatorName,PreyName,Value FROM " + TableName.toStdString();
+    queryStr   = "SELECT SystemName,PredatorName,PreyName,Value FROM " + TableName;
     queryStr  += " WHERE SystemName = '" + m_projectSettingsConfig + "'";
     dataMap    = m_database->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SystemName"].size();
     if (NumRecords != NumSpecies*NumSpecies) {
-        msg  = "nmfADMB::getPreferredData: Incorrect number of records found in: " + TableName.toStdString() + ". ";
+        msg  = "nmfADMB::getPreferredData: Incorrect number of records found in: " + TableName + ". ";
         msg += "Expecting " + std::to_string(NumSpecies*NumSpecies) + " but found " + std::to_string(NumRecords) + ".";
         m_logger->logMsg(nmfConstants::Error,msg);
         return false;
@@ -506,7 +510,8 @@ nmfADMB::getTotalCatch(
     }
 
     fields     = {"SystemName","SpeName","Fleet","Year","Value","Units"};
-    queryStr   = "SELECT SystemName,SpeName,Fleet,Year,Value,Units FROM CatchFisheryTotal";
+    queryStr   = "SELECT SystemName,SpeName,Fleet,Year,Value,Units FROM " +
+                  nmfConstantsMSCAA::TableCatchFisheryTotal;
     queryStr  += " WHERE SystemName = '" + m_projectSettingsConfig + "'";
     dataMap    = m_database->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SystemName"].size();
@@ -556,7 +561,8 @@ nmfADMB::getWeightAtAge(
     }
 
     fields     = {"SystemName","SpeName","Year","Age","Value","Units"};
-    queryStr   = "SELECT SystemName,SpeName,Year,Age,Value,Units FROM Weight";
+    queryStr   = "SELECT SystemName,SpeName,Year,Age,Value,Units FROM " +
+                  nmfConstantsMSCAA::TableWeight;
     queryStr  += " WHERE SystemName = '" + m_projectSettingsConfig + "'";
     dataMap    = m_database->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SystemName"].size();
@@ -607,7 +613,8 @@ nmfADMB::getCatch(
     }
 
     fields     = {"SystemName","SpeName","Fleet","Year","Age","Value","Units"};
-    queryStr   = "SELECT SystemName,SpeName,Fleet,Year,Age,Value,Units FROM CatchFishery";
+    queryStr   = "SELECT SystemName,SpeName,Fleet,Year,Age,Value,Units FROM " +
+                  nmfConstantsMSCAA::TableCatchFishery;
     queryStr  += " WHERE SystemName = '" + m_projectSettingsConfig + "'";
     dataMap    = m_database->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SystemName"].size();
@@ -656,7 +663,8 @@ nmfADMB::getTotalSurvey(
     }
 
     fields     = {"SystemName","SpeName","Survey","Year","Value","Units"};
-    queryStr   = "SELECT SystemName,SpeName,Survey,Year,Value,Units FROM CatchSurveyTotal";
+    queryStr   = "SELECT SystemName,SpeName,Survey,Year,Value,Units FROM " +
+                  nmfConstantsMSCAA::TableCatchSurveyTotal;
     queryStr  += " WHERE SystemName = '" + m_projectSettingsConfig + "'";
     dataMap    = m_database->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SystemName"].size();
@@ -701,7 +709,9 @@ nmfADMB::getNaturalMortality(
 
     // Find number of segments
     fields      = {"Segs"};
-    queryStr    = "SELECT COUNT(DISTINCT(Segment)) AS Segs FROM MortalityNatural WHERE ColName = 'First Year'";
+    queryStr    = "SELECT COUNT(DISTINCT(Segment)) AS Segs FROM " +
+                   nmfConstantsMSCAA::TableMortalityNatural +
+                  " WHERE ColName = 'First Year'";
     dataMap     = m_database->nmfQueryDatabase(queryStr, fields);
     NumSegments = std::stoi(dataMap["Segs"][0]);
 
@@ -713,7 +723,8 @@ nmfADMB::getNaturalMortality(
                               NumNonAgeColNameItems*NumSegments*NumSpecies;
 
     fields     = {"SystemName","SpeName","ColName","Value"};
-    queryStr   = "SELECT SystemName,SpeName,ColName,Value FROM MortalityNatural";
+    queryStr   = "SELECT SystemName,SpeName,ColName,Value FROM " +
+                  nmfConstantsMSCAA::TableMortalityNatural;
     queryStr  += " WHERE SystemName = '" + m_projectSettingsConfig + "'";
     dataMap    = m_database->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SystemName"].size();
@@ -762,7 +773,8 @@ nmfADMB::getConsumptionBiomass(
     }
 
     fields     = {"SystemName","SpeName","Year","Age","Value","Units"};
-    queryStr   = "SELECT SystemName,SpeName,Year,Age,Value,Units FROM Consumption";
+    queryStr   = "SELECT SystemName,SpeName,Year,Age,Value,Units FROM " +
+                  nmfConstantsMSCAA::TableConsumption;
     queryStr  += " WHERE SystemName = '" + m_projectSettingsConfig + "'";
     dataMap    = m_database->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SystemName"].size();
@@ -809,7 +821,8 @@ nmfADMB::getSurvey(
     }
 
     fields     = {"SystemName","SpeName","Survey","Year","Age","Value","Units"};
-    queryStr   = "SELECT SystemName,SpeName,Survey,Year,Age,Value,Units FROM CatchSurvey";
+    queryStr   = "SELECT SystemName,SpeName,Survey,Year,Age,Value,Units FROM " +
+                  nmfConstantsMSCAA::TableCatchSurvey;
     queryStr  += " WHERE SystemName = '" + m_projectSettingsConfig + "'";
     dataMap    = m_database->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SystemName"].size();
@@ -857,7 +870,7 @@ nmfADMB::getFoodHabit(
 
     // Find number of bins (assume every species has same bin size)
     fields     = {"SystemName","PredatorName","ColName","Value"};
-    queryStr   = "SELECT SystemName,PredatorName,ColName,Value FROM Diet";
+    queryStr   = "SELECT SystemName,PredatorName,ColName,Value FROM " + nmfConstantsMSCAA::TableDiet;
     queryStr  += " WHERE SystemName = '" + m_projectSettingsConfig + "'";
     dataMap    = m_database->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SystemName"].size();
@@ -871,7 +884,8 @@ nmfADMB::getFoodHabit(
 
     // Find NumBins and calculate how many records "should" be found
     fields   = {"Bins"};
-    queryStr = "SELECT COUNT(DISTINCT(Bin)) AS Bins from Diet where ColName = 'First Year'";
+    queryStr = "SELECT COUNT(DISTINCT(Bin)) AS Bins FROM " + nmfConstantsMSCAA::TableDiet +
+               " WHERE ColName = 'First Year'";
     dataMap  = m_database->nmfQueryDatabase(queryStr, fields);
     NumBins  = std::stoi(dataMap["Bins"][0]);
     for (int i=0; i<NumSpecies; ++i) {
@@ -879,7 +893,7 @@ nmfADMB::getFoodHabit(
     }
 
     fields     = {"SystemName","PredatorName","ColName","Value"};
-    queryStr   = "SELECT SystemName,PredatorName,ColName,Value FROM Diet";
+    queryStr   = "SELECT SystemName,PredatorName,ColName,Value FROM " + nmfConstantsMSCAA::TableDiet;
     queryStr  += " WHERE SystemName = '" + m_projectSettingsConfig + "'";
     dataMap    = m_database->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SystemName"].size();
@@ -965,7 +979,8 @@ nmfADMB::getInteraction(
     int TotNumRecordsCalculated = NumSpecies;
 
     fields     = {"SystemName","PredValue","PreyValue"};
-    queryStr   = "SELECT SystemName,PredValue,PreyValue FROM PredatorPreyInteractionsVec";
+    queryStr   = "SELECT SystemName,PredValue,PreyValue FROM " +
+                  nmfConstantsMSCAA::TablePredatorPreyInteractionsVec;
     queryStr  += " WHERE SystemName = '" + m_projectSettingsConfig + "'";
     dataMap    = m_database->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SystemName"].size();
@@ -1044,7 +1059,7 @@ nmfADMB::writeADMBDataFile(const QString& dataFile,
     StructSystemData SystemData;
     std::vector<std::string> SpeciesList;
 
-    m_database->getAllSpecies(m_logger, SpeciesList);
+    m_database->getSpecies(m_logger, SpeciesList);
     NumSpecies = SpeciesList.size();
 
     if (! getSurveyWeights(NumSpecies,NumSurveys,TSwtValues,SPwtValues)) {
@@ -1073,15 +1088,15 @@ nmfADMB::writeADMBDataFile(const QString& dataFile,
 
     // Ignore predator prey data if running single species
     if (1) { // (m_trophic == 1) {
-        if (! getPreferredData(NumSpecies,"PredatorPreyPreferredRatio",PreferredWeightsEta)) {
+        if (! getPreferredData(NumSpecies,nmfConstantsMSCAA::TablePredatorPreyPreferredRatio,PreferredWeightsEta)) {
             m_logger->logMsg(nmfConstants::Error,"nmfADMB::writeADMBDataFile: Error getPreferredData");
             return false;
         }
-        if (! getPreferredData(NumSpecies,"PredatorPreyVarianceGTRatio",PreferredWeightsSigmaLT)) {
+        if (! getPreferredData(NumSpecies,nmfConstantsMSCAA::TablePredatorPreyVarianceGTRatio,PreferredWeightsSigmaLT)) {
             m_logger->logMsg(nmfConstants::Error,"nmfADMB::writeADMBDataFile: Error getPreferredData");
             return false;
         }
-        if (! getPreferredData(NumSpecies,"PredatorPreyVarianceLTRatio",PreferredWeightsSigmaGT)) {
+        if (! getPreferredData(NumSpecies,nmfConstantsMSCAA::TablePredatorPreyVarianceLTRatio,PreferredWeightsSigmaGT)) {
             m_logger->logMsg(nmfConstants::Error,"nmfADMB::writeADMBDataFile: Error getPreferredData");
             return false;
         }
@@ -1433,7 +1448,7 @@ nmfADMB::parseReportFile(std::map<std::string,boost::numeric::ublas::matrix<doub
         return errorMsg;
     }
     std::vector<std::string> SpeciesList;
-    m_database->getAllSpecies(m_logger, SpeciesList);
+    m_database->getSpecies(m_logger, SpeciesList);
     int NumSpecies = SpeciesList.size();
 
     if (! getSpeciesData(NumSpecies,SpeciesData)) {
@@ -1683,7 +1698,7 @@ nmfADMB::readADMBReportFile(
     int NumYears = -1;
     std::vector<std::string> SpeciesVec;
 
-    m_database->getAllSpecies(m_logger, SpeciesVec);
+    m_database->getSpecies(m_logger, SpeciesVec);
     NumSpecies = SpeciesVec.size();
 
     // initialize m_Abundance

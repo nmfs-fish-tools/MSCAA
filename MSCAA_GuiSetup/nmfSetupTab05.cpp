@@ -103,7 +103,8 @@ nmfSetup_Tab5::loadWtTables()
     QModelIndex index;
 
     fields     = {"SystemName","SpeName","Survey","TSwtValue","SPwtValue"};
-    queryStr   = "SELECT SystemName,SpeName,Survey,TSwtValue,SPwtValue FROM SurveyWeights";
+    queryStr   = "SELECT SystemName,SpeName,Survey,TSwtValue,SPwtValue FROM " +
+                  nmfConstantsMSCAA::TableSurveyWeights;
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SpeName"].size();
     if (NumRecords == 0) {
@@ -140,7 +141,7 @@ nmfSetup_Tab5::loadMonthTable()
     QComboBox* cbox;
 
     fields     = {"SystemName","SpeName","Survey","Value"};
-    queryStr   = "SELECT SystemName,SpeName,Survey,Value FROM SurveyMonth";
+    queryStr   = "SELECT SystemName,SpeName,Survey,Value FROM " + nmfConstantsMSCAA::TableSurveyMonth;
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SpeName"].size();
     if (NumRecords == 0) {
@@ -214,10 +215,11 @@ nmfSetup_Tab5::saveWeightTables()
     float SPwtValue;
 
     // Delete the current Species entry here
-    deleteCmd = "DELETE FROM SurveyWeights WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
+    deleteCmd = "DELETE FROM " + nmfConstantsMSCAA::TableSurveyWeights +
+                " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     errorMsg = m_databasePtr->nmfUpdateDatabase(deleteCmd);
     if (nmfUtilsQt::isAnError(errorMsg)) {
-        msg = "\nError in Save command. Couldn't delete all records from SurveyMonth table";
+        msg = "\nError in Save command. Couldn't delete all records from SurveyWeights table";
         m_logger->logMsg(nmfConstants::Error,"nmfSetup_Tab5::saveWeightTables: DELETE error: " + errorMsg);
         m_logger->logMsg(nmfConstants::Error,"cmd: " + deleteCmd);
         QMessageBox::warning(Setup_Tab5_Widget, "Error", msg, QMessageBox::Ok);
@@ -225,7 +227,7 @@ nmfSetup_Tab5::saveWeightTables()
     }
 
     // Build insert command from the model data
-    saveCmd = "INSERT INTO SurveyWeights ";
+    saveCmd = "INSERT INTO " + nmfConstantsMSCAA::TableSurveyWeights;
     saveCmd += " (MohnsRhoLabel,SystemName,SpeName,Survey,TSwtValue,SPwtValue) VALUES ";
     for (int row = 0; row < NumRows; ++row) {
         SpeciesLabel = smodelTS->verticalHeaderItem(row);
@@ -279,7 +281,8 @@ nmfSetup_Tab5::saveMonthTable()
     QStandardItem* SurveyLabel;
 
     // Delete the current Species entry here
-    deleteCmd = "DELETE FROM SurveyMonth WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
+    deleteCmd = "DELETE FROM " + nmfConstantsMSCAA::TableSurveyMonth +
+                " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     errorMsg = m_databasePtr->nmfUpdateDatabase(deleteCmd);
     if (nmfUtilsQt::isAnError(errorMsg)) {
         msg = "\nError in Save command. Couldn't delete all records from SurveyMonth table";
@@ -290,7 +293,7 @@ nmfSetup_Tab5::saveMonthTable()
     }
 
     // Build insert command from the model data
-    saveCmd = "INSERT INTO SurveyMonth ";
+    saveCmd = "INSERT INTO " + nmfConstantsMSCAA::TableSurveyMonth;
     saveCmd += " (MohnsRhoLabel,SystemName,SpeName,Survey,Value) VALUES ";
     for (int row = 0; row < NumRows; ++row) {
         SpeciesLabel = smodel->verticalHeaderItem(row);
@@ -338,7 +341,7 @@ nmfSetup_Tab5::getSpecies(std::vector<std::string>& species,
     numSurveyMap.clear();
 
     fields     = {"SpeName","NumSurveys"};
-    queryStr   = "SELECT SpeName,NumSurveys FROM Species";
+    queryStr   = "SELECT SpeName,NumSurveys FROM " + nmfConstantsMSCAA::TableSpecies;
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumSpecies = dataMap["SpeName"].size();
 

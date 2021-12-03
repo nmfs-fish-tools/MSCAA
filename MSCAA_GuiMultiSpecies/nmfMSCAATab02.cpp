@@ -91,7 +91,7 @@ nmfMSCAA_Tab2::getNumSpecies()
     bool foundSpecies;
     std::vector<std::string> species;
 
-    foundSpecies = m_databasePtr->getAllSpecies(m_logger, species);
+    foundSpecies = m_databasePtr->getSpecies(m_logger, species);
     if (! foundSpecies) {
         return 0;
     } else {
@@ -242,13 +242,16 @@ nmfMSCAA_Tab2::callback_SavePB()
 {
     switch (MSCAA_Tab2_RatioTBW->currentIndex()) {
         case 0:
-            saveTable(MSCAA_Tab2_PreferredTV,"PredatorPreyPreferredRatio");
+            saveTable(MSCAA_Tab2_PreferredTV,
+                      nmfConstantsMSCAA::TablePredatorPreyPreferredRatio);
             break;
         case 1:
-            saveTable(MSCAA_Tab2_VarianceLessThanTV,"PredatorPreyVarianceLTRatio");
+            saveTable(MSCAA_Tab2_VarianceLessThanTV,
+                      nmfConstantsMSCAA::TablePredatorPreyVarianceLTRatio);
             break;
         case 2:
-            saveTable(MSCAA_Tab2_VarianceGreaterThanTV,"PredatorPreyVarianceGTRatio");
+            saveTable(MSCAA_Tab2_VarianceGreaterThanTV,
+                      nmfConstantsMSCAA::TablePredatorPreyVarianceGTRatio);
             break;
         default:
             break;
@@ -265,7 +268,7 @@ nmfMSCAA_Tab2::getSpecies(std::vector<std::string>& species)
     std::string queryStr;
 
     fields     = {"SpeName","NumSurveys"};
-    queryStr   = "SELECT SpeName,NumSurveys FROM Species";
+    queryStr   = "SELECT SpeName,NumSurveys FROM " + nmfConstantsMSCAA::TableSpecies;
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumSpecies = dataMap["SpeName"].size();
 
@@ -323,9 +326,9 @@ std::cout << "nmfMSCAA_Tab2::loadWidgets()" << std::endl;
     std::vector<QTableView*> tableViews = {MSCAA_Tab2_PreferredTV,
                                            MSCAA_Tab2_VarianceLessThanTV,
                                            MSCAA_Tab2_VarianceGreaterThanTV};
-    std::vector<std::string> tableNames = {"PredatorPreyPreferredRatio",
-                                           "PredatorPreyVarianceLTRatio",
-                                           "PredatorPreyVarianceGTRatio"};
+    std::vector<std::string> tableNames = {nmfConstantsMSCAA::TablePredatorPreyPreferredRatio,
+                                           nmfConstantsMSCAA::TablePredatorPreyVarianceLTRatio,
+                                           nmfConstantsMSCAA::TablePredatorPreyVarianceGTRatio};
 
     for (unsigned long i = 0; i < tableNames.size(); ++i) {
         loadTable(tableViews[i],tableNames[i]);

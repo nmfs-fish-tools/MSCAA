@@ -120,10 +120,11 @@ nmfSetup_Tab6::saveFleetData()
     QStandardItem* SpeciesLabel;
 
     // Delete the current Species entry here
-    deleteCmd = "DELETE FROM Fleets WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
+    deleteCmd = "DELETE FROM " + nmfConstantsMSCAA::TableFleets +
+                " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     errorMsg = m_databasePtr->nmfUpdateDatabase(deleteCmd);
     if (nmfUtilsQt::isAnError(errorMsg)) {
-        msg = "\nError in Save command. Couldn't delete all records from SurveyMonth table";
+        msg = "\nError in Save command. Couldn't delete all records from TableFleets table";
         m_logger->logMsg(nmfConstants::Error,"nmfSetup_Tab6::saveFleetData: DELETE error: " + errorMsg);
         m_logger->logMsg(nmfConstants::Error,"cmd: " + deleteCmd);
         QMessageBox::warning(Setup_Tab6_Widget, "Error", msg, QMessageBox::Ok);
@@ -131,7 +132,7 @@ nmfSetup_Tab6::saveFleetData()
     }
 
     // Build insert command from the model data
-    saveCmd = "INSERT INTO Fleets ";
+    saveCmd = "INSERT INTO " + nmfConstantsMSCAA::TableFleets;
     saveCmd += " (MohnsRhoLabel,SystemName,SpeName,FleetNumber,FleetName) VALUES ";
     for (int row = 0; row < NumRows; ++row) {
         SpeciesLabel = smodel->verticalHeaderItem(row);
@@ -178,11 +179,12 @@ nmfSetup_Tab6::saveSystemData()
 
     // Build insert command from the model data
     if (SystemDataExists) {
-        saveCmd  = "UPDATE System SET AbundanceDriver = '" +
+        saveCmd  = "UPDATE " + nmfConstantsMSCAA::TableModels +
+                   " SET AbundanceDriver = '" +
                     AbundanceDriver.toStdString() + "' " +
                    "WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     } else {
-        saveCmd = "INSERT INTO System ";
+        saveCmd = "INSERT INTO " + nmfConstantsMSCAA::TableModels;
         saveCmd += " (MohnsRhoLabel,SystemName,TotalBiomass,FH_FirstYear,FH_LastYear,NumSpInter,AbundanceDriver) VALUES ";
         saveCmd += "('"  + MohnsRhoLabel +
                    "','" + m_ProjectSettingsConfig +
@@ -233,7 +235,7 @@ nmfSetup_Tab6::getSpecies(std::vector<std::string>& SpeciesVec,
     std::string Species;
 
     fields     = {"SpeName","NumFleets"};
-    queryStr   = "SELECT SpeName,NumFleets FROM Species";
+    queryStr   = "SELECT SpeName,NumFleets FROM " + nmfConstantsMSCAA::TableSpecies;
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumSpecies = dataMap["SpeName"].size();
 
@@ -290,7 +292,7 @@ nmfSetup_Tab6::loadFleetData()
 
     // Read fleet data
     fields     = {"SystemName","SpeName","FleetNumber","FleetName"};
-    queryStr   = "SELECT SystemName,SpeName,FleetNumber,FleetName FROM Fleets";
+    queryStr   = "SELECT SystemName,SpeName,FleetNumber,FleetName FROM " + nmfConstantsMSCAA::TableFleets;
     queryStr  += " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     queryStr  += " ORDER BY SpeName,FleetNumber";
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
@@ -339,7 +341,7 @@ nmfSetup_Tab6::loadSystemData(bool emitSignal)
 
     // Read System data
     fields     = {"SystemName","AbundanceDriver"};
-    queryStr   = "SELECT SystemName,AbundanceDriver FROM `System`";
+    queryStr   = "SELECT SystemName,AbundanceDriver FROM " + nmfConstantsMSCAA::TableModels;
     queryStr  += " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SystemName"].size();

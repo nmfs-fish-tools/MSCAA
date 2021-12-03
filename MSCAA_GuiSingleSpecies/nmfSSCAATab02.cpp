@@ -151,7 +151,7 @@ nmfSSCAA_Tab2::setSpecies(QString species)
     nmfMSCAAUtils::loadTable(m_databasePtr,m_logger,
                              m_ProjectSettingsConfig,
                              SSCAA_Tab2_CatchTV,
-                             "CatchSurvey",species,
+                             nmfConstantsMSCAA::TableCatchSurvey,species,
                              std::to_string(survey),units,
                              nmfConstants::dontIncludeTotalColumn,
                              nmfConstants::AllYears);
@@ -160,7 +160,7 @@ nmfSSCAA_Tab2::setSpecies(QString species)
     nmfMSCAAUtils::loadTheTotalTable(m_databasePtr,m_logger,
                              m_ProjectSettingsConfig,
                              SSCAA_Tab2_TotalTV,
-                             "CatchSurveyTotal",species,
+                             nmfConstantsMSCAA::TableCatchSurveyTotal,species,
                              std::to_string(survey),totalUnits);
 }
 
@@ -198,7 +198,7 @@ nmfSSCAA_Tab2::callback_SavePB()
         ok = nmfMSCAAUtils::saveTable(SSCAA_Tabs,m_databasePtr,m_logger,
                                  SSCAA_Tab2_CatchTV,
                                  m_ProjectSettingsConfig,
-                                 "CatchSurvey",species,
+                                 nmfConstantsMSCAA::TableCatchSurvey,species,
                                  std::to_string(surveyNum),
                                  getUnits(),
                                  nmfConstants::IsNotProportion,
@@ -211,7 +211,7 @@ nmfSSCAA_Tab2::callback_SavePB()
         ok = nmfMSCAAUtils::saveProportionTable(SSCAA_Tabs,m_databasePtr,m_logger,
                                            SSCAA_Tab2_CatchTV,
                                            m_ProjectSettingsConfig,
-                                           "CatchSurveyProportion",
+                                           nmfConstantsMSCAA::TableCatchSurveyProportion,
                                            species,std::to_string(surveyNum));
         if (ok) {
             msg += "CatchSurveyProportion table has been successfully updated.\n";
@@ -223,7 +223,7 @@ nmfSSCAA_Tab2::callback_SavePB()
         ok = nmfMSCAAUtils::saveTheTotalTable(SSCAA_Tabs,m_databasePtr,m_logger,
                                               SSCAA_Tab2_TotalTV,
                                               m_ProjectSettingsConfig,
-                                              "CatchSurveyTotal",species,
+                                              nmfConstantsMSCAA::TableCatchSurveyTotal,species,
                                               std::to_string(surveyNum),
                                               getTotalUnits());
         if (ok) {
@@ -243,7 +243,7 @@ nmfSSCAA_Tab2::loadNumSurveys(QString species)
     std::string queryStr;
 
     fields     = {"SpeName","NumSurveys"};
-    queryStr   = "SELECT SpeName,NumSurveys FROM Species";
+    queryStr   = "SELECT SpeName,NumSurveys FROM " + nmfConstantsMSCAA::TableSpecies;
     queryStr  += " WHERE SpeName = '" + species.toStdString() + "'";
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SpeName"].size();
@@ -289,7 +289,7 @@ std::cout << "nmfSSCAA_Tab2::loadWidgets()" << std::endl;
     nmfMSCAAUtils::loadTable(m_databasePtr,m_logger,
                              m_ProjectSettingsConfig,
                              SSCAA_Tab2_CatchTV,
-                             "CatchSurvey",
+                             nmfConstantsMSCAA::TableCatchSurvey,
                              species, std::to_string(survey), units,
                              nmfConstants::dontIncludeTotalColumn,
                              nmfConstants::AllYears);
@@ -298,7 +298,7 @@ std::cout << "nmfSSCAA_Tab2::loadWidgets()" << std::endl;
     nmfMSCAAUtils::loadTheTotalTable(m_databasePtr,m_logger,
                                      m_ProjectSettingsConfig,
                                      SSCAA_Tab2_TotalTV,
-                                     "CatchSurveyTotal",
+                                     nmfConstantsMSCAA::TableCatchSurveyTotal,
                                      species, std::to_string(survey),
                                      units);
 

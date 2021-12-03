@@ -151,7 +151,7 @@ private:
                         QString& M2Estimates);
     bool getPreferredData(
             const int& NumSpecies,
-            QString TableName,
+            std::string TableName,
             QString& PreferredWeightsEta);
     bool getTotalCatch(
             const int& NumSpecies,

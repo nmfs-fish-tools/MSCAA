@@ -180,7 +180,8 @@ MSCAA_GuiOutputControls::getSpecies(int&         NumSpecies,
     SpeciesList.clear();
 
     fields     = {"SpeName"};
-    queryStr   = "SELECT SpeName from Species ORDER BY SpeName";
+    queryStr   = "SELECT SpeName FROM " + nmfConstantsMSCAA::TableSpecies +
+                 " ORDER BY SpeName";
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumSpecies = unsigned(dataMap["SpeName"].size());
     if (NumSpecies == 0) {

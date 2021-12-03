@@ -189,7 +189,7 @@ nmfSSCAA_Tab1::isCatchAtAge(QString species)
 
     // Read Species data
     fields     = {"SpeName","CatchAtAge"};
-    queryStr   = "SELECT SpeName,CatchAtAge FROM Species";
+    queryStr   = "SELECT SpeName,CatchAtAge FROM " + nmfConstantsMSCAA::TableSpecies;
     queryStr  += " WHERE SpeName = '" + species.toStdString() + "'";
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SpeName"].size();
@@ -219,7 +219,7 @@ nmfSSCAA_Tab1::setSpecies(QString species)
     nmfMSCAAUtils::loadTable(m_database,m_logger,
                              m_projectSettingsConfig,
                              SSCAA_Tab1_CatchAtAgeTV,
-                             "CatchFishery",species,
+                             nmfConstantsMSCAA::TableCatchFishery,species,
                              std::to_string(0),
                              abundanceUnits,
                              nmfConstants::dontIncludeTotalColumn,
@@ -230,7 +230,7 @@ nmfSSCAA_Tab1::setSpecies(QString species)
     nmfMSCAAUtils::loadCatchAtLengthTable(m_database,m_logger,
                              m_projectSettingsConfig,
                              SSCAA_Tab1_CatchAtLengthTV,
-                             "CatchAtLengthFishery",species,
+                             nmfConstantsMSCAA::TableCatchAtLengthFishery,species,
                              std::to_string(0),
                              abundanceUnits);
 
@@ -238,7 +238,7 @@ nmfSSCAA_Tab1::setSpecies(QString species)
     nmfMSCAAUtils::loadTheTotalTable(m_database,m_logger,
                                      m_projectSettingsConfig,
                                      SSCAA_Tab1_TotalTV,
-                                     "CatchFisheryTotal",species,
+                                     nmfConstantsMSCAA::TableCatchFisheryTotal,species,
                                      std::to_string(0),
                                      weightUnits);
 
@@ -293,7 +293,7 @@ nmfSSCAA_Tab1::callback_SavePB()
             ok = nmfMSCAAUtils::saveTable(SSCAA_Tabs,m_databasePtr,m_logger,
                                      SSCAA_Tab1_CatchAtAgeTV,
                                      m_projectSettingsConfig,
-                                     "CatchFishery",species,fleet,
+                                     nmfConstantsMSCAA::TableCatchFishery,species,fleet,
                                      getAbundanceUnits(),
                                      nmfConstants::IsNotProportion,
                                      nmfConstants::dontIncludeTotalColumn,
@@ -305,7 +305,7 @@ nmfSSCAA_Tab1::callback_SavePB()
 //            ok = nmfMSCAAUtils::saveProportionTable(SSCAA_Tabs,databasePtr,logger,
 //                                               SSCAA_Tab1_CatchAtAgeTV,
 //                                               ProjectSettingsConfig,
-//                                               "CatchFisheryProportion",
+//                                               nmfConstantsMSCAA::TableCatchFisheryProportion,
 //                                               species,noVal);
 //            if (ok) {
 //                msg += "CatchFisheryProportion table has been successfully updated.\n";
@@ -318,7 +318,8 @@ nmfSSCAA_Tab1::callback_SavePB()
             ok = nmfMSCAAUtils::saveCatchAtLengthTable(SSCAA_Tabs,m_databasePtr,m_logger,
                                                        SSCAA_Tab1_CatchAtLengthTV,
                                                        m_projectSettingsConfig,
-                                                       "CatchAtLengthFishery",species,fleet,
+                                                       nmfConstantsMSCAA::TableCatchAtLengthFishery,
+                                                       species,fleet,
                                                        getAbundanceUnits());
             if (ok) {
                 msg += "CatchFisheryLength table has been successfully updated.\n";
@@ -330,10 +331,11 @@ nmfSSCAA_Tab1::callback_SavePB()
                                          nmfConstants::ShowError))
     {
         ok = nmfMSCAAUtils::saveTheTotalTable(SSCAA_Tabs,m_databasePtr,m_logger,
-                                         SSCAA_Tab1_TotalTV,
-                                         m_projectSettingsConfig,
-                                         "CatchFisheryTotal",species,fleet,
-                                         getWeightUnits());
+                                              SSCAA_Tab1_TotalTV,
+                                              m_projectSettingsConfig,
+                                              nmfConstantsMSCAA::TableCatchFisheryTotal,
+                                              species,fleet,
+                                              getWeightUnits());
         if (ok) {
             msg += "CatchFisheryTotal table has been successfully updated.\n";
         }
@@ -368,14 +370,14 @@ std::cout << "nmfSSCAA_Tab1::loadWidgets() Species: " << species.toStdString() <
         nmfMSCAAUtils::loadCatchAtLengthTable(m_databasePtr,m_logger,
                                  m_projectSettingsConfig,
                                  SSCAA_Tab1_CatchAtLengthTV,
-                                 "CatchAtLengthFishery",
+                                 nmfConstantsMSCAA::TableCatchAtLengthFishery,
                                  species,fleet);
     }
 
     nmfMSCAAUtils::loadTable(m_databasePtr,m_logger,
                              m_projectSettingsConfig,
                              SSCAA_Tab1_CatchAtAgeTV,
-                             "CatchFishery",
+                             nmfConstantsMSCAA::TableCatchFishery,
                              species,fleet,
                              abundanceUnits,
                              nmfConstants::dontIncludeTotalColumn,
@@ -385,7 +387,7 @@ std::cout << "nmfSSCAA_Tab1::loadWidgets() Species: " << species.toStdString() <
     nmfMSCAAUtils::loadTheTotalTable(m_databasePtr,m_logger,
                              m_projectSettingsConfig,
                              SSCAA_Tab1_TotalTV,
-                             "CatchFisheryTotal",
+                             nmfConstantsMSCAA::TableCatchFisheryTotal,
                              species,fleet,
                              weightUnits);
     setWeightUnits(weightUnits);

@@ -311,7 +311,7 @@ std::cout << "LoadEntityList"  << std::endl;
 
     // Get species names and load gui
     fields = {"SpeName","MinAge","MaxAge","FirstYear","LastYear"};
-    queryStr   = "SELECT SpeName,MinAge,MaxAge,FirstYear,LastYear FROM Species";
+    queryStr   = "SELECT SpeName,MinAge,MaxAge,FirstYear,LastYear FROM " + nmfConstantsMSCAA::TableSpecies;
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumSpecies = unsigned(dataMap["SpeName"].size());
     if (NumSpecies == 0) {
@@ -749,7 +749,7 @@ void
 nmfMainWindow::menu_about()
 {
     QString name    = "Multi-Species Statistical Catch-At-Age";
-    QString version = "MSCAA v0.9.7 (beta)";
+    QString version = "MSCAA v0.9.8 (beta)";
     QString specialAcknowledgement = "";
     QString cppVersion   = "C++??";
     QString mysqlVersion = "?";
@@ -1516,13 +1516,13 @@ nmfMainWindow::callback_MortalityAgeGroupsSelected(QModelIndexList ageIndexList,
     } else if (mode == "SSCAA Data Input") {
         if (! m_databasePtr->getMortalityData(
                     m_logger,m_ProjectSettingsConfig,Species.toStdString(),
-                    NumYears,NumAges,"MortalityNatural",NaturalMortality)) {
+                    NumYears,NumAges,nmfConstantsMSCAA::TableMortalityNatural,NaturalMortality)) {
             m_logger->logMsg(nmfConstants::Warning,"No Natural Mortality data found.");
             return;
         }
         if (! m_databasePtr->getMortalityData(
                     m_logger,m_ProjectSettingsConfig,Species.toStdString(),
-                    NumYears,NumAges,"MortalityFishing",FishingMortality)) {
+                    NumYears,NumAges,nmfConstantsMSCAA::TableMortalityFishing,FishingMortality)) {
             m_logger->logMsg(nmfConstants::Warning,"No Fishing Mortality data found.");
             return;
         }

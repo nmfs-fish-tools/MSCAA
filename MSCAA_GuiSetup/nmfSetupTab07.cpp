@@ -149,7 +149,8 @@ nmfSetup_Tab7::callback_SavePB()
     QStandardItem* AgeLabel;
 
     // Delete the current Species entry here
-    deleteCmd = "DELETE FROM AgeLengthKey WHERE SystemName = '" + m_ProjectSettingsConfig + "'" +
+    deleteCmd = "DELETE FROM " + nmfConstantsMSCAA::TableAgeLengthKey +
+                " WHERE SystemName = '" + m_ProjectSettingsConfig + "'" +
                 " AND SpeName = '" + Species.toStdString() + "'";
     errorMsg = m_databasePtr->nmfUpdateDatabase(deleteCmd);
     if (nmfUtilsQt::isAnError(errorMsg)) {
@@ -161,7 +162,7 @@ nmfSetup_Tab7::callback_SavePB()
     }
 
     // Build insert command from the model data
-    saveCmd = "INSERT INTO AgeLengthKey ";
+    saveCmd = "INSERT INTO " + nmfConstantsMSCAA::TableAgeLengthKey;
     saveCmd += " (MohnsRhoLabel,SystemName,SpeName,Year,Age,Value) VALUES ";
     for (int row = 0; row < NumRows; ++row) {
         YearLabel = smodel->verticalHeaderItem(row);
@@ -222,9 +223,9 @@ nmfSetup_Tab7::getSpeciesData(QString& Species,
         return;
 
     fields     = {"SpeName","MinAge","MaxAge","FirstYear","LastYear","MinLength","MaxLength"};
-    queryStr   = "SELECT SpeName,MinAge,MaxAge,FirstYear,LastYear,MinLength,MaxLength FROM Species";
+    queryStr   = "SELECT SpeName,MinAge,MaxAge,FirstYear,LastYear,MinLength,MaxLength FROM " +
+                  nmfConstantsMSCAA::TableSpecies;
     queryStr  += " WHERE SpeName = '" + Species.toStdString() + "'";
-
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["MinAge"].size();
     if (NumRecords == 0) {
@@ -306,7 +307,7 @@ std::cout << "nmfSetup_Tab7::loadWidgets()" << std::endl;
 
     // Read AgeLengthKey data
     fields     = {"SystemName","SpeName","Year","Age","Value"};
-    queryStr   = "SELECT SystemName,SpeName,Year,Age,Value FROM AgeLengthKey";
+    queryStr   = "SELECT SystemName,SpeName,Year,Age,Value FROM " + nmfConstantsMSCAA::TableAgeLengthKey;
     queryStr  += " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     queryStr  += " AND SpeName = '" + currentSpecies.toStdString() + "'";
     queryStr  += " ORDER BY Year,Age";
@@ -348,7 +349,7 @@ std::cout << "nmfSetup_Tab7::loadWidgets()" << std::endl;
 /*
     // Read fleet data
     fields     = {"SystemName","SpeName","FleetNumber","FleetName"};
-    queryStr   = "SELECT SystemName,SpeName,FleetNumber,FleetName FROM Fleets";
+    queryStr   = "SELECT SystemName,SpeName,FleetNumber,FleetName FROM " + nmfConstantsMSCAA::TableFleets;
     queryStr  += " WHERE SystemName = '" + ProjectSettingsConfig + "'";
     queryStr  += " ORDER BY SpeName,FleetNumber";
     dataMap    = databasePtr->nmfQueryDatabase(queryStr, fields);

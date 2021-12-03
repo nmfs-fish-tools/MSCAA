@@ -107,7 +107,7 @@ nmfMSCAA_Tab1::getNumSpecies()
     bool foundSpecies;
     std::vector<std::string> species;
 
-    foundSpecies = m_databasePtr->getAllSpecies(m_logger, species);
+    foundSpecies = m_databasePtr->getSpecies(m_logger, species);
     if (! foundSpecies) {
         return 0;
     } else {
@@ -222,7 +222,7 @@ nmfMSCAA_Tab1::updatePredPreyInteractionTable()
     std::vector<int> PredVec;
     std::vector<int> PreyVec;
 
-    m_databasePtr->getAllSpecies(m_logger, Species);
+    m_databasePtr->getSpecies(m_logger, Species);
 //  NumSpecies = Species.size();
 
     smodelMain = qobject_cast<QAbstractItemModel*>(MSCAA_Tab1_InteractionsTV->model());
@@ -276,8 +276,8 @@ nmfMSCAA_Tab1::saveInteractionsVecData()
     QAbstractItemModel *smodel = qobject_cast<QAbstractItemModel*>(MSCAA_Tab1_PredPreyInteractionTV->model());
 
     // Delete the previous data in the table
-    deleteCmd = "DELETE FROM PredatorPreyInteractionsVec WHERE SystemName = '" +
-                m_ProjectSettingsConfig + "'";
+    deleteCmd = "DELETE FROM " + nmfConstantsMSCAA::TablePredatorPreyInteractionsVec +
+                " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     errorMsg = m_databasePtr->nmfUpdateDatabase(deleteCmd);
     if (nmfUtilsQt::isAnError(errorMsg)) {
         msg = "\nError in Save command. Couldn't delete all records from PredatorPreyInteractionsVec table";
@@ -289,7 +289,7 @@ nmfMSCAA_Tab1::saveInteractionsVecData()
 
 
     // There are only 2 rows. The 1st is the Predator vec and the 2nd is the Prey vec.
-    saveCmd = "REPLACE INTO PredatorPreyInteractionsVec";
+    saveCmd = "REPLACE INTO " + nmfConstantsMSCAA::TablePredatorPreyInteractionsVec;
     saveCmd += " (MohnsRhoLabel,SystemName,PredValue,PreyValue) VALUES ";
     for (int col = 0; col < smodel->columnCount(); ++col) {
         saveCmd += "('" + MohnsRhoLabel +
@@ -357,14 +357,15 @@ nmfMSCAA_Tab1::saveSystemData()
     TotalBiomass += "_" + MSCAA_Tab1_UnitsCMB->currentText();
 
     if (SystemDataExists) {
-        saveCmd  = "UPDATE System SET TotalBiomass = '" + TotalBiomass.toStdString() +
-                "', FH_FirstYear = "  + MSCAA_Tab1_FirstYearLE->text().toStdString() +
-                " , FH_LastYear  = "  + MSCAA_Tab1_LastYearLE->text().toStdString() +
-                " , NumSpInter   = "  + std::to_string(getNumInteractions()) +
-                " , Owt          = "  + MSCAA_Tab1_OtherFoodWtLE->text().toStdString() +
-                " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
+        saveCmd  = "UPDATE " + nmfConstantsMSCAA::TableModels +
+                   " SET TotalBiomass = '" + TotalBiomass.toStdString() +
+                   "', FH_FirstYear = "  + MSCAA_Tab1_FirstYearLE->text().toStdString() +
+                   " , FH_LastYear  = "  + MSCAA_Tab1_LastYearLE->text().toStdString() +
+                   " , NumSpInter   = "  + std::to_string(getNumInteractions()) +
+                   " , Owt          = "  + MSCAA_Tab1_OtherFoodWtLE->text().toStdString() +
+                   " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     } else {
-        saveCmd = "REPLACE INTO System";
+        saveCmd = "REPLACE INTO " + nmfConstantsMSCAA::TableModels;
         saveCmd += " (MohnsRhoLabel,SystemName,TotalBiomass,FH_FirstYear,FH_LastYear,NumSpInter,Owt,AbundanceDriver) VALUES ";
         saveCmd += "('" + MohnsRhoLabel +
                 "','" + m_ProjectSettingsConfig +
@@ -404,10 +405,10 @@ nmfMSCAA_Tab1::saveInteractionsData()
     QModelIndex index;
     QString msg;
 
-    m_databasePtr->getAllSpecies(m_logger, Species);
+    m_databasePtr->getSpecies(m_logger, Species);
     NumSpecies = Species.size();
 
-    saveCmd = "INSERT INTO PredatorPreyInteractions";
+    saveCmd = "INSERT INTO " + nmfConstantsMSCAA::TablePredatorPreyInteractions;
     saveCmd += " (MohnsRhoLabel,SystemName,PredatorName,PreyName,Value) VALUES ";
     for (int row = 0; row < NumSpecies; ++row) {
         for (int col = 0; col < NumSpecies; ++col) {
@@ -429,8 +430,8 @@ nmfMSCAA_Tab1::saveInteractionsData()
         m_logger->logMsg(nmfConstants::Warning,"nmfMSCAA_Tab1::saveInteractionsData: Set out of range value(s) to 0.");
     }
     // Delete the previous data in the table
-    deleteCmd = "DELETE FROM PredatorPreyInteractions WHERE SystemName = '" +
-                m_ProjectSettingsConfig + "'";
+    deleteCmd = "DELETE FROM " + nmfConstantsMSCAA::TablePredatorPreyInteractions +
+                " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     errorMsg = m_databasePtr->nmfUpdateDatabase(deleteCmd);
     if (nmfUtilsQt::isAnError(errorMsg)) {
         msg = "\nError in Save command. Couldn't delete all records from PredatorPreyInteractions table";
@@ -474,10 +475,10 @@ nmfMSCAA_Tab1::saveVulnerabilityData()
     QModelIndex indexVulnerability;
     QString msg;
 
-    m_databasePtr->getAllSpecies(m_logger, Species);
+    m_databasePtr->getSpecies(m_logger, Species);
     NumSpecies = Species.size();
 
-    saveCmd = "INSERT INTO PredatorPreyVulnerability";
+    saveCmd = "INSERT INTO " + nmfConstantsMSCAA::TablePredatorPreyVulnerability;
     saveCmd += " (MohnsRhoLabel,SystemName,PredatorName,PreyName,Value) VALUES ";
     for (int row = 0; row < NumSpecies; ++row) {
         for (int col = 0; col < NumSpecies; ++col) {
@@ -506,8 +507,8 @@ nmfMSCAA_Tab1::saveVulnerabilityData()
         m_logger->logMsg(nmfConstants::Warning,"nmfMSCAA_Tab1::saveVulnerabilityData: Set value(s) to 0 where no Interaction data exist.");
     }
     // Delete the previous data in the table
-    deleteCmd = "DELETE FROM PredatorPreyVulnerability WHERE SystemName = '" +
-                m_ProjectSettingsConfig + "'";
+    deleteCmd = "DELETE FROM " + nmfConstantsMSCAA::TablePredatorPreyVulnerability +
+                " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     errorMsg = m_databasePtr->nmfUpdateDatabase(deleteCmd);
     if (nmfUtilsQt::isAnError(errorMsg)) {
         msg = "\nError in Save command. Couldn't delete all records from PredatorPreyVulnerability table";
@@ -546,18 +547,19 @@ nmfMSCAA_Tab1::loadSystemData()
     QString totalBiomass;
     QString units;
 
-    m_databasePtr->getAllSpecies(m_logger, Species);
+    m_databasePtr->getSpecies(m_logger, Species);
 //  NumSpecies = Species.size();
 //  smodel = new QStandardItemModel(NumSpecies,NumSpecies);
 
     // Get data from database
     fields     = {"SystemName","TotalBiomass","FH_FirstYear","FH_LastYear","Owt"};
-    queryStr   = "SELECT SystemName,TotalBiomass,FH_FirstYear,FH_LastYear,Owt FROM `System` ";
+    queryStr   = "SELECT SystemName,TotalBiomass,FH_FirstYear,FH_LastYear,Owt FROM " + nmfConstantsMSCAA::TableModels;
     queryStr  += " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["TotalBiomass"].size();
     if (NumRecords == 0) {
-        m_logger->logMsg(nmfConstants::Error,"No data found in table: System");
+        m_logger->logMsg(nmfConstants::Error,"nmfMSCAA_Tab1::loadSystemData: No data found in table: System");
+        m_logger->logMsg(nmfConstants::Error,queryStr);
         return false;
     }
 
@@ -594,13 +596,13 @@ nmfMSCAA_Tab1::loadInteractionsData()
     std::map<std::string, std::vector<std::string> > dataMap;
     std::string queryStr;
 
-    m_databasePtr->getAllSpecies(m_logger, Species);
+    m_databasePtr->getSpecies(m_logger, Species);
     NumSpecies = Species.size();
     smodel = new QStandardItemModel(NumSpecies,NumSpecies);
 
     // Get data from database
     fields     = {"SystemName","PredatorName","PreyName","Value"};
-    queryStr   = "SELECT SystemName,PredatorName,PreyName,Value FROM PredatorPreyInteractions ";
+    queryStr   = "SELECT SystemName,PredatorName,PreyName,Value FROM " + nmfConstantsMSCAA::TablePredatorPreyInteractions;
     queryStr  += " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     queryStr  += " ORDER BY PredatorName";
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
@@ -646,7 +648,7 @@ nmfMSCAA_Tab1::loadInteractionsVecData()
 
     // Get data from database
     fields     = {"SystemName","PredValue","PreyValue"};
-    queryStr   = "SELECT SystemName,PredValue,PreyValue FROM PredatorPreyInteractionsVec ";
+    queryStr   = "SELECT SystemName,PredValue,PreyValue FROM " + nmfConstantsMSCAA::TablePredatorPreyInteractionsVec;
     queryStr  += " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["PredValue"].size();
@@ -689,13 +691,13 @@ nmfMSCAA_Tab1::loadVulnerabilityData()
     std::map<std::string, std::vector<std::string> > dataMap;
     std::string queryStr;
 
-    m_databasePtr->getAllSpecies(m_logger, Species);
+    m_databasePtr->getSpecies(m_logger, Species);
     NumSpecies = Species.size();
     smodel = new QStandardItemModel(NumSpecies,NumSpecies);
 
     // Get data from database
     fields     = {"SystemName","PredatorName","PreyName","Value"};
-    queryStr   = "SELECT SystemName,PredatorName,PreyName,Value FROM PredatorPreyVulnerability ";
+    queryStr   = "SELECT SystemName,PredatorName,PreyName,Value FROM " + nmfConstantsMSCAA::TablePredatorPreyVulnerability;
     queryStr  += " WHERE SystemName = '" + m_ProjectSettingsConfig + "'";
     queryStr  += " ORDER BY PredatorName";
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);

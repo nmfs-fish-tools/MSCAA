@@ -101,18 +101,35 @@ nmfSetup_Tab3::callback_Setup_Tab3_DelSpeciesPB()
     QString SpeciesName;
     QString msg;
     QMessageBox::StandardButton reply;
-    QList<QString> TablesToDeleteFrom1 = { // Delete with SpeName field
-        "AgeLengthKey","CatchAtLengthFishery","CatchFishery","CatchFisheryProportion",
-        "CatchFisheryTotal","CatchSurvey","CatchSurveyProportion","CatchSurveyTotal",
-        "Consumption","Covariates","Fleets","InitialAbundance","Maturity",
-        "MortalityFishing","MortalityNatural","SimulationParametersSpecies",
-        "SimulationParametersYearly","Species","SurveyMonth","Weight"};
-    QList<QString> TablesToDeleteFrom2 = { // Delete with PredatorName,ColName fields
-        "Diet"};
-    QList<QString> TablesToDeleteFrom3 = { // Delete with PredatorName,PreyName fields
-        "PredatorPreyInteractions","PredatorPreyPreferredRatio",
-        "PredatorPreyVarianceGTRatio","PredatorPreyVarianceLTRatio",
-        "PredatorPreyVulnerability"};
+    QList<std::string> TablesToDeleteFrom1 = { // Delete with SpeName field
+                                               nmfConstantsMSCAA::TableAgeLengthKey,
+                                               nmfConstantsMSCAA::TableCatchAtLengthFishery,
+                                               nmfConstantsMSCAA::TableCatchFishery,
+                                               nmfConstantsMSCAA::TableCatchFisheryProportion,
+                                               nmfConstantsMSCAA::TableCatchFisheryTotal,
+                                               nmfConstantsMSCAA::TableCatchSurvey,
+                                               nmfConstantsMSCAA::TableCatchSurveyProportion,
+                                               nmfConstantsMSCAA::TableCatchSurveyTotal,
+                                               nmfConstantsMSCAA::TableConsumption,
+                                               nmfConstantsMSCAA::TableCovariates,
+                                               nmfConstantsMSCAA::TableFleets,
+                                               nmfConstantsMSCAA::TableInitialAbundance,
+                                               nmfConstantsMSCAA::TableMaturity,
+                                               nmfConstantsMSCAA::TableMortalityFishing,
+                                               nmfConstantsMSCAA::TableMortalityNatural,
+                                               nmfConstantsMSCAA::TableSimulationParametersSpecies,
+                                               nmfConstantsMSCAA::TableSimulationParametersYearly,
+                                               nmfConstantsMSCAA::TableSpecies,
+                                               nmfConstantsMSCAA::TableSurveyMonth,
+                                               nmfConstantsMSCAA::TableWeight};
+    QList<std::string> TablesToDeleteFrom2 = { // Delete with PredatorName,ColName fields
+                                               nmfConstantsMSCAA::TableDiet};
+    QList<std::string> TablesToDeleteFrom3 = { // Delete with PredatorName,PreyName fields
+                                               nmfConstantsMSCAA::TablePredatorPreyInteractions,
+                                               nmfConstantsMSCAA::TablePredatorPreyPreferredRatio,
+                                               nmfConstantsMSCAA::TablePredatorPreyVarianceGTRatio,
+                                               nmfConstantsMSCAA::TablePredatorPreyVarianceLTRatio,
+                                               nmfConstantsMSCAA::TablePredatorPreyVulnerability};
 
     // Check to make sure user really wants to delete the selected Species and associated data.
     msg = "\nDeleting Species will cause all data associated with the selected";
@@ -161,7 +178,7 @@ void
 nmfSetup_Tab3::removeFromTable(
         std::string field,
         QTableWidgetItem *itemToRemove,
-        QList<QString>& TablesToDeleteFrom)
+        QList<std::string>& TablesToDeleteFrom)
 {
     std::string cmd;
     std::string errorMsg;
@@ -170,9 +187,9 @@ nmfSetup_Tab3::removeFromTable(
     if (itemToRemove != NULL) {
         SpeciesName = itemToRemove->text();
         if (! SpeciesName.isEmpty()) {
-            for (QString Table : TablesToDeleteFrom)
+            for (std::string tableName : TablesToDeleteFrom)
             {
-                cmd = "DELETE FROM " + Table.toStdString() +" WHERE " + field +
+                cmd = "DELETE FROM " + tableName +" WHERE " + field +
                       " = '" + SpeciesName.toStdString() + "'";
                 errorMsg = m_databasePtr->nmfUpdateDatabase(cmd);
                 if (nmfUtilsQt::isAnError(errorMsg)) {
@@ -238,7 +255,7 @@ nmfSetup_Tab3::callback_Setup_Tab3_SavePB()
 
     // Check each cell for missing fields
     int numCols;
-    std::vector<std::string> Tables = {"Species"};
+    std::vector<std::string> Tables = {nmfConstantsMSCAA::TableSpecies};
     std::vector<int> NumSpeciesOrGuilds= {NumSpecies};
     int tableNum = -1;
     for (QTableWidget *tw : {Setup_Tab3_SpeciesTW}) {
@@ -246,7 +263,8 @@ nmfSetup_Tab3::callback_Setup_Tab3_SavePB()
         numCols = tw->columnCount();
         for (int i=0; i<NumSpeciesOrGuilds[tableNum]; ++i) {
             for (int j=0; j<numCols; ++j) {
-                if ((Tables[tableNum] == "Guilds") || (Tables[tableNum] == "Species") )
+//              if ((Tables[tableNum] == "Guilds") || (Tables[tableNum] == nmfConstantsMSCAA::TableSpecies) )
+                if (Tables[tableNum] == nmfConstantsMSCAA::TableSpecies)
                 {
                     msg.clear();
                     if (tw->item(i,j)->text().isEmpty()) {
@@ -286,8 +304,9 @@ nmfSetup_Tab3::callback_Setup_Tab3_SavePB()
     }
 
     for (int i=0; i<NumSpeciesOrGuilds[tableNum]; ++i) {
-        saveCmd += "REPLACE INTO Species SET SpeName ='" +
-                Setup_Tab3_SpeciesTW->item(i,0)->text().toStdString() + "', ";
+        saveCmd += "REPLACE INTO " + nmfConstantsMSCAA::TableSpecies +
+                   " SET SpeName ='" +
+                   Setup_Tab3_SpeciesTW->item(i,0)->text().toStdString() + "', ";
         for (int col = 1; col < ColLabels.size(); ++col) {
             saveCmd += ColLabels[col].toStdString() + " = " + quote +
                        Setup_Tab3_SpeciesTW->item(i, col)->text().toStdString() +
@@ -404,7 +423,7 @@ loadSpecies()
     queryStr   = "SELECT SpeName,MinAge,MaxAge,FirstAgePrtRcrt,";
     queryStr  += "AgeFullRcrt,AgeFullRcrtSurvey,SurveySel,";
     queryStr  += "FirstYear,LastYear,NumSurveys,NumFleets,Nseg,";
-    queryStr  += "MinLength,MaxLength,NumLengthBins,CatchAtAge FROM Species";
+    queryStr  += "MinLength,MaxLength,NumLengthBins,CatchAtAge FROM " + nmfConstantsMSCAA::TableSpecies;
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumSpecies = dataMap["SpeName"].size();
     if (NumSpecies == 0) {
@@ -487,7 +506,7 @@ nmfSetup_Tab3::callback_Setup_Tab3_SpeciesCB(bool state)
     std::string queryStr;
 
     fields = {"SpeName"};
-    queryStr = "SELECT SpeName FROM Species";
+    queryStr = "SELECT SpeName FROM " + nmfConstantsMSCAA::TableSpecies;
     dataMap  = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumSpecies = dataMap["SpeName"].size();
 

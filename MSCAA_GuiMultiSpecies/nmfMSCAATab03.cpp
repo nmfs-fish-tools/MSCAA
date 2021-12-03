@@ -115,7 +115,7 @@ nmfMSCAA_Tab3::getNumSpecies()
     bool foundSpecies;
     std::vector<std::string> species;
 
-    foundSpecies = m_databasePtr->getAllSpecies(m_logger, species);
+    foundSpecies = m_databasePtr->getSpecies(m_logger, species);
     if (! foundSpecies) {
         return 0;
     } else {
@@ -255,14 +255,15 @@ nmfMSCAA_Tab3::callback_SavePB()
                                          nmfConstants::ShowError))
     {
         ok = nmfMSCAAUtils::saveBinnedTable(MSCAA_Tabs,
-                                       m_databasePtr,
-                                       m_logger,
-                                       MSCAA_Tab3_DietTV,
-                                       m_ProjectSettingsConfig,
-                                       "Diet", getNumBins(),
-                                       binType,
-                                       getPredatorSpecies(),
-                                       getPredatorAge());
+                                            m_databasePtr,
+                                            m_logger,
+                                            MSCAA_Tab3_DietTV,
+                                            m_ProjectSettingsConfig,
+                                            nmfConstantsMSCAA::TableDiet,
+                                            getNumBins(),
+                                            binType,
+                                            getPredatorSpecies(),
+                                            getPredatorAge());
         if (ok) {
             msg = "\nDiet table has been successfully updated.\n";
             QMessageBox::information(MSCAA_Tabs, "Diet Updated", msg, QMessageBox::Ok);
@@ -281,7 +282,8 @@ nmfMSCAA_Tab3::callback_NumSegCMB(int value)
         nmfMSCAAUtils::createNewNumberOfBinsTable(m_databasePtr,m_logger,
                                                   m_ProjectSettingsConfig,
                                                   MSCAA_Tab3_DietTV,
-                                                  "Diet", getNumBins(),
+                                                  nmfConstantsMSCAA::TableDiet,
+                                                  getNumBins(),
                                                   Species,
                                                   getPredatorAge(),
                                                   isAutoFillChecked());
@@ -289,7 +291,8 @@ nmfMSCAA_Tab3::callback_NumSegCMB(int value)
         nmfMSCAAUtils::createNewYearsPerBinTable(m_databasePtr,m_logger,
                                                  m_ProjectSettingsConfig,
                                                  MSCAA_Tab3_DietTV,
-                                                 "Diet", getNumBins(),
+                                                 nmfConstantsMSCAA::TableDiet,
+                                                 getNumBins(),
                                                  Species,
                                                  getPredatorAge(),
                                                  isAutoFillChecked());
@@ -306,7 +309,8 @@ nmfMSCAA_Tab3::callback_AutoFillSegCB(bool isAutoFillChecked)
         nmfMSCAAUtils::createNewNumberOfBinsTable(m_databasePtr,m_logger,
                                                   m_ProjectSettingsConfig,
                                                   MSCAA_Tab3_DietTV,
-                                                  "Diet", getNumBins(),
+                                                  nmfConstantsMSCAA::TableDiet,
+                                                  getNumBins(),
                                                   Species,
                                                   getPredatorAge(),
                                                   isAutoFillChecked);
@@ -314,7 +318,8 @@ nmfMSCAA_Tab3::callback_AutoFillSegCB(bool isAutoFillChecked)
         nmfMSCAAUtils::createNewYearsPerBinTable(m_databasePtr,m_logger,
                                                  m_ProjectSettingsConfig,
                                                  MSCAA_Tab3_DietTV,
-                                                 "Diet", getNumBins(),
+                                                 nmfConstantsMSCAA::TableDiet,
+                                                 getNumBins(),
                                                  Species,
                                                  getPredatorAge(),
                                                  isAutoFillChecked);
@@ -360,7 +365,8 @@ std::cout << "nmfMSCAA_Tab3::loadWidgets()" << std::endl;
     // Get num bins from saved file and set combobox appropriately
     numBins = nmfMSCAAUtils::getNumBins(m_databasePtr,m_logger,
                                         m_ProjectSettingsConfig,
-                                        "Diet", binType,
+                                        nmfConstantsMSCAA::TableDiet,
+                                        binType,
                                         predatorSpecies,
                                         getPredatorAge());
 
@@ -371,7 +377,8 @@ std::cout << "nmfMSCAA_Tab3::loadWidgets()" << std::endl;
         nmfMSCAAUtils::loadBinnedTable(m_databasePtr,m_logger,
                                        m_ProjectSettingsConfig,
                                        MSCAA_Tab3_DietTV,
-                                       "Diet", numBins, binType,
+                                       nmfConstantsMSCAA::TableDiet,
+                                       numBins, binType,
                                        predatorSpecies,
                                        getPredatorAge());
     }
