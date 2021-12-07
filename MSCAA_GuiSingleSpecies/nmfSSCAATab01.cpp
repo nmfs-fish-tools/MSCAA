@@ -194,7 +194,7 @@ nmfSSCAA_Tab1::isCatchAtAge(QString species)
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SpeName"].size();
     if (NumRecords == 0) {
-        m_logger->logMsg(nmfConstants::Warning,"Warning: No records found in table: Species");
+        m_logger->logMsg(nmfConstants::Warning,"Warning: No records found in table: " + nmfConstantsMSCAA::TableSpecies);
         return false;
     }
 

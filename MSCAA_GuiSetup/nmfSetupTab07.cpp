@@ -314,7 +314,7 @@ std::cout << "nmfSetup_Tab7::loadWidgets()" << std::endl;
     dataMap    = m_databasePtr->nmfQueryDatabase(queryStr, fields);
     NumRecords = dataMap["SpeName"].size();
     if (NumRecords == 0) {
-        m_logger->logMsg(nmfConstants::Warning,"Warning: No records found in table: AgeLengthKey");
+        m_logger->logMsg(nmfConstants::Warning,"Warning: No records found in table: "+nmfConstantsMSCAA::TableAgeLengthKey);
     }
 
     getSpeciesData(currentSpecies,MinAge,MaxAge,FirstYear,LastYear,
