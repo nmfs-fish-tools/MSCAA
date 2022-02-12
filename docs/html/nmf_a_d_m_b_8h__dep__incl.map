@@ -1,12 +1,13 @@
 <map id="MSCAA_Optimization/nmfADMB.h" name="MSCAA_Optimization/nmfADMB.h">
-<area shape="rect" id="node2" href="$nmf_m_s_c_a_a_table_i_o_8h.html" title="Contains the MSCAA namespace utility functions. " alt="" coords="655,95,808,136"/>
-<area shape="rect" id="node3" href="$nmf_m_s_c_a_a_tab01_8h.html" title="This file contains the class definition for the GUI elements and functionality for the 1st tabbed MSC..." alt="" coords="5,184,177,225"/>
-<area shape="rect" id="node4" href="$nmf_main_window_8h_source.html" title="MSCAA_Main/nmfMainWindow.h" alt="" coords="623,273,840,300"/>
-<area shape="rect" id="node5" href="$nmf_m_s_c_a_a_tab02_8h.html" title="This file contains the class definition for the GUI elements and functionality for the 2nd tabbed MSC..." alt="" coords="253,184,425,225"/>
-<area shape="rect" id="node6" href="$nmf_m_s_c_a_a_tab03_8h.html" title="This file contains the class definition for the GUI elements and functionality for the 3rd tabbed MSC..." alt="" coords="449,184,621,225"/>
-<area shape="rect" id="node7" href="$nmf_m_s_c_a_a_tab04_8h.html" title="This file contains the class definition for the GUI elements and functionality for the 4th tabbed MSC..." alt="" coords="645,184,817,225"/>
-<area shape="rect" id="node8" href="$nmf_setup_tab04_8h.html" title="This file contains the class definition for the GUI elements and functionality for the 4th tabbed Set..." alt="" coords="841,191,1080,218"/>
-<area shape="rect" id="node9" href="$nmf_setup_tab06_8h.html" title="This file contains the class definition for the GUI elements and functionality for the 6th tabbed Set..." alt="" coords="1104,191,1343,218"/>
-<area shape="rect" id="node10" href="$nmf_simulation_tab01_8h_source.html" title="MSCAA_GuiSimulation\l/nmfSimulationTab01.h" alt="" coords="1367,184,1525,225"/>
-<area shape="rect" id="node11" href="$nmf_simulation_tab02_8h_source.html" title="MSCAA_GuiSimulation\l/nmfSimulationTab02.h" alt="" coords="1549,184,1708,225"/>
+<area shape="rect" id="node1" title="Function prototypes for the ADMB module." alt="" coords="683,5,843,47"/>
+<area shape="rect" id="node2" href="$nmf_m_s_c_a_a_table_i_o_8h.html" title="Contains the MSCAA namespace utility functions." alt="" coords="683,95,842,136"/>
+<area shape="rect" id="node3" href="$nmf_m_s_c_a_a_tab01_8h.html" title="This file contains the class definition for the GUI elements and functionality for the 1st tabbed MSC..." alt="" coords="5,184,187,225"/>
+<area shape="rect" id="node4" href="$nmf_main_window_8h_source.html" title=" " alt="" coords="646,273,879,300"/>
+<area shape="rect" id="node5" href="$nmf_m_s_c_a_a_tab02_8h.html" title="This file contains the class definition for the GUI elements and functionality for the 2nd tabbed MSC..." alt="" coords="261,184,443,225"/>
+<area shape="rect" id="node6" href="$nmf_m_s_c_a_a_tab03_8h.html" title="This file contains the class definition for the GUI elements and functionality for the 3rd tabbed MSC..." alt="" coords="467,184,648,225"/>
+<area shape="rect" id="node7" href="$nmf_m_s_c_a_a_tab04_8h.html" title="This file contains the class definition for the GUI elements and functionality for the 4th tabbed MSC..." alt="" coords="672,184,853,225"/>
+<area shape="rect" id="node8" href="$nmf_setup_tab04_8h.html" title="This file contains the class definition for the GUI elements and functionality for the 4th tabbed Set..." alt="" coords="878,191,1130,218"/>
+<area shape="rect" id="node9" href="$nmf_setup_tab06_8h.html" title="This file contains the class definition for the GUI elements and functionality for the 6th tabbed Set..." alt="" coords="1154,191,1406,218"/>
+<area shape="rect" id="node10" href="$nmf_simulation_tab01_8h_source.html" title=" " alt="" coords="1430,184,1602,225"/>
+<area shape="rect" id="node11" href="$nmf_simulation_tab02_8h_source.html" title=" " alt="" coords="1626,184,1798,225"/>
 </map>

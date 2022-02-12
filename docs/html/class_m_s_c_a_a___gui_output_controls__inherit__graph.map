@@ -1,2 +1,4 @@
 <map id="MSCAA_GuiOutputControls" name="MSCAA_GuiOutputControls">
+<area shape="rect" id="node1" title="The class containing the controls for the Output dock widget." alt="" coords="5,80,201,107"/>
+<area shape="rect" id="node2" title=" " alt="" coords="66,5,141,32"/>
 </map>

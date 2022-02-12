@@ -1,23 +1,24 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node2" href="$class_m_s_c_a_a___gui_output_controls.html" title="The class containing the controls for the Output dock widget. " alt="" coords="124,5,309,32"/>
-<area shape="rect" id="node3" href="$classnmf_m_s_c_a_a___tab1.html" title="The class containing the interactions for the 1st MSCAA tabbed pane. " alt="" coords="153,56,281,83"/>
-<area shape="rect" id="node4" href="$classnmf_m_s_c_a_a___tab2.html" title="The class containing the interactions for the 2nd MSCAA tabbed pane. " alt="" coords="153,107,281,133"/>
-<area shape="rect" id="node5" href="$classnmf_m_s_c_a_a___tab3.html" title="The class containing the interactions for the 3rd MSCAA tabbed pane. " alt="" coords="153,157,281,184"/>
-<area shape="rect" id="node6" href="$classnmf_m_s_c_a_a___tab4.html" title="The class containing the interactions for the 4th MSCAA tabbed pane. " alt="" coords="153,208,281,235"/>
-<area shape="rect" id="node7" href="$classnmf_m_s_c_a_a___tab5.html" title="The class containing the interactions for the 5th MSCAA tabbed pane. " alt="" coords="153,259,281,285"/>
-<area shape="rect" id="node8" href="$classnmf_setup___tab1.html" title="The class containing the interactions for the 1st Setup tabbed pane. " alt="" coords="159,309,274,336"/>
-<area shape="rect" id="node9" href="$classnmf_setup___tab2.html" title="The class containing the interactions for the 2nd Setup tabbed pane. " alt="" coords="159,360,274,387"/>
-<area shape="rect" id="node10" href="$classnmf_setup___tab3.html" title="The class containing the interactions for the 3rd Setup tabbed pane. " alt="" coords="159,411,274,437"/>
-<area shape="rect" id="node11" href="$classnmf_setup___tab4.html" title="The class containing the interactions for the 4th Setup tabbed pane. " alt="" coords="159,461,274,488"/>
-<area shape="rect" id="node12" href="$classnmf_setup___tab5.html" title="The class containing the interactions for the 5th Setup tabbed pane. " alt="" coords="159,512,274,539"/>
-<area shape="rect" id="node13" href="$classnmf_setup___tab6.html" title="The class containing the interactions for the 6th Setup tabbed pane. " alt="" coords="159,563,274,589"/>
-<area shape="rect" id="node14" href="$classnmf_setup___tab7.html" title="The class containing the interactions for the 7th Setup tabbed pane. " alt="" coords="159,613,274,640"/>
-<area shape="rect" id="node15" href="$classnmf_simulation___tab1.html" title="nmfSimulation_Tab1" alt="" coords="146,664,287,691"/>
-<area shape="rect" id="node16" href="$classnmf_simulation___tab2.html" title="nmfSimulation_Tab2" alt="" coords="146,715,287,741"/>
-<area shape="rect" id="node17" href="$classnmf_s_s_c_a_a___tab1.html" title="The class containing the interactions for the 1st SSCAA tabbed pane: Fishery Catch&#45;At&#45;Age Data..." alt="" coords="153,765,280,792"/>
-<area shape="rect" id="node18" href="$classnmf_s_s_c_a_a___tab2.html" title="The class containing the interactions for the 2nd SSCAA tabbed pane: Survey Catch Data..." alt="" coords="153,816,280,843"/>
-<area shape="rect" id="node19" href="$classnmf_s_s_c_a_a___tab3.html" title="The class containing the interactions for the 3rd SSCAA tabbed pane: Weight&#45;At&#45;Age Data..." alt="" coords="153,867,280,893"/>
-<area shape="rect" id="node20" href="$classnmf_s_s_c_a_a___tab4.html" title="The class containing the interactions for the 4th SSCAA tabbed pane: Maturity Data. " alt="" coords="153,917,280,944"/>
-<area shape="rect" id="node21" href="$classnmf_s_s_c_a_a___tab5.html" title="The class containing the interactions for the 5th SSCAA tabbed pane: Mortality Data. " alt="" coords="153,968,280,995"/>
-<area shape="rect" id="node22" href="$classnmf_s_s_c_a_a___tab6.html" title="The class containing the interactions for the 6th SSCAA tabbed pane: Run. " alt="" coords="153,1019,280,1045"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,512,80,539"/>
+<area shape="rect" id="node2" href="$class_m_s_c_a_a___gui_output_controls.html" title="The class containing the controls for the Output dock widget." alt="" coords="128,5,324,32"/>
+<area shape="rect" id="node3" href="$classnmf_m_s_c_a_a___tab1.html" title="The class containing the interactions for the 1st MSCAA tabbed pane." alt="" coords="160,56,292,83"/>
+<area shape="rect" id="node4" href="$classnmf_m_s_c_a_a___tab2.html" title="The class containing the interactions for the 2nd MSCAA tabbed pane." alt="" coords="160,107,292,133"/>
+<area shape="rect" id="node5" href="$classnmf_m_s_c_a_a___tab3.html" title="The class containing the interactions for the 3rd MSCAA tabbed pane." alt="" coords="160,157,292,184"/>
+<area shape="rect" id="node6" href="$classnmf_m_s_c_a_a___tab4.html" title="The class containing the interactions for the 4th MSCAA tabbed pane." alt="" coords="160,208,292,235"/>
+<area shape="rect" id="node7" href="$classnmf_m_s_c_a_a___tab5.html" title="The class containing the interactions for the 5th MSCAA tabbed pane." alt="" coords="160,259,292,285"/>
+<area shape="rect" id="node8" href="$classnmf_setup___tab1.html" title="The class containing the interactions for the 1st Setup tabbed pane." alt="" coords="165,309,287,336"/>
+<area shape="rect" id="node9" href="$classnmf_setup___tab2.html" title="The class containing the interactions for the 2nd Setup tabbed pane." alt="" coords="165,360,287,387"/>
+<area shape="rect" id="node10" href="$classnmf_setup___tab3.html" title="The class containing the interactions for the 3rd Setup tabbed pane." alt="" coords="165,411,287,437"/>
+<area shape="rect" id="node11" href="$classnmf_setup___tab4.html" title="The class containing the interactions for the 4th Setup tabbed pane." alt="" coords="165,461,287,488"/>
+<area shape="rect" id="node12" href="$classnmf_setup___tab5.html" title="The class containing the interactions for the 5th Setup tabbed pane." alt="" coords="165,512,287,539"/>
+<area shape="rect" id="node13" href="$classnmf_setup___tab6.html" title="The class containing the interactions for the 6th Setup tabbed pane." alt="" coords="165,563,287,589"/>
+<area shape="rect" id="node14" href="$classnmf_setup___tab7.html" title="The class containing the interactions for the 7th Setup tabbed pane." alt="" coords="165,613,287,640"/>
+<area shape="rect" id="node15" href="$classnmf_simulation___tab1.html" title=" " alt="" coords="149,664,303,691"/>
+<area shape="rect" id="node16" href="$classnmf_simulation___tab2.html" title=" " alt="" coords="149,715,303,741"/>
+<area shape="rect" id="node17" href="$classnmf_s_s_c_a_a___tab1.html" title="The class containing the interactions for the 1st SSCAA tabbed pane: Fishery Catch&#45;At&#45;Age Data." alt="" coords="162,765,290,792"/>
+<area shape="rect" id="node18" href="$classnmf_s_s_c_a_a___tab2.html" title="The class containing the interactions for the 2nd SSCAA tabbed pane: Survey Catch Data." alt="" coords="162,816,290,843"/>
+<area shape="rect" id="node19" href="$classnmf_s_s_c_a_a___tab3.html" title="The class containing the interactions for the 3rd SSCAA tabbed pane: Weight&#45;At&#45;Age Data." alt="" coords="162,867,290,893"/>
+<area shape="rect" id="node20" href="$classnmf_s_s_c_a_a___tab4.html" title="The class containing the interactions for the 4th SSCAA tabbed pane: Maturity Data." alt="" coords="162,917,290,944"/>
+<area shape="rect" id="node21" href="$classnmf_s_s_c_a_a___tab5.html" title="The class containing the interactions for the 5th SSCAA tabbed pane: Mortality Data." alt="" coords="162,968,290,995"/>
+<area shape="rect" id="node22" href="$classnmf_s_s_c_a_a___tab6.html" title="The class containing the interactions for the 6th SSCAA tabbed pane: Run." alt="" coords="162,1019,290,1045"/>
 </map>

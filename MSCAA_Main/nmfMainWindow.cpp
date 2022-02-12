@@ -27,6 +27,7 @@ nmfMainWindow::nmfMainWindow(QWidget *parent) :
     m_TableNamesWidget  = nullptr;
     m_PreferencesDlg    = new QDialog(this);
     m_TableNamesDlg     = new QDialog(this);
+    m_DBTimeout = nmfConstantsMSCAA::DefaultDBTimeoutDays;
 
     EntityListLV = m_UI->EntityDockWidget->findChild<QListView *>("EntityListLV");
 
@@ -65,6 +66,7 @@ nmfMainWindow::nmfMainWindow(QWidget *parent) :
         m_isStartUpOK = false;
         return;
     }
+    m_AppStartTime = QDateTime::currentDateTime();
 
     initializePreferencesDlg();
     initializeTableNamesDlg();
@@ -92,6 +94,7 @@ nmfMainWindow::nmfMainWindow(QWidget *parent) :
         enableApplicationFeatures(false);
     }
 
+    setDatabaseWaitTime();
 }
 
 bool
@@ -357,6 +360,8 @@ nmfMainWindow::loadGUIs()
     MSCAA_Tab3_ptr->loadWidgets();
     MSCAA_Tab4_ptr->loadWidgets();
     MSCAA_Tab5_ptr->loadWidgets();
+
+    setDatabaseWaitTime();
 
 //    Simulation_Tab1_ptr->loadWidgets();
 //    Simulation_Tab2_ptr->loadWidgets();
@@ -769,6 +774,8 @@ nmfMainWindow::menu_about()
     std::map<std::string, std::vector<std::string> > dataMap;
     std::string queryStr;
     QString os = QString::fromStdString(nmfUtils::getOS());
+    QDateTime currentAppTime = QDateTime::currentDateTime();
+    int upTimeSeconds = m_AppStartTime.secsTo(currentAppTime);
 
     // Define Qt link
     qtLink = QString("<a href='https://www.qt.io'>https://www.qt.io</a>");
@@ -827,7 +834,7 @@ nmfMainWindow::menu_about()
     msg += QString("<li>")+QString("linuxdeployqt 6 (January 27, 2019)<br>")+linuxDeployLink+QString("</li>");
     msg += QString("</ul>");
 
-    nmfUtilsQt::showAboutWidget(this,name,os,version,specialAcknowledgement,msg);
+    nmfUtilsQt::showAboutWidget(this,name,os,upTimeSeconds,version,specialAcknowledgement,msg);
 }
 
 
@@ -863,6 +870,20 @@ nmfMainWindow::closeEvent(QCloseEvent *event)
 {
     saveSettings();
 //    menu_stopRun();
+}
+
+void
+nmfMainWindow::setDatabaseWaitTime()
+{
+    int timeoutSeconds   = m_DBTimeout * nmfConstants::SecondsPerDay;
+    std::string cmd      = "SET GLOBAL wait_timeout=" + std::to_string(timeoutSeconds);
+    std::string errorMsg = m_databasePtr->nmfUpdateDatabase(cmd);
+
+    if (nmfUtilsQt::isAnError(errorMsg)) {
+        m_logger->logMsg(nmfConstants::Error,"[Error 1] setDatabaseWaitTime: set global error: " + errorMsg);
+        m_logger->logMsg(nmfConstants::Error,"cmd: " + cmd);
+        return;
+    }
 }
 
 void

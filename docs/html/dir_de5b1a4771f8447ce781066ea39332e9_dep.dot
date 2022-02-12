@@ -1,8 +1,0 @@
-digraph "MSCAA_GuiMultiSpecies" {
-  compound=true
-  node [ fontsize="10", fontname="Helvetica"];
-  edge [ labelfontsize="10", labelfontname="Helvetica"];
-  dir_de5b1a4771f8447ce781066ea39332e9 [shape=box, label="MSCAA_GuiMultiSpecies", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_de5b1a4771f8447ce781066ea39332e9.html"];
-  dir_b0dd4c7b837d61b29440a9f979f7fd8e [shape=box label="MSCAA_GuiUtilities" fillcolor="white" style="filled" color="red" URL="dir_b0dd4c7b837d61b29440a9f979f7fd8e.html"];
-  dir_de5b1a4771f8447ce781066ea39332e9->dir_b0dd4c7b837d61b29440a9f979f7fd8e [headlabel="6", labeldistance=1.5 headhref="dir_000003_000001.html"];
-}

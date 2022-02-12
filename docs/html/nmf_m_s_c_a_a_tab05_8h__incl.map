@@ -1,3 +1,13 @@
 <map id="MSCAA_GuiMultiSpecies/nmfMSCAATab05.h" name="MSCAA_GuiMultiSpecies/nmfMSCAATab05.h">
-<area shape="rect" id="node8" href="$_verbose_debug_level_dialog_8h.html" title="Creates the dialog asking the user to select the desired verbose debug level. " alt="" coords="701,95,887,121"/>
+<area shape="rect" id="node1" title="This file contains the class definition for the GUI elements and functionality for the 5th tabbed MSC..." alt="" coords="260,5,441,47"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,95,136,121"/>
+<area shape="rect" id="node3" title=" " alt="" coords="321,169,423,196"/>
+<area shape="rect" id="node4" title=" " alt="" coords="211,95,277,121"/>
+<area shape="rect" id="node5" title=" " alt="" coords="301,95,400,121"/>
+<area shape="rect" id="node6" title=" " alt="" coords="424,95,568,121"/>
+<area shape="rect" id="node7" title=" " alt="" coords="592,95,715,121"/>
+<area shape="rect" id="node8" href="$_verbose_debug_level_dialog_8h.html" title="Creates the dialog asking the user to select the desired verbose debug level." alt="" coords="739,95,946,121"/>
+<area shape="rect" id="node9" title=" " alt="" coords="645,169,768,196"/>
+<area shape="rect" id="node10" title=" " alt="" coords="792,169,893,196"/>
+<area shape="rect" id="node11" title=" " alt="" coords="917,169,1029,196"/>
 </map>

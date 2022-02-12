@@ -87,6 +87,8 @@ private:
     QWidget*       m_PreferencesWidget;
     QWidget*       m_TableNamesWidget;
     bool           m_isStartUpOK;
+    QDateTime      m_AppStartTime;
+    int            m_DBTimeout;
 
     QWidget*       EntityListWidget;
     QListView*     EntityListLV;
@@ -138,6 +140,7 @@ private:
     void readSettings();
     void saveSettings();
     void setChartView(QString type);
+    void setDatabaseWaitTime();
     void setDefaultDockWidgetsVisibility();
     void setup2dChart();
     void setup3dChart();

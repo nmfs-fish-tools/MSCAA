@@ -1,8 +1,0 @@
-digraph "MSCAA_GuiSetup" {
-  compound=true
-  node [ fontsize="10", fontname="Helvetica"];
-  edge [ labelfontsize="10", labelfontname="Helvetica"];
-  dir_92821e86947efe8e1fb6e13c4e903b9f [shape=box, label="MSCAA_GuiSetup", style="filled", fillcolor="#eeeeff", pencolor="black", URL="dir_92821e86947efe8e1fb6e13c4e903b9f.html"];
-  dir_b0dd4c7b837d61b29440a9f979f7fd8e [shape=box label="MSCAA_GuiUtilities" fillcolor="white" style="filled" color="red" URL="dir_b0dd4c7b837d61b29440a9f979f7fd8e.html"];
-  dir_92821e86947efe8e1fb6e13c4e903b9f->dir_b0dd4c7b837d61b29440a9f979f7fd8e [headlabel="2", labeldistance=1.5 headhref="dir_000005_000001.html"];
-}
