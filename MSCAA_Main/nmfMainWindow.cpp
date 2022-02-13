@@ -754,7 +754,7 @@ void
 nmfMainWindow::menu_about()
 {
     QString name    = "Multi-Species Statistical Catch-At-Age";
-    QString version = "MSCAA v0.9.8 (beta)";
+    QString version = "MSCAA v0.9.9 (beta)";
     QString specialAcknowledgement = "";
     QString cppVersion   = "C++??";
     QString mysqlVersion = "?";
